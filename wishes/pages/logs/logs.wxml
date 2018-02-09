@@ -1,7 +1,0 @@
-<!--logs.wxml-->
-<view class="container log-list">
-    <button bindtap="add">按钮</button>
-</view>
-<view class="mask" wx:if="{{showToast}}">
-
-</view>
