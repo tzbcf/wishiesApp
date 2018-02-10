@@ -1,0 +1,117 @@
+<view class="profit-container">
+    <view class="profit-header">
+        <view class="profit-header-pro">
+            <view>
+                <text class="clue">利润合计:</text>
+                <text class="info">{{profitTotal.sum.subtotalProfitSum}}</text>
+            </view>
+            <view>
+                <text class="clue">分成合计:</text>
+                <text class="info">{{profitTotal.sun.subtotalYingSum}}</text>
+            </view>
+        </view>
+        <view class="profit-header-total">
+            <view>
+                <text class="clue">分润合计:</text>
+                <text class="info">{{profitTotal.sum.subtotalShareum}}</text>
+            </view>
+            <view>
+                <text class="clue">实际利润:</text>
+                <text class="info">{{profitTotal.sum.subtotalActualSum}}</text>
+            </view>
+        </view>
+        <view class="profit-header-bill">
+            <view class="profit-bill-electro">
+                <view>
+                    <text class="clue">半年电票利润:</text>
+                    <text class="info">{{profitTotal.electroHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年电票利润:</text>
+                    <text class="info">{{profitTotal.electroYearMoneyTotal}}</text>
+                </view>
+            </view>
+            <view class="profiy-bill-finance">
+                <view>
+                    <text class="clue">半年财票利润:</text>
+                    <text class="info">{{profitTotal.financeHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年财票利润:</text>
+                    <text class="info">{{profitTotal.financeYearMoneyTotal}}</text>
+                </view>
+            </view>
+            <view class="profiy-bill-business">
+                <view>
+                    <text class="clue">半年商票利润:</text>
+                    <text class="info">{{profitTotal.businessHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年商票利润:</text>
+                    <text class="info">{{profitTotal.businessYearMoneyTotal}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="profit-main">
+        <block wx:for="{{profitData}}" wx:key="{{index}}">
+            <view class="profit-main-info">
+                <view class="profit-info-material">
+                    <view class="profit-id">
+                        <text>{{item.noteprofitId}}</text>
+                    </view>
+                    <view class="profit-bill-material">
+                        <view class="profit-bill-material-item">
+                            <text class="clue">票据编号:</text>
+                            <text class="info">{{item.nbNumber}}</text>
+                        </view>
+                        <view class="profit-bill-material-type">
+                            <text class="clue">票据类型:</text>
+                            <text>{{item.nType}}</text>
+                        </view>
+                        <view class="profit-bill-material-time">
+                            <text class="clue">客户名称:</text>
+                            <text class="info">{{item.nbMarketer}}</text>
+                            <text class="clue">交易日期:</text>
+                            <text class="info">{{item.nbDate}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="profit-info-figure">
+                    <view class="profit-deal">
+                        <view>
+                            <text class="clue">票面金额:</text>
+                            <text class="info">{{item.nbParValue}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">支付金额:</text>
+                            <text class="info">{{item.nbPayment}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">实收金额:</text>
+                            <text class="info">{{item.nbNetReceipts}}</text>
+                        </view>
+                    </view>
+                    <view class="profit-revenue">
+                        <view>
+                            <text class="clue">成本:</text>
+                            <text class="info">{{item.nbCost}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">实际收入:</text>
+                            <text class="info">{{item.nbRealIncome}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">扣息:</text>
+                            <text class="info">{{item.nbDiscount}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="profit-info-btn style-btn-bg">{{item.nbType}}</view>
+            </view>
+        </block>
+
+    </view>
+</view>
+<view class="query">查询</view>
+<view class="mask"></view>

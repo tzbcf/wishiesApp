@@ -1,0 +1,65 @@
+.stock-header{
+    line-height: 40rpx;
+    background: #fff;
+}
+.stock-header-total{
+    text-align: center;
+}
+.stock-container .clue{
+    margin-right: 10rpx;
+}
+.stock-container .info{
+    margin-right: 20rpx;
+}
+.stock-header-total,.stock-header-detail{
+    padding: 10rpx 0;
+    border-bottom: 1rpx solid #d8d8d8;
+}
+.stock-detail-electer,.stock-detail-finance,.stock-detail-business{
+    display: flex;
+}
+.stock-detail-electer view,.stock-detail-finance view,.stock-detail-business view{
+    width:50%;
+    text-align: center;
+    line-height: 44rpx;
+}
+.stock-main-info{
+    margin-top: 20rpx;
+    background: #fff;
+}
+.stock-info-top{
+    display: flex;
+    height:160rpx;
+    padding: 0 20rpx;
+}
+.stock-top-id{
+    display: flex;
+    height:100%;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.stock-top-id text{
+    display: inline-block;
+    width:50rpx;
+    height:50rpx;
+    border-radius: 50%;
+    border:1rpx solid #d8d8d8;
+    text-align: center;
+    line-height: 50rpx;
+}
+.stock-top-detail{
+    line-height: 46rpx;
+    padding: 10rpx 0;
+}
+.stock-info-bottom{
+    padding-bottom: 10rpx;
+}
+.stock-info-time,.stock-info-bank{
+    display: flex;
+    padding: 0 20rpx;
+    flex-direction: row;
+}
+.stock-info-time view,.stock-info-bank view{
+    width:50%;
+    line-height: 46rpx;
+}

@@ -1,0 +1,39 @@
+.client-info{
+    height:200rpx;
+    padding: 0 20rpx;
+    background: #fff;
+    margin-bottom:30rpx;
+    display: flex;
+    align-items: center;
+    flex-direction:row;
+}
+.client-info .client-info-surname,.client-info .client-info-per-data{
+    height:200rpx;
+}
+.client-info-surname{
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.client-info-surname text{
+    display: inline-block;
+    width:50rpx;
+    height:50rpx;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 50rpx;
+    border-radius: 50%;
+    border:1rpx solid #d8d8d8;
+}
+.client-info-per-data{
+    padding: 10rpx 0;
+    box-sizing: border-box;
+    font-size: 24rpx;
+    line-height: 46rpx;
+}
+.client-info-per-data .clue{
+    margin-right: 10rpx;
+}
+.client-info-per-data .info{
+    margin-right: 20rpx;
+}

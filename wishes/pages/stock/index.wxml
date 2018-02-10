@@ -1,0 +1,92 @@
+<view class="stock-container">
+    <view class="stock-header">
+        <view class="stock-header-total">
+            <text class="clue">库存纸制银票合计:</text>
+            <text class="info">{{stockTotal.paperMoneyTotal}}</text>
+        </view>
+        <view class="stock-header-detail">
+            <view class="stock-detail-electer">
+                <view>
+                    <text class="clue">半年电票合计</text>
+                    <text class="info">{{stockTotal.electroHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年电票合计</text>
+                    <text class="info">{{stockTotal.electroYearMoneyTotal}}</text>
+                </view>
+            </view>
+            <view class="stock-detail-finance">
+                <view>
+                    <text class="clue">半年财票合计</text>
+                    <text class="info">{{stockTotal.financeHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年财票合计</text>
+                    <text class="info">{{stockTotal.financeYearMoneyTotal}}</text>
+                </view>
+            </view>
+            <view class="stock-detail-business">
+                <view>
+                    <text class="clue">半年商票合计</text>
+                    <text class="info">{{stockTotal.businessHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年商票合计</text>
+                    <text class="info">{{stockTotal.businessYearMoneyTotal}}</text>
+                </view>
+
+            </view>
+        </view>
+    </view>
+    <view class="stock-main">
+        <block wx:for="{{stockData}}" wx:key="index">
+            <view class="stock-main-info">
+                <view class="stock-info-top">
+                    <view class="stock-top-id">
+                        <text>{{item.noteId}}</text>
+                    </view>
+                    <view class="stock-top-detail">
+                        <view>
+                            <text class="clue">银票编号:</text>
+                            <text class="info">{{item.nNumber}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">银票类型:</text>
+                            <text class="info">{{item.nTypeName}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">票面金额:</text>
+                            <text class="info">{{item.nMoney}}</text>
+                            <text class="clue">交易日期:</text>
+                            <text class="info">{{item.nBuyTime}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="stock-info-bottom">
+                    <view class="stock-info-time">
+                        <view>
+                            <text class="clue">出票日期:</text>
+                            <text class="info">{{item.nOpenTime}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">到期日期:</text>
+                            <text class="info">{{item.nExpireTimeIn}}</text>
+                        </view>
+                    </view>
+                    <view class="stock-info-bank">
+                        <view>
+                            <text class="clue">兑票银行:</text>
+                            <text class="info">{{item.nEnterBankIn}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">银行扣息:</text>
+                            <text class="info">{{item.nBuyDiscount}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="query">查询</view>
+<view class="mask"></view>

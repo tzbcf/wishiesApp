@@ -1,0 +1,83 @@
+.profit-header{
+    background: #fff;
+    border-bottom: 1rpx solid #d8d8d8;
+    line-height: 40rpx;
+    padding: 20rpx 20rpx;
+    margin-bottom: 20rpx;
+}
+.profit-header-pro,.profit-header-total,.profit-bill-electro,.profiy-bill-finance,.profiy-bill-business{
+    display: flex;
+}
+.profit-header-pro view,.profit-header-total view,.profit-bill-electro view,.profiy-bill-finance view,.profiy-bill-business view{
+    width: 50%;
+}
+.profit-main-info{
+    margin-bottom: 20rpx;
+    padding: 0 20rpx 20rpx;
+    background: #fff;
+    position: relative;
+}
+.profit-info-material{
+    display: flex;
+    flex-direction:row;
+    height:160rpx;
+}
+.profit-id{
+    height:100%;
+    display: flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.profit-id text{
+    width:60rpx;
+    height:60rpx;
+    border-radius: 50%;
+    border: 1rpx solid #d8d8d8;
+    text-align: center;
+    line-height: 60rpx;
+}
+.profit-bill-material{
+    padding: 20rpx 0;
+    line-height: 44rpx;
+}
+.profit-main .clue{
+    margin-right:10rpx;
+}
+.profit-main .info{
+    margin-right: 20rpx;
+}
+.profit-info-figure .profit-deal,.profit-info-figure .profit-revenue{
+    display: flex;
+    flex-direction: row;
+}
+.profit-info-figure .profit-deal view,.profit-info-figure .profit-revenue view{
+    width:33%;
+}
+.profit-info-btn{
+    display: inline-block;
+    padding: 8rpx 16rpx;
+    border-radius: 6rpx;
+    position: absolute;
+    right: 60rpx;
+    top:16rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

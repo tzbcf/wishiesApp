@@ -9,7 +9,7 @@ const $ = {
             data:data,
             success:res=>{
                 if(res.status==200){
-                    success(res.rows)
+                    success(res.rows,res)
                 }else {
                     error(res.msg)
                 }

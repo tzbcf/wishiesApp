@@ -1,0 +1,95 @@
+.business-header{
+    background: #fff;
+    border-bottom: 1rpx solid #d8d8d8;
+    line-height: 40rpx;
+    padding: 20rpx 0;
+}
+.business-header-deal{
+    display: flex;
+    flex-direction:row;
+}
+.business-header-deal view{
+    width:50%;
+    box-sizing: border-box;
+}
+.business-header-deal view:nth-child(1){
+    text-align: right;
+    padding-right: 10rpx;
+}
+.business-header-deal view:nth-child(2){
+    text-align: left;
+    padding-left: 10rpx;
+}
+.business-header-total{
+    text-align: center;
+}
+.business-main-info{
+    margin-bottom: 20rpx;
+    padding: 0 20rpx 20rpx;
+    background: #fff;
+    position: relative;
+}
+.business-info-material{
+    display: flex;
+    flex-direction:row;
+    height:160rpx;
+}
+.business-id{
+    height:100%;
+    display: flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.business-id text{
+    width:60rpx;
+    height:60rpx;
+    border-radius: 50%;
+    border: 1rpx solid #d8d8d8;
+    text-align: center;
+    line-height: 60rpx;
+}
+.business-bill-material{
+    padding: 20rpx 0;
+    line-height: 44rpx;
+}
+.business-main .clue{
+    margin-right:10rpx;
+}
+.business-main .info{
+    margin-right: 20rpx;
+}
+.business-info-figure .business-deal,.business-info-figure .business-revenue{
+    display: flex;
+    flex-direction: row;
+}
+.business-info-figure .business-deal view,.business-info-figure .business-revenue view{
+    width:33%;
+}
+.business-info-btn{
+    display: inline-block;
+    padding: 8rpx 16rpx;
+    border-radius: 6rpx;
+    position: absolute;
+    right: 60rpx;
+    top:16rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

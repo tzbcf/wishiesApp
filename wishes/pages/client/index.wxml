@@ -1,0 +1,31 @@
+<view class="client-container">
+    <block wx:for="{{clientData}}" wx:key="index">
+        <view class="client-info">
+            <view class="client-info-surname">
+                <text>{{item.userNameFirstChar}}</text>
+            </view>
+            <view class="client-info-per-data">
+                <view class="client-info-name">
+                    <text class="clue">姓名:</text>
+                    <text class="info">{{item.userName}}</text>
+                </view>
+                <view class="client-info-tel">
+                    <text class="clue">手机号码:</text>
+                    <text class="info">{{item.uPhone}}</text>
+                </view>
+                <view class="client-info-relate">
+                    <text class="clue">关联人员:</text>
+                    <text class="info">{{item.uSuperior}}</text>
+                </view>
+                <view class="client-info-rank">
+                    <text class="clue">身份证:</text>
+                    <text class="info">{{item.uIdNumber}}</text>
+                    <text class="clue">出生日期:</text>
+                    <text class="info">{{item.uBirthday}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<view class="query">查询</view>
+<view class="mask"></view>
