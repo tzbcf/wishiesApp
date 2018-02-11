@@ -24,6 +24,7 @@
 }
 .login-main input{
     display: inline-block;
+    width:400rpx;
     line-height: 80rpx;
     font-size: 28rpx;
 }
@@ -45,7 +46,7 @@
 .login-inter text{
     line-height: 80rpx;
     font-size: 36rpx;
-    margin-right: 40rpx;
+    margin: 0 40rpx 0 60rpx;
 }
 .login-main-btn{
     margin-top: 80rpx;

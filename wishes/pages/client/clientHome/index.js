@@ -30,11 +30,11 @@ Page({
       ]
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+    goDemand(){
+        wx.navigateTo({
+            url: '/pages/client/clientDemand/index'
+        })
+    },
   onLoad: function () {
   }
 })

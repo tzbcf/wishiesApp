@@ -9,15 +9,15 @@
         <view class="login-inter">
             <view class="login-main-account">
                 <text>账号</text>
-                <input type="text" placeholder="请输入账号"></input>
+                <input type="text" name="userName" placeholder="请输入账号" bindinput="userInput"></input>
             </view>
             <view class="login-main-password">
                 <text>密码</text>
-                <input type="text" placeholder="请输入密码"></input>
+                <input type="text" password name="password" placeholder="请输入密码" bindinput="passInput"></input>
             </view>
         </view>
         <view class="login-main-btn">
-            <button class="style-btn-bg">登录</button>
+            <button class="style-btn-bg" bindtap="login">登录</button>
         </view>
     </view>
     <view class="login-hint">没有账号，拨打电话：18606266622</view>

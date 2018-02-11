@@ -1,0 +1,127 @@
+<view class="clientDd-container">
+    <block wx:if="{{demand}}">
+        <view class="clientDd-demand">
+            <view class="clientDd-name">
+                <view class="clientDa-clue">姓<text></text>名:</view>
+                <view class="client-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="clientDd-tel">
+                <view class="clientDa-clue">手机号码:</view>
+                <view class="client-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="clientDd-btn">
+                <view>
+                    <button class="style-btn-bg">查询</button>
+                </view>
+                <view>
+                    <button bindtap="addData">添加</button>
+                </view>
+            </view>
+        </view>
+        <view class="clientDd-main">
+            <block wx:for="{{clientData}}" wx:key="index">
+                <view class="client-info">
+                    <view class="client-info-surname">
+                        <text>{{item.userNameFirstChar}}</text>
+                    </view>
+                    <view class="client-info-per-data">
+                        <view class="client-info-name">
+                            <text class="clue">姓名:</text>
+                            <text class="info">{{item.userName}}</text>
+                        </view>
+                        <view class="client-info-tel">
+                            <text class="clue">手机号码:</text>
+                            <text class="info">{{item.uPhone}}</text>
+                        </view>
+                        <view class="client-info-relate">
+                            <text class="clue">关联人员:</text>
+                            <text class="info">{{item.uSuperior}}</text>
+                        </view>
+                        <view class="client-info-rank">
+                            <text class="clue">身份证:</text>
+                            <text class="info">{{item.uIdNumber}}</text>
+                            <text class="clue">出生日期:</text>
+                            <text class="info">{{item.uBirthday}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="client-demand">
+            <view class="demand-detail">
+                <view class="demand-clue">姓名<text class="font-color-red">*</text>:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">手机号码<text class="font-color-red">*</text>:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">身份证号:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">出身日期:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">开户行:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">银行卡号:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">用户类别:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">营销员关联:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">用户编号:</view>
+                <view class="demand-ipt">
+                    <input type="text"></input>
+                </view>
+            </view>
+            <view class="demand-detail">
+                <view class="demand-clue">身份证图片:</view>
+                <view class="demand-ipt">
+                    <block wx:if="{{!identityId}}">
+                        <button bindtap="addIdentityId">选择图片</button>
+                    </block>
+                    <block wx:else>
+                        <image src="{{identityId}}"></image>
+                    </block>
+                </view>
+            </view>
+            <view class="demand-btn">
+                <button class="style-btn-bg" bindtap="addAffirm">确认</button>
+            </view>
+        </view>
+    </block>
+</view>

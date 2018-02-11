@@ -1,15 +1,35 @@
-.profit-header{
-    background: #fff;
-    border-bottom: 1rpx solid #d8d8d8;
-    line-height: 40rpx;
-    padding: 20rpx 20rpx;
-    margin-bottom: 20rpx;
-}
-.profit-header-pro,.profit-header-total,.profit-bill-electro,.profiy-bill-finance,.profiy-bill-business{
+.demand-header-detail{
     display: flex;
+    margin-bottom:30rpx;
+    padding: 0 40rpx;
 }
-.profit-header-pro view,.profit-header-total view,.profit-bill-electro view,.profiy-bill-finance view,.profiy-bill-business view{
-    width: 50%;
+.demand-header-clue{
+    width:160rpx;
+    line-height: 56rpx;
+}
+.demand-header-info input{
+    width:520rpx;
+    background: #fff;
+}
+.demand-header-time{
+    background: #fff;
+}
+.demand-header-ipt{
+    display: flex;
+    width:520rpx;
+    justify-content: space-between;
+}
+.demand-header-ipt input,.demand-header-ipt view{
+    background: #fff;
+    width:220rpx;
+    line-height: 56rpx;
+}
+.demand-header-btn{
+    padding: 0 40rpx 0 30rpx;
+}
+.profitDd-header{
+    padding-top: 30rpx;
+    margin-bottom: 30rpx;
 }
 .profit-main-info{
     margin-bottom: 20rpx;
@@ -61,23 +81,3 @@
     right: 60rpx;
     top:16rpx;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

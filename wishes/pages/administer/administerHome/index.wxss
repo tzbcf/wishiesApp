@@ -1,0 +1,44 @@
+.ad-container{
+    height:100%;
+    position: relative;
+}
+.ad-header image{
+    display: block;
+    width:144rpx;
+    height:144rpx;
+    margin:0 auto;
+    border-radius: 50%;
+}
+.ad-header{
+    padding-top: 90rpx;
+}
+.ad-info{
+    text-align: center;
+    margin-top: 60rpx;
+}
+.ad-info view{
+    margin-bottom: 20rpx;
+}
+.ad-demand{
+    padding-top: 80rpx;
+}
+.ad-demand view{
+    width:500rpx;
+    height:160rpx;
+    border: 1px solid #d8d8d8;
+    margin:0 auto;
+    text-align: center;
+    line-height: 160rpx;
+    margin-bottom: 60rpx;
+}
+.ad-btn{
+    width:100%;
+    padding: 0 60rpx;
+    box-sizing: border-box;
+    position: absolute;
+    bottom:200rpx;
+}
+.ad-back{
+    width: 100%;
+
+}

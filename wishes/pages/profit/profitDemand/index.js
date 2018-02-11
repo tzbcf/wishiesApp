@@ -1,8 +1,22 @@
-/**
- * Created by terrorblade on 2018/2/10.
- */
+const date = new Date();
+const years = [];
+const months = [];
+const days = [];
+
+for (let i = 1990; i <= date.getFullYear(); i++) {
+    years.push(i)
+}
+
+for (let i = 1 ; i <= 12; i++) {
+    months.push(i)
+}
+
+for (let i = 1 ; i <= 31; i++) {
+    days.push(i)
+}
+
 Page({
-    data: {
+    data:{
         profitData:[
             {
                 "nbCost": 9000,
@@ -51,14 +65,22 @@ Page({
             "financeHalfYearMoneyTotal": "0",
             "electroYearMoneyTotal": "1812",
             "financeYearMoneyTotal":"25522"
-        }
+        },
+        years: years,
+        year: date.getFullYear(),
+        months: months,
+        month: 2,
+        days: days,
+        day: 2,
+        value: [9999, 1, 1],
+        timeSorter:false
     },
-    //事件处理函数
-    bindViewTap: function() {
-        wx.navigateTo({
-            url: '../logs/logs'
+    bindChange(e) {
+        const val = e.detail.value
+        this.setData({
+            year: this.data.years[val[0]],
+            month: this.data.months[val[1]],
+            day: this.data.days[val[2]]
         })
-    },
-    onLoad: function () {
     }
 })

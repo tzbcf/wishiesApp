@@ -1,0 +1,83 @@
+.business-main-info{
+    margin-bottom: 20rpx;
+    padding: 0 20rpx 20rpx;
+    background: #fff;
+    position: relative;
+}
+.business-info-material{
+    display: flex;
+    flex-direction:row;
+    height:160rpx;
+}
+.business-id{
+    height:100%;
+    display: flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.business-id text{
+    width:60rpx;
+    height:60rpx;
+    border-radius: 50%;
+    border: 1rpx solid #d8d8d8;
+    text-align: center;
+    line-height: 60rpx;
+}
+.business-bill-material{
+    padding: 20rpx 0;
+    line-height: 44rpx;
+}
+.business-main .clue{
+    margin-right:10rpx;
+}
+.business-main .info{
+    margin-right: 20rpx;
+}
+.business-info-figure .business-deal,.business-info-figure .business-revenue{
+    display: flex;
+    flex-direction: row;
+}
+.business-info-figure .business-deal view,.business-info-figure .business-revenue view{
+    width:33%;
+}
+.business-info-btn{
+    display: inline-block;
+    padding: 8rpx 16rpx;
+    border-radius: 6rpx;
+    position: absolute;
+    right: 60rpx;
+    top:16rpx;
+}
+.demand-header-detail{
+    display: flex;
+    margin-bottom:30rpx;
+    padding: 0 40rpx;
+}
+.demand-header-clue{
+    width:160rpx;
+    line-height: 56rpx;
+}
+.demand-header-info input{
+    width:520rpx;
+    background: #fff;
+}
+.demand-header-time{
+    background: #fff;
+}
+.demand-header-ipt{
+    display: flex;
+    width:520rpx;
+    justify-content: space-between;
+}
+.demand-header-ipt input,.demand-header-ipt view{
+    background: #fff;
+    width:220rpx;
+    line-height: 56rpx;
+}
+.demand-header-btn{
+    padding: 0 40rpx 0 30rpx;
+}
+.businessDd-header{
+    padding-top: 30rpx;
+    margin-bottom: 30rpx;
+}

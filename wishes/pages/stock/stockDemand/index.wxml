@@ -1,0 +1,104 @@
+<view class="stockDd-container">
+    <view class="stockDd-header">
+        <view class="demand-header-detail">
+            <view class="demand-header-clue">银票标号:</view>
+            <view class="demand-header-info">
+                <input type="text"></input>
+            </view>
+        </view>
+        <view  class="demand-header-detail">
+            <view class="demand-header-clue">银票类型:</view>
+            <view class="demand-header-info">
+                <input type="text"></input>
+            </view>
+        </view>
+        <view  class="demand-header-detail">
+            <view class="demand-header-clue">选择日期:</view>
+            <view class="demand-header-ipt">
+                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
+                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
+            </view>
+        </view>
+        <view  class="demand-header-detail">
+            <view class="demand-header-clue">银票金额:</view>
+            <view class="demand-header-ipt">
+                <input type="text"></input>
+                <input type="text"></input>
+            </view>
+        </view>
+        <view  class="demand-header-detail">
+            <view class="demand-header-clue">扣息:</view>
+            <view class="demand-header-ipt">
+                <input type="text"></input>
+                <input type="text"></input>
+            </view>
+        </view>
+        <view class="demand-header-btn">
+            <button class="style-btn-bg">查询</button>
+        </view>
+    </view>
+    <view class="stockDd-main">
+        <block wx:for="{{stockData}}" wx:key="index">
+            <view class="stock-main-info">
+                <view class="stock-info-top">
+                    <view class="stock-top-id">
+                        <text>{{item.noteId}}</text>
+                    </view>
+                    <view class="stock-top-detail">
+                        <view>
+                            <text class="clue">银票编号:</text>
+                            <text class="info">{{item.nNumber}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">银票类型:</text>
+                            <text class="info">{{item.nTypeName}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">票面金额:</text>
+                            <text class="info">{{item.nMoney}}</text>
+                            <text class="clue">交易日期:</text>
+                            <text class="info">{{item.nBuyTime}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="stock-info-bottom">
+                    <view class="stock-info-time">
+                        <view>
+                            <text class="clue">出票日期:</text>
+                            <text class="info">{{item.nOpenTime}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">到期日期:</text>
+                            <text class="info">{{item.nExpireTimeIn}}</text>
+                        </view>
+                    </view>
+                    <view class="stock-info-bank">
+                        <view>
+                            <text class="clue">兑票银行:</text>
+                            <text class="info">{{item.nEnterBankIn}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">银行扣息:</text>
+                            <text class="info">{{item.nBuyDiscount}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="mask">
+    <block wx:if="{{timeSorter}}">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+            <picker-view-column>
+                <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
+            </picker-view-column>
+        </picker-view>
+    </block>
+</view>

@@ -72,8 +72,7 @@
                 <view class="business-info-btn style-btn-bg">{{item.nbType}}</view>
             </view>
         </block>
-
     </view>
 </view>
-<view class="query">查询</view>
+<view class="query" bindtap="goDemand">查询</view>
 <view class="mask"></view>

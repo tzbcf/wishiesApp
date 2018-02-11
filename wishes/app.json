@@ -1,49 +1,52 @@
 {
   "pages":[
-    "pages/profit/index",
-    "pages/stock/index",
-    "pages/business/index",
-    "pages/client/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/business/businessHome/index",
+    "pages/business/businessDemand/index",
+    "pages/client/clientHome/index",
+    "pages/client/clientDemand/index",
+    "pages/administer/administerHome/index",
+    "pages/profit/profitDemand/index",
+    "pages/profit/profitHome/index",
+    "pages/stock/stockDemand/index",
+    "pages/stock/stockHome/index"
+
   ],
   "tabBar":{
     "color":"#666666",
     "selectedColor":"#fe6012",
     "list":[
       {
-        "pagePath":"pages/client/index",
+        "pagePath":"pages/client/clientHome/index",
         "text":"客户",
         "iconPath":"./base/img/client.png",
         "selectedIconPath":"./base/img/client-active.png"
 
       },
       {
-        "pagePath":"pages/business/index",
+        "pagePath":"pages/business/businessHome/index",
         "text":"业务",
         "iconPath":"./base/img/business.png",
         "selectedIconPath":"./base/img/business-active.png"
       },
       {
-        "pagePath":"pages/stock/index",
+        "pagePath":"pages/stock/stockHome/index",
         "text":"库存",
         "iconPath":"./base/img/stock.png",
         "selectedIconPath":"./base/img/stock-active.png"
       },
       {
-        "pagePath":"pages/profit/index",
+        "pagePath":"pages/profit/profitHome/index",
         "text":"利润",
         "iconPath":"./base/img/profit.png",
         "selectedIconPath":"./base/img/profit-active.png"
       },
       {
-        "pagePath":"pages/login/index",
+        "pagePath":"pages/administer/administerHome/index",
         "text":"管理中心",
         "iconPath":"./base/img/administer.png",
         "selectedIconPath":"./base/img/administer-active.png"
       }
     ]
-
-
-
   }
 }
