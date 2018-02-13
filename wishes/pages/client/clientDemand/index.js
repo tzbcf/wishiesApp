@@ -1,33 +1,55 @@
+const $= getApp().globalData.$;
 Page({
     data:{
-        clientData:[
-            {
-                userNameFirstChar:"夏",
-                userName:"夏正国",
-                uPhone:"18888888888",
-                uSuperior:"刘德华",
-                uIdNumber:"123456789123456789",
-                uBirthday:"1970-12-10"
-            },
-            {
-                userNameFirstChar:"刘",
-                userName:"刘德华",
-                uPhone:"18888888888",
-                uSuperior:"刘德华",
-                uIdNumber:"123456789123456789",
-                uBirthday:"1970-12-10"
-            },
-            {
-                userNameFirstChar:"毕",
-                userName:"毕姥爷",
-                uPhone:"18888888888",
-                uSuperior:"刘德华",
-                uIdNumber:"123456789123456789",
-                uBirthday:"1970-12-10"
-            },
-        ],
+        clientData:[],
         demand:true,
-        identityId:""
+        identityId:"",
+        page:1,
+        size:1
+    },
+    onLoad(){
+        let clientData = wx.getStorageSync('clientData'),
+            personalData = wx.getStorageSync('loginData');
+        this.setData({
+            clientData:clientData,
+            personalData:personalData
+        })
+        console.log(personalData.uType)
+    },
+    nameInput(e){
+        this.setData({
+            userName:e.detail.value
+        })
+    },
+    phoneInput(e){
+        this.setData({
+            uPhone:e.detail.value
+        })
+    },
+    demandData(){
+        console.log("111")
+        let userName = this.data.userName,
+            uPhone = this.data.uPhone,
+            page = this.data.page,
+            size = this.data.size,
+            _this =this,
+            personalData = this.data.personalData;
+        $.common('noteBankPlusManager/user/getUserListWechat.htm',"GET",{
+          page:page,
+          size:size, 
+          plusType:personalData.plusType,
+          plusId:personalData.plusId,
+          userName:userName,
+          uPhone:uPhone
+        },function (res) {
+          console.log("获取成功",res);
+          _this.setData({
+            clientData:res
+          })
+        },function (err) {
+          console.log("获取失败",err)
+        }
+        )   
     },
     addIdentityId(){
         let _this=this;

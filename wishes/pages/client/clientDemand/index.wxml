@@ -4,18 +4,18 @@
             <view class="clientDd-name">
                 <view class="clientDa-clue">姓<text></text>名:</view>
                 <view class="client-ipt">
-                    <input type="text"></input>
+                    <input type="text" name="name" bindinput="nameInput"></input>
                 </view>
             </view>
             <view class="clientDd-tel">
                 <view class="clientDa-clue">手机号码:</view>
                 <view class="client-ipt">
-                    <input type="text"></input>
+                    <input type="text" name="phone" bindinput="phoneInput"></input>
                 </view>
             </view>
             <view class="clientDd-btn">
                 <view>
-                    <button class="style-btn-bg">查询</button>
+                    <button class="style-btn-bg" bindtap="demandData">查询</button>
                 </view>
                 <view>
                     <button bindtap="addData">添加</button>
@@ -90,18 +90,22 @@
                     <input type="text"></input>
                 </view>
             </view>
-            <view class="demand-detail">
-                <view class="demand-clue">用户类别:</view>
-                <view class="demand-ipt">
-                    <input type="text"></input>
+            <block wx:if="{{personalData.uType<=2}}">
+                <view class="demand-detail">
+                    <view class="demand-clue">用户类别:</view>
+                    <view class="demand-ipt">
+                        <input type="text"></input>
+                    </view>
                 </view>
-            </view>
-            <view class="demand-detail">
-                <view class="demand-clue">营销员关联:</view>
-                <view class="demand-ipt">
-                    <input type="text"></input>
+            </block>
+            <block wx:if="{{personalData.uType<=2}}">
+                <view class="demand-detail">
+                    <view class="demand-clue">营销员关联:</view>
+                    <view class="demand-ipt">
+                        <input type="text"></input>
+                    </view>
                 </view>
-            </view>
+            </block>
             <view class="demand-detail">
                 <view class="demand-clue">用户编号:</view>
                 <view class="demand-ipt">

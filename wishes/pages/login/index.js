@@ -30,10 +30,9 @@ Page({
         })
     },
     login(){
-        // wx.showLoading({
-        //     title: '加载中',
-        // });
-        console.log(showRequestInfo());
+        wx.showLoading({
+            title: '加载中',
+        });
         let account=this.data.account,
             password=this.data.password;
         $.common("noteBankPlusManager/user/loginManagerWechat.htm","GET",{
@@ -41,8 +40,25 @@ Page({
             password:password
         },function (res) {
             console.log("成功",res)
+            wx.switchTab({
+                url: '/pages/client/clientHome/index'
+            })
+            wx.setStorage({
+                key:"loginData",
+                data:res,
+                success:res => {
+                    console.log("数据储存成功",res)
+                }
+            })
             },function (err) {
-            console.log("失败",err)
+                console.log("失败",err)
+                wx.hideLoading();
+                wx.showToast({
+                    title: '密码错误',
+                    icon: 'none',
+                    duration: 2000
+                })
+               
             }
         )
         // if(account=='admin' && password=="12345"){
