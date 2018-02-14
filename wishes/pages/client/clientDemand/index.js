@@ -1,11 +1,36 @@
-const $= getApp().globalData.$;
+const $= getApp().globalData.$,
+      date = new Date(),
+      years = [],
+      months = [],
+      days = [];
+
+for (let i = 1960; i <= date.getFullYear(); i++) {
+  years.push(i)
+}
+
+for (let i = 1 ; i <= 12; i++) {
+  months.push(i)
+}
+
+for (let i = 1 ; i <= 31; i++) {
+  days.push(i)
+}
+
 Page({
     data:{
         clientData:[],
-        demand:true,
+        demand:false,
         identityId:"",
         page:1,
-        size:1
+        size:1,
+        years: years,
+        year: date.getFullYear(),
+        months: months,
+        month: 2,
+        days: days,
+        day: 2,
+        value: [9999, 1, 1],
+        birthdayShow:false
     },
     onLoad(){
         let clientData = wx.getStorageSync('clientData'),
@@ -51,6 +76,44 @@ Page({
         }
         )   
     },
+     userNameInput(e){
+        this.setData({
+            uPhone:e.detail.value
+        })
+    },
+     userPhoneInput(e){
+        this.setData({
+            uPhone:e.detail.value
+        })
+    },
+     idCardInput(e){
+        this.setData({
+            uPhone:e.detail.value
+        })
+    },
+    birthdayInput(e){
+        this.setData({
+            birthdayShow:true
+        })
+    },
+    bindChange: function(e) {
+      const val = e.detail.value
+      this.setData({
+        year: this.data.years[val[0]],
+        month: this.data.months[val[1]],
+        day: this.data.days[val[2]]
+      })
+    },
+     openBankInput(e){
+        this.setData({
+            uPhone:e.detail.value
+        })
+    },
+     bankInput(e){
+        this.setData({
+            uPhone:e.detail.value
+        })
+    },
     addIdentityId(){
         let _this=this;
         wx.chooseImage({
@@ -73,6 +136,12 @@ Page({
     addAffirm(){
         this.setData({
             demand:true
+        })
+    },
+    hideShade(){
+      console.log("11111")
+      this.setData({
+            birthdayShow:false
         })
     }
 });

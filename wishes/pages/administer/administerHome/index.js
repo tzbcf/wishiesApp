@@ -18,7 +18,8 @@ Page({
         })
     },
     exit(){
-        wx.redirectTo({
+        wx.clearStorage();
+        wx.reLaunch({
             url: '/pages/login/index'
         })
     }

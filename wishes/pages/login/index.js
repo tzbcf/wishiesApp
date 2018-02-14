@@ -6,8 +6,6 @@ Page({
     onLoad: function () {
         let _this=this,userInfo;
         _this.getUser(userInfo);
-
-
     },
     getUser(userInfo){
         wx.getUserInfo({
@@ -40,7 +38,7 @@ Page({
             password:password
         },function (res) {
             console.log("成功",res)
-            wx.switchTab({
+            wx.reLaunch({
                 url: '/pages/client/clientHome/index'
             })
             wx.setStorage({
