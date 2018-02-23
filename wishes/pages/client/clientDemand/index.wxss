@@ -101,3 +101,10 @@
     height:200rpx;
     max-width: 100%;
 }
+.birthdaySelect{
+    width: 100%;
+    background: #fff;
+}
+.birthdaySelect view{
+    text-align: center;
+}

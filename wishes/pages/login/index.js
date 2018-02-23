@@ -5,9 +5,7 @@ Page({
     },
     onLoad: function () {
         let _this=this,userInfo;
-        _this.getUser(userInfo)
-
-
+        _this.getUser(userInfo);
     },
     getUser(userInfo){
         wx.getUserInfo({
@@ -35,18 +33,45 @@ Page({
         });
         let account=this.data.account,
             password=this.data.password;
-        if(account=='admin' && password=="12345"){
-            wx.switchTab({
+        $.common("noteBankPlusManager/user/loginManagerWechat.htm","GET",{
+            account:account,
+            password:password
+        },function (res) {
+            console.log("成功",res)
+            wx.reLaunch({
                 url: '/pages/client/clientHome/index'
             })
-        }else {
-            setTimeout(function(){
+            wx.setStorage({
+                key:"loginData",
+                data:res,
+                success:res => {
+                    console.log("数据储存成功",res)
+                }
+            })
+            },function (err) {
+                console.log("失败",err)
+                wx.hideLoading();
                 wx.showToast({
                     title: '密码错误',
                     icon: 'none',
                     duration: 2000
                 })
-            },2000)
-        }
+               
+            }
+        )
+        // if(account=='admin' && password=="12345"){
+        //
+        //     wx.switchTab({
+        //         url: '/pages/client/clientHome/index'
+        //     })
+        // }else {
+        //     setTimeout(function(){
+        //         wx.showToast({
+        //             title: '密码错误',
+        //             icon: 'none',
+        //             duration: 2000
+        //         })
+        //     },2000)
+        // }
     }
 });

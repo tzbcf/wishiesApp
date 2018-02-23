@@ -8,10 +8,11 @@ const $ = {
             method:method,
             data:data,
             success:res=>{
-                if(res.status==200){
-                    success(res.rows,res)
+                console.log(res);
+                if(res.data.status==200){
+                    success(res.data.rows,res.data)
                 }else {
-                    error(res.msg)
+                    error(res.data.msg)
                 }
             },
             fail:err=>{
