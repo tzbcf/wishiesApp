@@ -28,6 +28,7 @@
     padding: 0 20rpx 20rpx;
     background: #fff;
     position: relative;
+    font-size: 24rpx;
 }
 .business-info-material{
     display: flex;
@@ -47,6 +48,7 @@
     border: 1rpx solid #d8d8d8;
     text-align: center;
     line-height: 60rpx;
+    font-size: 24rpx;
 }
 .business-bill-material{
     padding: 20rpx 0;

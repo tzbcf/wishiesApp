@@ -19,18 +19,26 @@ for (let i = 1 ; i <= 31; i++) {
 Page({
     data:{
         clientData:[],
-        demand:false,
+        demand:true,
         identityId:"",
         page:1,
         size:1,
         years: years,
         year: date.getFullYear(),
         months: months,
-        month: 2,
+        month: 1,
         days: days,
-        day: 2,
-        value: [9999, 1, 1],
-        birthdayShow:false
+        day: 1,
+        value: [9999, 0, 0],
+        birthdayShow:false,
+        maskShow:false,
+        userSort:false,
+        userSortVal:'',
+        userSortValue:['营销员','客户','营销主管'],
+        userSortValues:0,
+        uSuperiorValue:[],
+        uSuperior:false,
+        uSuperiorValues:0
     },
     onLoad(){
         let clientData = wx.getStorageSync('clientData'),
@@ -52,33 +60,44 @@ Page({
         })
     },
     demandData(){
-        console.log("111")
+        console.log("111");
         let userName = this.data.userName,
             uPhone = this.data.uPhone,
             page = this.data.page,
             size = this.data.size,
             _this =this,
             personalData = this.data.personalData;
-        $.common('noteBankPlusManager/user/getUserListWechat.htm',"GET",{
-          page:page,
-          size:size, 
-          plusType:personalData.plusType,
-          plusId:personalData.plusId,
-          userName:userName,
-          uPhone:uPhone
-        },function (res) {
-          console.log("获取成功",res);
-          _this.setData({
-            clientData:res
-          })
-        },function (err) {
-          console.log("获取失败",err)
+        console.log("111",userName);
+        console.log("111",uPhone);
+        if(!userName && !uPhone){
+            wx.showToast({
+                title: '请填写用户名与手机号',
+                icon: 'none',
+                duration: 1000
+            })
+        }else{
+            $.common('noteBankPlusManager/user/getUserListWechat.htm',"GET",{
+                    page:page,
+                    size:size,
+                    plusType:personalData.plusType,
+                    plusId:personalData.plusId,
+                    userName:userName,
+                    uPhone:uPhone
+                },function (res) {
+                    console.log("获取成功",res);
+                    _this.setData({
+                        clientData:res
+                    })
+                },function (err) {
+                    console.log("获取失败",err)
+                }
+            )
         }
-        )   
+
     },
      userNameInput(e){
         this.setData({
-            uPhone:e.detail.value
+            uAddUserName:e.detail.value
         })
     },
      userPhoneInput(e){
@@ -88,31 +107,115 @@ Page({
     },
      idCardInput(e){
         this.setData({
-            uPhone:e.detail.value
+            uIdNumber:e.detail.value
         })
     },
     birthdayInput(e){
+         console.log("111");
         this.setData({
+            maskShow:true,
             birthdayShow:true
         })
     },
-    bindChange: function(e) {
-      const val = e.detail.value
+    bindBirthdayChange(e) {
+      let val = e.detail.value;
       this.setData({
-        year: this.data.years[val[0]],
-        month: this.data.months[val[1]],
-        day: this.data.days[val[2]]
+        birthdayVal:val
       })
+    },
+    bindBirthdayEns(){
+        let val=this.data.birthdayVal;
+        this.setData({
+            year: this.data.years[val[0]],
+            month: this.data.months[val[1]],
+            day: this.data.days[val[2]],
+            value:val
+        })
     },
      openBankInput(e){
         this.setData({
-            uPhone:e.detail.value
+            uBankDeposit:e.detail.value
         })
     },
      bankInput(e){
         this.setData({
-            uPhone:e.detail.value
+            uBankCard:e.detail.value
         })
+    },
+    userSortBtn(e){
+         this.setData({
+             maskShow:true,
+             userSort:true
+         })
+    },
+    bindUserSortChange(e){
+        let val = e.detail.value,
+            value=this.data.userSortValue[val];
+        this.setData({
+            userSortVal:value,
+            userSortValues:val
+        })
+    },
+    bindUserSortEns(){
+        let val = this.data.userSortValues,
+            value=this.data.userSortValue[val];
+        this.setData({
+            userSortVal:value,
+            userSortValues:val
+        });
+        this.acquireSuperior();
+    },
+    uSuperiorBtn(){
+        let userSort=this.data.userSortVal;
+        console.log("关联人员",this.data.uSuperiorValue)
+        if(userSort){
+            this.setData({
+                maskShow:true,
+                uSuperior:true
+            })
+        }else {
+            wx.showToast({
+                title: '请选择用户类别',
+                icon: 'none',
+                duration: 1000
+            })
+        }
+
+    },
+    acquireSuperior(){
+        let personalData = this.data.personalData,
+            _this=this,
+            type=parseInt(this.data.userSortValues)+3;
+        $.common('noteBankPlusManager//user/getUserIntelligentListWechat.htm',"GET",{
+                plusType:personalData.plusType,
+                plusId:personalData.plusId,
+                type:type
+            },function (res) {
+                console.log("获取成功",res);
+                _this.setData({
+                    uSuperiorValue:res
+                })
+            },function (err) {
+                console.log("获取失败",err)
+            }
+        )
+    },
+    bindSuperiorChange(e){
+        let val = e.detail.value,
+            value=this.data.uSuperiorValue[val];
+        this.setData({
+            uSuperiorVal:value,
+            uSuperiorValues:val
+        })
+
+    },
+    bindSuperiorEns(){
+        let val = this.data.uSuperiorValues,
+            value=this.data.uSuperiorValue[val];
+        this.setData({
+            uSuperiorVal:value,
+            uSuperiorValues:val
+        });
     },
     addIdentityId(){
         let _this=this;
@@ -134,14 +237,73 @@ Page({
         })
     },
     addAffirm(){
-        this.setData({
-            demand:true
-        })
+        this.addUserRequest()
+
+
+        // this.setData({
+        //     demand:true
+        // })
+    },
+    addUserRequest(){
+        let _this=this,
+            UserObj={},
+            uBirthday=this.data.year+this.data.month+this.data.day,
+            uBankDeposit=this.data.uBankDeposit,
+            uBankCard=this.data.uBankCard,
+            personalData = this.data.personalData,
+            clientData=this.data.clientData,
+            uType;
+        UserObj.userName=this.data.uAddUserName;
+        UserObj.uPhone=this.data.uPhone;
+        UserObj.uIdNumber=this.data.uIdNumber;
+        UserObj.uBirthday=this.data.year+"-"+this.data.month+"-"+this.data.day;
+        UserObj.userNameFirstChar=this.data.uAddUserName.split("")[0];
+        if(personalData.uType<=2){
+            UserObj.uSuperior=this.data.uSuperiorValue[this.data.uSuperiorValues];
+            uType=parseInt(this.data.userSortValues)+3;
+        }else {
+            UserObj.uSuperior="";
+            uType="";
+        }
+        $.common('noteBankPlusManager//user/addUserWechat.htm',"POST",{
+                uAddUserName:UserObj.userName,
+                uPhone:UserObj.uPhone,
+                uIdNumber:UserObj.uIdNumber,
+                uBirthday:uBirthday,
+                uBankDeposit:uBankDeposit,
+                uBankCard:uBankCard,
+                uSuperior:UserObj.uSuperior,
+                uType:uType
+            },function (res) {
+                console.log("获取成功",res);
+                clientData.unshift(UserObj);
+                // wx.setStorage({
+                //     key:"clientData",
+                //     data:clientData,
+                //     success:res => {
+                //         console.log("数据储存成功",res)
+                //     }
+                // });
+                _this.setData({
+                    clientData:clientData,
+                    demand:true
+                })
+            },function (err) {
+                wx.showToast({
+                    title: err.msg,
+                    icon: 'none',
+                    duration: 1000
+                })
+            }
+        )
     },
     hideShade(){
-      console.log("11111")
+      console.log("11111");
       this.setData({
-            birthdayShow:false
+            birthdayShow:false,
+            maskShow:false,
+            userSort:false,
+            uSuperior:false
         })
     }
 });

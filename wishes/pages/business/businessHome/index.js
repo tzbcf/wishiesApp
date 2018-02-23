@@ -1,49 +1,43 @@
 /**
  * Created by terrorblade on 2018/2/10.
  */
+const $= getApp().globalData.$;
 Page({
     data: {
-        businessData:[
-            {
-                "nbCost": 9000,
-                "nbParValue": 10000,
-                "nbTypeName": "托收",
-                "nTypeName": "纸票",
-                "nbNetReceipts": 10000,
-                "nbPayment": 0,
-                "nbDate": "2017-11-26 09:26:16",
-                "nbType": '买入',
-                "noteBusinessId": 34,
-                "nbNumber": "11111111114",
-                "nbDiscount": 0.1,
-                "nType": 1,
-                "nbRealIncome": 10000,
-                "nbMarketer": "张三"
-            },
-            {
-                "nbCost": 9000,
-                "nbParValue": 10000,
-                "nbTypeName": "换出",
-                "nTypeName": "纸票",
-                "nbNetReceipts": 9000,
-                "nbPayment": 0,
-                "nbDate": "2017-11-26 09:22:54",
-                "nbType": '卖出',
-                "noteBusinessId": 33,
-                "nbNumber": "11111111113",
-                "nbDiscount": 0.1,
-                "nType": 0,
-                "nbRealIncome": 9000,
-                "nbMarketer": "王五"
-            }
-        ],
-        businessTotal:{
-            "saleMoneyTotal": "10000.00",
-            "exchangeMoneyTotal": "110000.00",
-            "buyMoneyTotal": "100000.00"
-        }
+        businessData:[],
+        businessTotal:{},
+        page:1,
+        size:3
     },
     onLoad: function () {
+        let personalData = wx.getStorageSync('loginData');
+        console.log("本地获取的数据",personalData)
+        this.setData({
+            personalData:personalData
+        });
+        this.acquireBussinessData()
+    },
+    acquireBussinessData(){
+        let page = this.data.page,
+            _this=this,
+            size = this.data.size,
+            personalData = this.data.personalData;
+        $.common('noteBankPlusManager/note/findNoteBusinessListWechat.htm',"GET",{
+                page:page,
+                size:size,
+                plusType:personalData.plusType,
+                plusId:personalData.plusId
+            },function (res,resData) {
+                console.log("获取成功",res);
+            console.log("获取成功",resData);
+                _this.setData({
+                    businessData:res,
+                    businessTotal:resData.total
+                })
+            },function (err) {
+                console.log("获取失败",err)
+            }
+        )
     },
     goDemand(){
         wx.navigateTo({

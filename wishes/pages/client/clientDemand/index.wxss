@@ -86,6 +86,11 @@
     width:480rpx;
     background: #fff;
     border-radius: 6rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+}
+.id-picture .demand-ipt{
+    padding-left: 0;
 }
 .font-color-red{
     color:red;
@@ -101,10 +106,43 @@
     height:200rpx;
     max-width: 100%;
 }
-.birthdaySelect{
+.birthdaySelect,.user-sort-sel{
     width: 100%;
+    position: absolute;
+    bottom:0;
     background: #fff;
 }
-.birthdaySelect view{
+.birthdaySelect view,.user-sort-sel view{
     text-align: center;
+}
+.birthday-btn{
+    display: flex;
+    justify-content:space-between;
+    padding: 0 50rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+}
+.birthday-btn view{
+    padding: 20rpx 20rpx;
+}
+.birthday-btn-cancel{
+    color: #888;
+}
+.birthday-btn-ensure{
+    color: #1AAD19;
+}
+.demand-detail .drop-down{
+    position: relative;
+    line-height: 56rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+}
+.demand-detail .drop-down:after{
+    content: "";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    position: absolute;
+    width: 0;
+    top:21rpx;
+    right:15rpx;
 }

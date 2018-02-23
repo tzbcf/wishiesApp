@@ -75,4 +75,3 @@
     </view>
 </view>
 <view class="query" bindtap="goDemand">查询</view>
-<view class="mask"></view>

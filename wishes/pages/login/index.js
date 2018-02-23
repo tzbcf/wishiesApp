@@ -59,19 +59,5 @@ Page({
                
             }
         )
-        // if(account=='admin' && password=="12345"){
-        //
-        //     wx.switchTab({
-        //         url: '/pages/client/clientHome/index'
-        //     })
-        // }else {
-        //     setTimeout(function(){
-        //         wx.showToast({
-        //             title: '密码错误',
-        //             icon: 'none',
-        //             duration: 2000
-        //         })
-        //     },2000)
-        // }
     }
 });

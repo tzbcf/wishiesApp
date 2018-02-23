@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b97f067-0dae-4488-8a73-8e483c8e1d96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/wishiesApp.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/.idea/workspace.xml" afterPath="$PROJECT_DIR$/wishes/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/app.json" afterPath="$PROJECT_DIR$/wishes/app.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/app.wxss" afterPath="$PROJECT_DIR$/wishes/app.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/base/config.js" afterPath="$PROJECT_DIR$/wishes/base/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/base/global.js" afterPath="$PROJECT_DIR$/wishes/base/global.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/administer/administerHome/index.js" afterPath="$PROJECT_DIR$/wishes/pages/administer/administerHome/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/business/businessHome/index.js" afterPath="$PROJECT_DIR$/wishes/pages/business/businessHome/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxml" afterPath="$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxss" afterPath="$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.js" afterPath="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxml" afterPath="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxss" afterPath="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/client/clientHome/index.js" afterPath="$PROJECT_DIR$/wishes/pages/client/clientHome/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/login/index.js" afterPath="$PROJECT_DIR$/wishes/pages/login/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wishes/pages/login/index.wxml" afterPath="$PROJECT_DIR$/wishes/pages/login/index.wxml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,30 +26,30 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wishes/pages/login/index.js">
+        <entry file="file://$PROJECT_DIR$/wishes/pages/business/businessHome/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+            <state relative-caret-position="456">
+              <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wishes/base/config.js">
+      <file leaf-file-name="index.wxss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+            <state relative-caret-position="504">
+              <caret line="30" column="20" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="global.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wishes/base/global.js">
+      <file leaf-file-name="index.wxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="726">
+              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -64,6 +58,14 @@
     </leaf>
   </component>
   <component name="FindInProjectRecents">
+    <findStrings>
+      <find>bindChange</find>
+      <find>birthdaySelect</find>
+      <find>drop-down</find>
+      <find>nameInput</find>
+      <find>demandData</find>
+      <find>demand-ipt</find>
+    </findStrings>
     <dirStrings>
       <dir>E:\demo\wishiesApp</dir>
     </dirStrings>
@@ -76,6 +78,15 @@
       <list>
         <option value="$PROJECT_DIR$/wishes/base/config.js" />
         <option value="$PROJECT_DIR$/wishes/pages/login/index.js" />
+        <option value="$PROJECT_DIR$/wishes/app.wxss" />
+        <option value="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxss" />
+        <option value="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxml" />
+        <option value="$PROJECT_DIR$/wishes/pages/login/index.wxml" />
+        <option value="$PROJECT_DIR$/wishes/pages/client/clientDemand/index.js" />
+        <option value="$PROJECT_DIR$/wishes/app.json" />
+        <option value="$PROJECT_DIR$/wishes/pages/business/businessHome/index.js" />
+        <option value="$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxss" />
+        <option value="$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxml" />
       </list>
     </option>
   </component>
@@ -120,6 +131,53 @@
               <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="business" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="business" type="462c0819:PsiDirectoryNode" />
+              <item name="businessHome" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wishiesApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wishiesApp" type="462c0819:PsiDirectoryNode" />
+              <item name="wishes" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="clientHome" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -162,12 +220,12 @@
       <option name="presentableId" value="Default" />
       <updated>1518409951917</updated>
       <workItem from="1518409953093" duration="1420000" />
-      <workItem from="1519352639193" duration="84000" />
+      <workItem from="1519352639193" duration="13329000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1504000" />
+    <option name="totallyTimeSpent" value="14749000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -182,7 +240,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2528978" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14014752" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -244,18 +302,141 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/app.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="31" column="29" lean-forward="false" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/client/clientHome/index.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wishes/pages/login/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+        <state relative-caret-position="678">
+          <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="57" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wishes/base/global.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="92" column="19" lean-forward="false" selection-start-line="92" selection-start-column="19" selection-end-line="92" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/login/index.wxss">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/login/index.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/client/clientDemand/index.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="17" column="68" lean-forward="false" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="68" />
+          <folding>
+            <element signature="n#style#0;n#picker-view#0;n#view#0;n#block#0;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#picker-view-column#0;n#picker-view#0;n#view#0;n#block#0;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#picker-view-column#1;n#picker-view#0;n#view#0;n#block#0;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#picker-view-column#2;n#picker-view#0;n#view#0;n#block#0;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#picker-view#0;n#view#0;n#block#1;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#picker-view-column#0;n#picker-view#0;n#view#0;n#block#1;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#picker-view#0;n#view#0;n#block#2;n#view#0;n#block#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#picker-view-column#0;n#picker-view#0;n#view#0;n#block#2;n#view#0;n#block#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/client/clientDemand/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="71" column="25" lean-forward="false" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
+          <folding>
+            <element signature="e#1121#1198#0" expanded="false" />
+            <element signature="e#1217#1292#0" expanded="false" />
+            <element signature="e#2470#2551#0" expanded="false" />
+            <element signature="e#2575#2650#0" expanded="false" />
+            <element signature="e#2671#2749#0" expanded="false" />
+            <element signature="e#2771#2898#0" expanded="false" />
+            <element signature="e#2926#3019#0" expanded="false" />
+            <element signature="e#3042#3273#0" expanded="false" />
+            <element signature="e#3296#3377#0" expanded="false" />
+            <element signature="e#3494#3592#0" expanded="false" />
+            <element signature="e#3619#3804#0" expanded="false" />
+            <element signature="e#3827#4055#0" expanded="false" />
+            <element signature="e#5117#5306#0" expanded="false" />
+            <element signature="e#5329#5529#0" expanded="false" />
+            <element signature="e#5550#6007#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="40" lean-forward="false" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/client/clientHome/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/business/businessHome/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="30" column="20" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wishes/pages/business/businessHome/index.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>
