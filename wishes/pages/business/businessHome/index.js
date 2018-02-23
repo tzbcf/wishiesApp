@@ -29,10 +29,11 @@ Page({
                 plusId:personalData.plusId
             },function (res,resData) {
                 console.log("获取成功",res);
-            console.log("获取成功",resData);
+                console.log("获取成功",resData);
                 _this.setData({
                     businessData:res,
-                    businessTotal:resData.total
+                    businessTotal:resData.total,
+                    busData:resData
                 })
             },function (err) {
                 console.log("获取失败",err)
@@ -40,6 +41,14 @@ Page({
         )
     },
     goDemand(){
+        let busData=this.data.busData;
+        wx.setStorage({
+            key:"busData",
+            data:busData,
+            success:res => {
+                console.log("数据储存成功",res)
+            }
+        })
         wx.navigateTo({
             url: '/pages/business/businessDemand/index'
         })

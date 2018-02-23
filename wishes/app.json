@@ -1,9 +1,9 @@
 {
   "pages":[
-    "pages/business/businessHome/index",
-    "pages/login/index",
-
     "pages/business/businessDemand/index",
+    "pages/login/index",
+    "pages/business/businessHome/index",
+
     "pages/client/clientHome/index",
     "pages/client/clientDemand/index",
     "pages/administer/administerHome/index",

@@ -24,12 +24,12 @@
                     </view>
                     <view class="business-bill-material">
                         <view class="business-bill-material-item">
-                            <text class="clue">票据编号:</text>
+                            <text class="clue">银票编号:</text>
                             <text class="info">{{item.nbNumber}}</text>
                         </view>
                         <view class="business-bill-material-type">
-                            <text class="clue">票据类型:</text>
-                            <text>{{item.nType}}</text>
+                            <text class="clue">银票类型:</text>
+                            <text>{{item.nTypeName}}</text>
                         </view>
                         <view class="business-bill-material-time">
                             <text class="clue">客户名称:</text>
@@ -69,7 +69,7 @@
                         </view>
                     </view>
                 </view>
-                <view class="business-info-btn style-btn-bg">{{item.nbType}}</view>
+                <view class="business-info-btn style-btn-bg">{{item.nbTypeName}}</view>
             </view>
         </block>
     </view>

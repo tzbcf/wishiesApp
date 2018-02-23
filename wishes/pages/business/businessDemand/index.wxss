@@ -3,6 +3,7 @@
     padding: 0 20rpx 20rpx;
     background: #fff;
     position: relative;
+    font-size: 24rpx;
 }
 .business-info-material{
     display: flex;
@@ -80,4 +81,28 @@
 .businessDd-header{
     padding-top: 30rpx;
     margin-bottom: 30rpx;
+}
+.date-sel{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    background: #fff;
+}
+.date-sel view{
+    text-align: center;
+}
+.businessDay-btn{
+    display: flex;
+    justify-content:space-between;
+    padding: 0 50rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+}
+.businessDay-btn view{
+    padding: 20rpx 20rpx;
+}
+.businessDay-btn-cancel{
+    color: #888;
+}
+.businessDay-btn-ensure{
+    color: #1AAD19;
 }

@@ -3,24 +3,24 @@
         <view class="demand-header-detail">
             <view class="demand-header-clue">银票标号:</view>
             <view class="demand-header-info">
-                <input type="text"></input>
+                <input type="text" bindinput="silverTicket"></input>
             </view>
         </view>
         <view  class="demand-header-detail">
             <view class="demand-header-clue">客户名称:</view>
             <view class="demand-header-info">
-                <input type="text"></input>
+                <input type="text" bindinput="userName"></input>
             </view>
         </view>
         <view  class="demand-header-detail">
             <view class="demand-header-clue">选择日期:</view>
             <view class="demand-header-ipt">
-                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
-                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
+                <view class="demand-header-time" bindtap="startBtn">{{startYear}}年{{startMonth}}月{{startDay}}日</view>
+                <view class="demand-header-time" bindtap="endBtn">{{endYear}}年{{endMonth}}月{{endDay}}日</view>
             </view>
         </view>
         <view class="demand-header-btn">
-            <button class="style-btn-bg">查询</button>
+            <button class="style-btn-bg" bindtap="query">查询</button>
         </view>
     </view>
     <view class="business-main">
@@ -32,12 +32,12 @@
                     </view>
                     <view class="business-bill-material">
                         <view class="business-bill-material-item">
-                            <text class="clue">票据编号:</text>
+                            <text class="clue">银票编号:</text>
                             <text class="info">{{item.nbNumber}}</text>
                         </view>
                         <view class="business-bill-material-type">
-                            <text class="clue">票据类型:</text>
-                            <text>{{item.nType}}</text>
+                            <text class="clue">银票类型:</text>
+                            <text>{{item.nTypeName}}</text>
                         </view>
                         <view class="business-bill-material-time">
                             <text class="clue">客户名称:</text>
@@ -77,23 +77,52 @@
                         </view>
                     </view>
                 </view>
-                <view class="business-info-btn style-btn-bg">{{item.nbType}}</view>
+                <view class="business-info-btn style-btn-bg">{{item.nbTypeName}}</view>
             </view>
         </block>
     </view>
 </view>
-<view class="mask">
-    <block wx:if="{{timeSorter}}">
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-            <picker-view-column>
-                <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
-            </picker-view-column>
-        </picker-view>
-    </block>
-</view>
+<block wx:if="{{dateShow}}">
+    <view class="shadeMask" bindtap="hideShade">
+        <block wx:if="{{startDateSel}}"  >
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindStartEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{startValue}}" bindchange="bindStartChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+        <block wx:if="{{endDateSel}}">
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindEndEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{endValue}}" bindchange="bindEndChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+    </view>
+</block>
