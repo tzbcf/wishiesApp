@@ -66,20 +66,12 @@ gulp.task('assets', () => {
         .pipe(gulp.dest('./dist/base'))
 })
 
-gulp.task('templates', () => {
+gulp.task('wxml', () => {
     return gulp.src('./wishes/**/*.wxml')
         .pipe(gulp.dest('./dist'))
 })
 
-gulp.task('templatesPro', () => {
-    return gulp.src('./wishes/**/*.wxml')
-        .pipe(htmlmin({
-            collapseWhitespace: true,
-            removeComments: true,
-            keepClosingSlash: true
-        }))
-        .pipe(gulp.dest('./dist'))
-});
+
 
 gulp.task('wxss', () => {
     var combined = combiner.obj([
@@ -144,7 +136,7 @@ gulp.task('dev', ['clean'], () => {
 gulp.task('build', [
     'jsonPro',
     'assets',
-    'templatesPro',
+    'wxml',
     'wxssPro',
     'scriptsPro'
 ]);
