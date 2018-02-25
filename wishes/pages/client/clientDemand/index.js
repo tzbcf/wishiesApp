@@ -41,6 +41,7 @@ Page({
         uSuperiorValues:0
     },
     onLoad(){
+        console.log(getCurrentPages())
         let clientData = wx.getStorageSync('clientData'),
             personalData = wx.getStorageSync('loginData');
         this.setData({

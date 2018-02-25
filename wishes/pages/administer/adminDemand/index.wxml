@@ -1,0 +1,186 @@
+<block wx:if="{{queryType==1}}">
+    <view class="businessDd-container">
+        <view class="businessDd-header">
+            <view class="demand-header-detail">
+                <view class="demand-header-clue">客户名称:</view>
+                <view class="demand-header-info">
+                    <input type="text" bindinput="userNameInput"></input>
+                </view>
+            </view>
+            <view  class="demand-header-detail">
+                <view class="demand-header-clue">银行简称:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="bankSel">{{bankValueItem}}</view>
+            </view>
+            <view  class="demand-header-detail">
+                <view class="demand-header-clue">选择日期:</view>
+                <view class="demand-header-ipt">
+                    <view class="demand-header-time" bindtap="startBtn">{{startYear}}年{{startMonth}}月{{startDay}}日</view>
+                    <view class="demand-header-time" bindtap="endBtn">{{endYear}}年{{endMonth}}月{{endDay}}日</view>
+                </view>
+            </view>
+            <view class="demand-header-btn">
+                <button class="style-btn-bg" bindtap="query">查询</button>
+            </view>
+        </view>
+        <view class="business-main">
+            <block wx:for="{{incomeData}}" wx:key="{{index}}">
+                <view class="business-main-info">
+                    <view class="business-info-material">
+                        <view class="business-id">
+                            <text>{{item.bankProfitId}}</text>
+                        </view>
+                        <view class="business-bill-material">
+                            <view class="business-bill-material-item">
+                                <text class="clue">交易日期:</text>
+                                <text class="info">{{item.dealTime}}</text>
+                            </view>
+                            <view class="business-bill-material-type">
+                                <text class="clue">事项:</text>
+                                <text class="info">{{item.bankEventName}}</text>
+                            </view>
+                            <view class="business-bill-material-type">
+                                <text class="clue">银行名称:</text>
+                                <text class="info">{{item.bankName}}</text>
+                            </view>
+                            <view class="business-bill-material-type">
+                                <text class="clue">客户名称:</text>
+                                <text class="info">{{item.userName}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="business-info-figure">
+                        <view class="business-deal">
+                            <view>
+                                <text class="clue">收入发生额:</text>
+                                <text class="info">{{item.budgetInputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">支出发生额:</text>
+                                <text class="info">{{item.budgetOutputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">实现其他应收:</text>
+                                <text class="info">{{item.receiveInputMoney}}</text>
+                            </view>
+                        </view>
+                        <view class="business-revenue">
+                            <view>
+                                <text class="clue">实现其他应付:</text>
+                                <text class="info">{{item.receiveOutputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">收支变动金额:</text>
+                                <text class="info">{{item.profitMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">银行余额:</text>
+                                <text class="info">{{item.bankCurrentMoney}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="business-header">
+            <view class="business-header-total">
+                <text>余额变动合计:</text>
+                <text>{{incomeTotal}}元</text>
+            </view>
+        </view>
+    </view>
+</block>
+<block wx:if="{{queryType==2}}">
+    <view class="businessDd-container">
+        <view class="businessDd-header">
+            <view  class="demand-header-detail">
+                <view class="demand-header-clue">银行简称:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="bankSel">{{bankValueItem}}</view>
+            </view>
+            <view class="demand-header-btn">
+                <button class="style-btn-bg" bindtap="bankQuery">查询</button>
+            </view>
+        </view>
+        <view class="business-main admin-bank-main">
+            <block wx:for="{{bankBalanceData}}" wx:key="{{index}}">
+                <view class="admin-bank-item">
+                    <view class="admin-bank-item-info">
+                        <text class="bank-clue">编号:</text>
+                        <text class="bank-detail">{{item.bankNum}}</text>
+                    </view>
+                    <view class="admin-bank-item-info">
+                        <text class="bank-clue">银行名称:</text>
+                        <text class="bank-detail">{{item.bankName}}</text>
+                    </view>
+                    <view class="admin-bank-item-info">
+                        <text class="bank-clue">银行简称:</text>
+                        <text class="bank-detail">{{item.bankShortName}}</text>
+                    </view>
+                    <view class="admin-bank-item-info">
+                        <text class="bank-clue">账户:</text>
+                        <text class="bank-detail">{{item.bankAcount}}</text>
+                    </view>
+                    <view class="admin-bank-item-info">
+                        <text class="bank-clue">账户余额:</text>
+                        <text class="bank-detail">{{item.bankMoney}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</block>
+<block wx:if="{{dateShow}}">
+    <view class="shadeMask" bindtap="hideShade">
+        <block wx:if="{{startDateSel}}"  >
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindStartEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{startValue}}" bindchange="bindStartChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+        <block wx:if="{{endDateSel}}">
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindEndEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{endValue}}" bindchange="bindEndChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+        </block>
+        <block wx:if="{{bankShow}}">
+            <view class="user-sort-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bankEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{bankValues}}" bindchange="bankChange">
+                    <picker-view-column>
+                        <view wx:for="{{bankValue}}" wx:key="index" style="line-height: 50px">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+        </block>
+    </view>
+</block>

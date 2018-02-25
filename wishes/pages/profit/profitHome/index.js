@@ -53,6 +53,9 @@ Page({
             "financeYearMoneyTotal":"25522"
         }
     },
+    onLoad(){
+        console.log(getCurrentPages())
+    },
     //事件处理函数
     goDemand(){
         wx.navigateTo({

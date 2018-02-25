@@ -6,6 +6,7 @@ Page({
     onLoad: function () {
         let _this=this,userInfo;
         _this.getUser(userInfo);
+        console.log(getCurrentPages())
     },
     getUser(userInfo){
         wx.getUserInfo({

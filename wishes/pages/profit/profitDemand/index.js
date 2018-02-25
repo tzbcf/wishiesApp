@@ -75,6 +75,9 @@ Page({
         value: [9999, 1, 1],
         timeSorter:false
     },
+    onLoad(){
+        console.log(getCurrentPages())
+    },
     bindChange(e) {
         const val = e.detail.value
         this.setData({

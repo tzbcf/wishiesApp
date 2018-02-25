@@ -27,7 +27,10 @@
     text-align: center;
 }
 .business-main{
-    padding:400rpx 0 140rpx 0;
+    padding:400rpx 0 100rpx 0;
+}
+.admin-bank-main{
+    padding: 220rpx 0 0 0;
 }
 .business-main-info{
     margin-bottom: 20rpx;
@@ -39,7 +42,7 @@
 .business-info-material{
     display: flex;
     flex-direction:row;
-    height:160rpx;
+    height:200rpx;
 }
 .business-id{
     height:100%;
@@ -89,9 +92,23 @@
     width:160rpx;
     line-height: 56rpx;
 }
-.demand-header-info input{
+.demand-header-info input,.demand-header-bank{
     width:520rpx;
     background: #fff;
+    line-height: 60rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    position: relative;
+}
+.demand-header-bank:after{
+    content: "";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    position: absolute;
+    width: 0;
+    top:21rpx;
+    right:15rpx;
 }
 .demand-header-time{
     background: #fff;
@@ -140,3 +157,27 @@
 .businessDay-btn-ensure{
     color: #1AAD19;
 }
+.user-sort-sel{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    background: #fff;
+}
+.user-sort-sel view{
+    text-align: center;
+}
+.birthday-btn{
+    display: flex;
+    justify-content:space-between;
+    padding: 0 50rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+}
+.admin-bank-item{
+    background: #fff;
+    margin-bottom: 20rpx;
+    padding: 20rpx 0 20rpx 20rpx;
+}
+.admin-bank-item-info{
+    line-height: 60rpx;
+}
+

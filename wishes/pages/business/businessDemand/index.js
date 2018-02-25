@@ -35,6 +35,7 @@ Page({
         endDateSel:false
     },
     onLoad(){
+        console.log(getCurrentPages())
         let busData = wx.getStorageSync('busData'),
             personalData = wx.getStorageSync('loginData');
         console.log("bus",busData);
@@ -135,6 +136,11 @@ Page({
                     businessData:res
                 })
             },function (err) {
+                wx.showToast({
+                    title: '查询失败',
+                    icon: 'none',
+                    duration: 1000
+                })
                 console.log("获取失败",err)
             }
         )

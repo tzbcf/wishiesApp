@@ -10,6 +10,7 @@ Page({
         size:3
     },
     onLoad: function () {
+        console.log(getCurrentPages())
         let personalData = wx.getStorageSync('loginData');
         console.log("本地获取的数据",personalData)
         this.setData({

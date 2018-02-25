@@ -13,6 +13,9 @@ Page({
     this.setData({
       personalData:personalData
     })
+
+      console.log(getCurrentPages())
+
     this.getClientData()
   },
   getClientData(){

@@ -43,6 +43,9 @@ Page({
             "electroYearMoneyTotal": "0"
         }
     },
+    onLoad(){
+        console.log(getCurrentPages())
+    },
     goDemand(){
         wx.navigateTo({
             url: '/pages/stock/stockDemand/index'

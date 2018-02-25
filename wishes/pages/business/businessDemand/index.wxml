@@ -1,7 +1,7 @@
 <view class="businessDd-container">
     <view class="businessDd-header">
         <view class="demand-header-detail">
-            <view class="demand-header-clue">银票标号:</view>
+            <view class="demand-header-clue">银票编号:</view>
             <view class="demand-header-info">
                 <input type="text" bindinput="silverTicket"></input>
             </view>
@@ -80,6 +80,22 @@
                 <view class="business-info-btn style-btn-bg">{{item.nbTypeName}}</view>
             </view>
         </block>
+    </view>
+    <view class="business-header">
+        <view class="business-header-deal">
+            <view>
+                <text>买入合计:</text>
+                <text>{{businessTotal.saleMoneyTotal}}元</text>
+            </view>
+            <view>
+                <text>卖出合计:</text>
+                <text>{{businessTotal.exchangeMoneyTotal}}元</text>
+            </view>
+        </view>
+        <view class="business-header-total">
+            <text>对换合计:</text>
+            <text>{{businessTotal.buyMoneyTotal}}元</text>
+        </view>
     </view>
 </view>
 <block wx:if="{{dateShow}}">
