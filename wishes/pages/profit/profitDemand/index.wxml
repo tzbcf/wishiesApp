@@ -1,47 +1,49 @@
 <view class="profitDd-container">
     <view class="profitDd-header">
         <view class="demand-header-detail">
-            <view class="demand-header-clue">银票标号:</view>
+            <view class="demand-header-clue">银票编号:</view>
             <view class="demand-header-info">
-                <input type="text"></input>
+                <input type="text" bindinput="silverInput"></input>
             </view>
         </view>
-        <view  class="demand-header-detail">
+        <view  class="demand-header-detail" wx:if="{{personalData.uType==0}}">
+            <view class="demand-header-clue">营销人员:</view>
+            <view class="demand-header-info">
+                <input type="text" bindinput="superInput"></input>
+            </view>
+        </view>
+        <view  class="demand-header-detail" wx:if="{{personalData.uType>2}}">
             <view class="demand-header-clue">客户名称:</view>
             <view class="demand-header-info">
-                <input type="text"></input>
+                <input type="text" bindinput="userInput"></input>
             </view>
         </view>
         <view  class="demand-header-detail">
             <view class="demand-header-clue">选择日期:</view>
             <view class="demand-header-ipt">
-                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
-                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
+                <view class="demand-header-time" bindtap="startBtn">{{startYear}}年{{startMonth}}月{{startDay}}日</view>
+                <view class="demand-header-time" bindtap="endBtn">{{endYear}}年{{endMonth}}月{{endDay}}日</view>
             </view>
         </view>
         <view class="demand-header-btn">
-            <button class="style-btn-bg">查询</button>
+            <button class="style-btn-bg" bindtap="profitQuery">查询</button>
         </view>
     </view>
-    <view class="profitDd-main">
+    <view class="profitDd-main" wx:if="{{personalData.uType==0}}">
         <block wx:for="{{profitData}}" wx:key="{{index}}">
             <view class="profit-main-info">
                 <view class="profit-info-material">
                     <view class="profit-id">
-                        <text>{{item.noteprofitId}}</text>
+                        <text>{{item.noteBusinessId}}</text>
                     </view>
                     <view class="profit-bill-material">
                         <view class="profit-bill-material-item">
-                            <text class="clue">票据编号:</text>
+                            <text class="clue">银票编号:</text>
                             <text class="info">{{item.nbNumber}}</text>
                         </view>
-                        <view class="profit-bill-material-type">
-                            <text class="clue">票据类型:</text>
-                            <text>{{item.nType}}</text>
-                        </view>
                         <view class="profit-bill-material-time">
-                            <text class="clue">客户名称:</text>
-                            <text class="info">{{item.nbMarketer}}</text>
+                            <text class="clue">银票类型:</text>
+                            <text class="info">{{item.nBuyTypeName}}</text>
                             <text class="clue">交易日期:</text>
                             <text class="info">{{item.nbDate}}</text>
                         </view>
@@ -50,50 +52,158 @@
                 <view class="profit-info-figure">
                     <view class="profit-deal">
                         <view>
+                            <text class="clue">买入客户:</text>
+                            <text class="info">{{item.nbCustomer}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">卖出客户:</text>
+                            <text class="info">{{item.nbCustomerBuy}}</text>
+                        </view>
+                        <view>
                             <text class="clue">票面金额:</text>
                             <text class="info">{{item.nbParValue}}</text>
                         </view>
-                        <view>
-                            <text class="clue">支付金额:</text>
-                            <text class="info">{{item.nbPayment}}</text>
-                        </view>
-                        <view>
-                            <text class="clue">实收金额:</text>
-                            <text class="info">{{item.nbNetReceipts}}</text>
-                        </view>
-                    </view>
-                    <view class="profit-revenue">
                         <view>
                             <text class="clue">成本:</text>
                             <text class="info">{{item.nbCost}}</text>
                         </view>
                         <view>
-                            <text class="clue">实际收入:</text>
-                            <text class="info">{{item.nbRealIncome}}</text>
+                            <text class="clue">实收金额:</text>
+                            <text class="info">{{item.nbNetReceipts}}</text>
                         </view>
                         <view>
-                            <text class="clue">扣息:</text>
-                            <text class="info">{{item.nbDiscount}}</text>
+                            <text class="clue">利润小计:</text>
+                            <text class="info">{{item.subtotalYingProfit}}</text>
                         </view>
                     </view>
                 </view>
-                <view class="profit-info-btn style-btn-bg">{{item.nbType}}</view>
+                <view class="profit-info-btn style-btn-bg">{{item.nbTypeName}}</view>
+            </view>
+        </block>
+    </view>
+    <view class="profit-bttom" wx:if="{{personalData.uType==0}}">
+        <view class="profit-bttom-total">
+            <text>纸制银票利润合计:</text>
+            <text>{{profitTotal.paperMoneyTotal}}元</text>
+        </view>
+        <view class="profit-bttom-total">
+            <view>
+                <text>半年电票利润合计:</text>
+                <text>{{profitTotal.electroHalfYearMoneyTotal}}元</text>
+            </view>
+            <view>
+                <text>一年电票利润合计:</text>
+                <text>{{profitTotal.electroYearMoneyTotal}}元</text>
+            </view>
+        </view>
+    </view>
+    <view class="profit-bttom" wx:if="{{personalData.uType>2}}">
+        <view class="profit-bttom-total">
+            <text>分润合计:</text>
+            <text>{{profitFenTotal.sbdPercentTotalSum}}元</text>
+        </view>
+        <view class="profit-bttom-total">
+            <view>
+                <text>分成合计:</text>
+                <text>{{profitFenTotal.nbYingTotalSum}}元</text>
+            </view>
+        </view>
+    </view>
+    <view class="profitDd-main" wx:if="{{personalData.uType>2}}">
+        <block wx:for="{{profitFenData}}" wx:key="{{index}}">
+            <view class="profit-main-info">
+                <view class="profit-info-material">
+                    <view class="profit-id">
+                        <text>{{item.shareBenefitDetailId}}</text>
+                    </view>
+                    <view class="profit-bill-material">
+                        <view class="profit-bill-material-item">
+                            <text class="clue">票据编号:</text>
+                            <text class="info">{{item.sbdNumber}}</text>
+                        </view>
+                        <view class="profit-bill-material-type">
+                            <text class="clue">票据类型:</text>
+                            <text class="info">{{item.nTypeName}}</text>
+                            <text class="clue">客户名称:</text>
+                            <text class="info">{{item.sbdCustomer}}</text>
+                        </view>
+                        <view class="profit-bill-material-time">
+                            <text class="clue">票面金额:</text>
+                            <text class="info">{{item.sbdMoney}}</text>
+                            <text class="clue">交易日期:</text>
+                            <text class="info">{{item.sbdDate}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="profit-info-figure">
+                    <view class="profit-deal">
+                        <view>
+                            <text class="clue">卖出分润类型:</text>
+                            <text class="info">{{item.nSaleTypeName}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">买入分润类型:</text>
+                            <text class="info">{{item.nBuyTypeName}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">一级分润提成:</text>
+                            <text class="info">{{item.sbdMarketerPercent}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">二级分润提成:</text>
+                            <text class="info">{{item.sbdTwoPercent}}</text>
+                        </view>
+                        <view>
+                            <text class="clue">分成合计:</text>
+                            <text class="info">{{item.sbdPercentTotal}}</text>
+                        </view>
+                    </view>
+                </view>
             </view>
         </block>
     </view>
 </view>
-<view class="mask">
-    <block wx:if="{{timeSorter}}">
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-            <picker-view-column>
-                <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
-            </picker-view-column>
-        </picker-view>
-    </block>
-</view>
+<block wx:if="{{dateShow}}">
+    <view class="shadeMask" bindtap="hideShade">
+        <block wx:if="{{startDateSel}}"  >
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindStartEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{startValue}}" bindchange="bindStartChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+        <block wx:if="{{endDateSel}}">
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindEndEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{endValue}}" bindchange="bindEndChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+    </view>
+</block>

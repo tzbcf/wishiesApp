@@ -1,6 +1,5 @@
 {
   "pages":[
-
     "pages/login/index",
     "pages/business/businessHome/index",
     "pages/business/businessDemand/index",
@@ -8,10 +7,10 @@
     "pages/client/clientDemand/index",
     "pages/administer/administerHome/index",
     "pages/administer/adminDemand/index",
-    "pages/profit/profitDemand/index",
-    "pages/profit/profitHome/index",
+    "pages/stock/stockHome/index",
     "pages/stock/stockDemand/index",
-    "pages/stock/stockHome/index"
+    "pages/profit/profitDemand/index",
+    "pages/profit/profitHome/index"
 
   ],
   "tabBar":{

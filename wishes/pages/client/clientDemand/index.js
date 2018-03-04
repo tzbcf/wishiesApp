@@ -29,7 +29,7 @@ Page({
         month: 1,
         days: days,
         day: 1,
-        value: [9999, 0, 0],
+        value: [date.getFullYear()-1960, 0, 0],
         birthdayShow:false,
         maskShow:false,
         userSort:false,
@@ -48,7 +48,8 @@ Page({
             clientData:clientData,
             personalData:personalData
         })
-        console.log(personalData.uType)
+        console.log(personalData.uType);
+        console.log("config",$.config.API_ROOT)
     },
     nameInput(e){
         this.setData({
@@ -125,7 +126,7 @@ Page({
       })
     },
     bindBirthdayEns(){
-        let val=this.data.birthdayVal;
+        let val=this.data.birthdayVal || this.data.value;
         this.setData({
             year: this.data.years[val[0]],
             month: this.data.months[val[1]],
@@ -222,12 +223,25 @@ Page({
         let _this=this;
         wx.chooseImage({
             count: 1, // 默认9
-            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sizeType: ['compressed'], // 压缩图
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: function (res) {
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-                _this.setData({
-                    identityId:res.tempFilePaths
+                console.log("tempFilePaths",res.tempFilePaths[0]);
+                wx.uploadFile({
+                    url: $.config.API_ROOT+'noteBankPlusManager/uploadimage/uploadModelImage.htm',
+                    filePath: res.tempFilePaths[0],
+                    name: 'uploadFile',
+                    success(res){
+                        let data=JSON.parse(res.data);
+                        _this.setData({
+                            identityId:data.rows
+                        })
+                        console.log("上传成功",data.rows)
+                    },
+                    fail(err){
+                        console.log("失败",err)
+                    }
                 })
             }
         })
@@ -248,50 +262,35 @@ Page({
     addUserRequest(){
         let _this=this,
             UserObj={},
-            uBirthday=this.data.year+this.data.month+this.data.day,
-            uBankDeposit=this.data.uBankDeposit,
-            uBankCard=this.data.uBankCard,
-            personalData = this.data.personalData,
-            clientData=this.data.clientData,
-            uType;
+            personalData=this.data.personalData;
         UserObj.userName=this.data.uAddUserName;
+        UserObj.plusId=personalData.plusId;
+        UserObj.plusType=personalData.plusType;
+        UserObj.uAddUserName=personalData.uAddUserName;
         UserObj.uPhone=this.data.uPhone;
         UserObj.uIdNumber=this.data.uIdNumber;
         UserObj.uBirthday=this.data.year+"-"+this.data.month+"-"+this.data.day;
-        UserObj.userNameFirstChar=this.data.uAddUserName.split("")[0];
+        UserObj.uBankDeposit=this.data.uBankDeposit;
+        UserObj.uBankCard=this.data.uBankCard;
+        UserObj.uIdPic=this.data.identityId;
+        // UserObj.userNameFirstChar=this.data.uAddUserName.split("")[0];
         if(personalData.uType<=2){
-            UserObj.uSuperior=this.data.uSuperiorValue[this.data.uSuperiorValues];
-            uType=parseInt(this.data.userSortValues)+3;
-        }else {
-            UserObj.uSuperior="";
-            uType="";
+            UserObj.uSuperior=this.data.uSuperiorValue[this.data.uSuperiorValues].userName;
+            UserObj.uType=parseInt(this.data.userSortValues)+3;
         }
-        $.common('noteBankPlusManager//user/addUserWechat.htm',"POST",{
-                uAddUserName:UserObj.userName,
-                uPhone:UserObj.uPhone,
-                uIdNumber:UserObj.uIdNumber,
-                uBirthday:uBirthday,
-                uBankDeposit:uBankDeposit,
-                uBankCard:uBankCard,
-                uSuperior:UserObj.uSuperior,
-                uType:uType
-            },function (res) {
-                console.log("获取成功",res);
+        console.log(UserObj);
+        console.log(typeof UserObj.userName);
+        $.common('noteBankPlusManager//user/addUserWechat.htm',"POST",$.util.fjson2Form(UserObj),function (res,resData) {
+                console.log("获取成功",resData);
+                let clientData=_this.data.clientData;
                 clientData.unshift(UserObj);
-                // wx.setStorage({
-                //     key:"clientData",
-                //     data:clientData,
-                //     success:res => {
-                //         console.log("数据储存成功",res)
-                //     }
-                // });
                 _this.setData({
                     clientData:clientData,
                     demand:true
                 })
             },function (err) {
                 wx.showToast({
-                    title: err.msg,
+                    title: '添加失败或已存在',
                     icon: 'none',
                     duration: 1000
                 })

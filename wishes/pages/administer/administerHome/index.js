@@ -40,5 +40,10 @@ Page({
         wx.navigateTo({
             url: '/pages/administer/adminDemand/index?queryType=2'
         })
+    },
+    oderRouter(){
+        wx.navigateTo({
+            url: '/pages/administer/adminDemand/index?queryType=3'
+        })
     }
 })

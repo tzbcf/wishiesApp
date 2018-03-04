@@ -27,9 +27,21 @@
 .demand-header-btn{
     padding: 0 40rpx 0 30rpx;
 }
-.profitDd-header{
-    padding-top: 30rpx;
-    margin-bottom: 30rpx;
+.profit-header{
+    background: #fff;
+    border-bottom: 1rpx solid #d8d8d8;
+    line-height: 40rpx;
+    padding: 20rpx 0;
+    margin-bottom: 20rpx;
+}
+.profit-header-pro,.profit-header-total,.profit-bill-electro,.profiy-bill-finance,.profiy-bill-business{
+    display: flex;
+}
+.profit-header-pro view,.profit-header-total view,.profit-bill-electro view,.profiy-bill-finance view,.profiy-bill-business view{
+    width: 50%;
+}
+.profit-header .clue,.profit-header .info{
+    line-height: 48rpx;
 }
 .profit-main-info{
     margin-bottom: 20rpx;
@@ -70,8 +82,9 @@
     display: flex;
     flex-direction: row;
 }
-.profit-info-figure .profit-deal view,.profit-info-figure .profit-revenue view{
-    width:33%;
+.profit-info-figure .profit-deal{
+    display: flex;
+    flex-wrap:wrap;
 }
 .profit-info-btn{
     display: inline-block;
@@ -80,4 +93,64 @@
     position: absolute;
     right: 60rpx;
     top:16rpx;
+}
+.profit-header-pro,.profit-header-total{
+    border-bottom: 1rpx solid #d8d8d8;
+    padding: 0 20rpx;
+}
+.profit-header-bill{
+    padding: 10rpx 20rpx 0;
+}
+.profit-header-total{
+    padding: 10rpx 20rpx;
+}
+.profitFen-header-pro{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 20rpx;
+}
+.fen-text-cent{
+    height:100%;
+    text-align: center;
+    padding-top: 50%;
+}
+.profitDd-header{
+    margin-bottom: 20rpx;
+    padding-top: 20rpx;
+}
+.date-sel{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    background: #fff;
+}
+.date-sel view{
+    text-align: center;
+}
+.businessDay-btn{
+    display: flex;
+    justify-content:space-between;
+    padding: 0 50rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+}
+.businessDay-btn view{
+    padding: 20rpx 20rpx;
+}
+.businessDay-btn-cancel{
+    color: #888;
+}
+.businessDay-btn-ensure{
+    color: #1AAD19;
+}
+.profit-bttom{
+    width:100%;
+    background: #fff;
+    position: fixed;
+    bottom:0;
+}
+.profit-bttom-total{
+    border-top:1rpx solid #E5E5E5;
+    padding: 10rpx;
+    text-align: center;
+    line-height: 40rpx;
 }

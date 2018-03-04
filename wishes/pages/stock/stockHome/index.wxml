@@ -15,27 +15,29 @@
                     <text class="info">{{stockTotal.electroYearMoneyTotal}}</text>
                 </view>
             </view>
-            <view class="stock-detail-finance">
-                <view>
-                    <text class="clue">半年财票合计</text>
-                    <text class="info">{{stockTotal.financeHalfYearMoneyTotal}}</text>
+            <block wx:if="{{personalData.uType<3 && personalData.plusType==2}}">
+                <view class="stock-detail-finance">
+                    <view>
+                        <text class="clue">半年财票合计</text>
+                        <text class="info">{{stockTotal.financeHalfYearMoneyTotal}}</text>
+                    </view>
+                    <view>
+                        <text class="clue">一年财票合计</text>
+                        <text class="info">{{stockTotal.financeYearMoneyTotal}}</text>
+                    </view>
                 </view>
-                <view>
-                    <text class="clue">一年财票合计</text>
-                    <text class="info">{{stockTotal.financeYearMoneyTotal}}</text>
+                <view class="stock-detail-business">
+                    <view>
+                        <text class="clue">半年商票合计</text>
+                        <text class="info">{{stockTotal.businessHalfYearMoneyTotal}}</text>
+                    </view>
+                    <view>
+                        <text class="clue">一年商票合计</text>
+                        <text class="info">{{stockTotal.businessYearMoneyTotal}}</text>
+                    </view>
                 </view>
-            </view>
-            <view class="stock-detail-business">
-                <view>
-                    <text class="clue">半年商票合计</text>
-                    <text class="info">{{stockTotal.businessHalfYearMoneyTotal}}</text>
-                </view>
-                <view>
-                    <text class="clue">一年商票合计</text>
-                    <text class="info">{{stockTotal.businessYearMoneyTotal}}</text>
-                </view>
+            </block>
 
-            </view>
         </view>
     </view>
     <view class="stock-main">
@@ -89,4 +91,3 @@
     </view>
 </view>
 <view class="query" bindtap="goDemand">查询</view>
-<view class="mask"></view>

@@ -128,6 +128,139 @@
         </view>
     </view>
 </block>
+<block wx:if="{{queryType==3}}">
+    <view class="businessDd-container">
+        <view class="businessDd-header">
+            <view class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">事项名称:</view>
+                <view class="demand-header-info">
+                    <input type="text" bindinput="eventInput"></input>
+                </view>
+            </view>
+            <view class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">客户名称:</view>
+                <view class="demand-header-info">
+                    <input type="text" bindinput="userNameInput"></input>
+                </view>
+            </view>
+            <view class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">银行编号:</view>
+                <view class="demand-header-info">
+                    <input type="text" bindinput="bankNumerInput"></input>
+                </view>
+            </view>
+            <view  class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">交易日期:</view>
+                <view class="demand-header-ipt">
+                    <view class="demand-header-time" bindtap="startBtn">{{startYear}}年{{startMonth}}月{{startDay}}日</view>
+                    <view class="demand-header-time" bindtap="endBtn">{{endYear}}年{{endMonth}}月{{endDay}}日</view>
+                </view>
+            </view>
+            <view  class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">应收付类型:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="receiveTypeTap">{{receiveTypeValue[receiveTypeValues]}}</view>
+            </view>
+            <view  class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">银行简称:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="bankSel">{{bankValueItem}}</view>
+            </view>
+            <view  class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">是否预付款:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="payStatusTap">{{payStateValue[payStatusValueItem]}}</view>
+            </view>
+            <view  class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">是否核销:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="payFinishTap">{{payStateValue[payFinishValueItem]}}</view>
+            </view>
+            <view  class="demand-header-detail margin-bot-10">
+                <view class="demand-header-clue">是否完成:</view>
+                <view class="demand-header-info demand-header-bank" bindtap="isFinishTap">{{payStateValue[isFinishValueItem]}}</view>
+            </view>
+            <view class="demand-header-btn">
+                <button class="style-btn-bg" bindtap="paymentQuery">查询</button>
+            </view>
+        </view>
+        <view class="business-main">
+            <block wx:for="{{otherIncomeData}}" wx:key="{{index}}">
+                <view class="business-main-info">
+                    <view class="adminDe-info-material">
+                        <view class="business-id">
+                            <text>{{item.bankReceiveId}}</text>
+                        </view>
+                        <view class="business-bill-material">
+                            <view class="business-bill-material-item">
+                                <text class="clue">交易日期:</text>
+                                <text class="info">{{item.dealTime}}</text>
+                            </view>
+                            <view class="business-bill-material-type">
+                                <text class="clue">事项:</text>
+                                <text class="info">{{item.bankEventName}}</text>
+                            </view>
+                            <view class="business-bill-material-type">
+                                <text class="clue">客户名称:</text>
+                                <text class="info">{{item.userName}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view >
+                        <view class="adminDe-deal">
+                            <view>
+                                <text class="clue">应收金额:</text>
+                                <text class="info">{{item.inputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">还需收入金额:</text>
+                                <text class="info">{{item.hasInputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">已收入金额:</text>
+                                <text class="info">{{item.receiveInputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">应付金额:</text>
+                                <text class="info">{{item.outputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">还需支付金额:</text>
+                                <text class="info">{{item.hasOutputMoney}}</text>
+                            </view>
+                            <view>
+                                <text class="clue">已应付金额:</text>
+                                <text class="info">{{item.receiveOutputMoney}}</text>
+                            </view>
+                        </view>
+                        <view class="adminDe-deal width-30">
+                            <view>
+                                <text class="clue">是否预付款:</text>
+                                <text class="info">
+                                    <text class="{{item.payFinish == 0 ? 'y-info-box' : 'b-info-box'}} info-box">{{item.payFinishName}}</text>
+                                </text>
+                            </view>
+                            <view>
+                                <text class="clue">是否核销:</text>
+                                <text class="info">
+                                    <text class="{{item.payStatus == 0 ? 'y-info-box' : 'b-info-box'}} info-box">{{item.payStatusName}}</text>
+                                </text>
+                            </view>
+                            <view>
+                                <text class="clue">是否完成:</text>
+                                <text class="info">
+                                    <text class="{{item.isFinish == 0 ? 'y-info-box' : 'b-info-box'}} info-box">{{item.isFinishName}}</text>
+                                </text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="business-header">
+            <view class="business-header-total">
+                <text>还需总应付金额:</text>
+                <text>{{otherIncomeTotal}}元</text>
+            </view>
+        </view>
+    </view>
+</block>
 <block wx:if="{{dateShow}}">
     <view class="shadeMask" bindtap="hideShade">
         <block wx:if="{{startDateSel}}"  >
@@ -177,7 +310,33 @@
                 </view>
                 <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{bankValues}}" bindchange="bankChange">
                     <picker-view-column>
-                        <view wx:for="{{bankValue}}" wx:key="index" style="line-height: 50px">{{item}}</view>
+                        <view wx:for="{{bankValue}}" wx:key="index" style="line-height: 50px">{{item.bankName}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+        </block>
+        <block wx:if="{{payStateShow}}">
+            <view class="user-sort-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="payStateEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{StateValues}}" bindchange="payStateChange">
+                    <picker-view-column>
+                        <view wx:for="{{payStateValue}}" wx:key="index" style="line-height: 50px">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+        </block>
+        <block wx:if="{{receiveTypeShow}}">
+            <view class="user-sort-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="receiveTypeEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{receiveTypeValues}}" bindchange="receiveTypeChange">
+                    <picker-view-column>
+                        <view wx:for="{{receiveTypeValue}}" wx:key="index" style="line-height: 50px">{{item}}</view>
                     </picker-view-column>
                 </picker-view>
             </view>

@@ -42,7 +42,7 @@ page{
     background: #fff;
     text-align: center;
     line-height: 90rpx;
-    position: absolute;
+    position: fixed;
     bottom: 80rpx;
     right:40rpx;
     z-index: 99;

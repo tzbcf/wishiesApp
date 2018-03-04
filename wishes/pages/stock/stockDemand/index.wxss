@@ -31,6 +31,9 @@
     padding-top: 30rpx;
     margin-bottom: 30rpx;
 }
+.padd-top-110{
+    padding-top: 110rpx!important;
+}
 .stock-header{
     line-height: 40rpx;
     background: #fff;
@@ -95,4 +98,30 @@
 .stock-info-time view,.stock-info-bank view{
     width:50%;
     line-height: 46rpx;
+}
+.stockDd-nav{
+    width:100%;
+    display: flex;
+    background: #fff;
+    position: fixed;
+    top:0;
+    z-index: 994;
+    border-bottom: 1rpx solid #d8d8d8;
+}
+.stockDd-nav-item{
+    width:33.3%;
+    text-align: center;
+    line-height: 80rpx;
+}
+.nav-item-active{
+    background: #ECECEC;
+}
+.stockDd-bottom{
+    width:100%;
+    padding-top: 10rpx;
+    border-top: 1rpx solid #d8d8d8;
+    background: #fff;
+    position: fixed;
+    bottom:0
+
 }

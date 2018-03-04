@@ -1,5 +1,5 @@
 <view class="ad-container">
-    <block wx:if="{{personalData.plusType==1}}">
+    <block wx:if="{{personalData.plusType==1 && personalData.uType < 3}}">
         <view class="ad-alone">
             <view class="ad-header">
                 <image src="{{userInfoImg}}"></image>
@@ -21,7 +21,7 @@
         <view class="ad-demand">
             <view bindtap="incomeRouter">收支明细查询</view>
             <view bindtap="bankRouter">银行账户余额查询</view>
-            <view>其他应收应付查询</view>
+            <view bindtap="oderRouter">其他应收应付查询</view>
         </view>
     </block>
     <view class="ad-btn">

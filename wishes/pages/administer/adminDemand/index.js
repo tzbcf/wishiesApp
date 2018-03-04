@@ -38,15 +38,25 @@ Page({
         bankShow:false,
         bankValue:["工商银行","农业银行","招商银行"],
         bankValues:0,
-        bankValueItem:"工商银行",
+        bankValueItem:"",
         page:1,
-        size:3
+        size:3,
+        payStateShow:false,
+        StateValues:Number,
+        payStateValue:['全部','未完成','完成'],
+        payStatusValueItem:0,
+        payFinishValueItem:0,
+        isFinishValueItem:0,
+        receiveTypeShow:false,
+        receiveTypeValues:0,
+        receiveTypeValue:['全部','应收','应付'],
+        payStateNum:0
     },
     onLoad(options){
-        let  queryType=options.queryType,
+        let  queryType=options.queryType || '3',
             _this=this,
             personalData = wx.getStorageSync('loginData');
-        console.log(queryType)
+        console.log(this.data.page);
         console.log("adminDemand",personalData);
         this.setData({
             personalData:personalData,
@@ -56,6 +66,7 @@ Page({
             page:1,
             size:3
         });
+        this.bankRequest();
         switch (queryType){
             case '1':
                 _this.incomeData();
@@ -143,7 +154,93 @@ Page({
             }
         )
     },
-    otherIncome(queryType){},
+    otherIncome(type){
+        let personalData=this.data.personalData,
+            dataObj={
+                page:this.data.page,
+                size:this.data.size,
+                plusType:personalData.plusType,
+                plusId:personalData.plusId,
+            },
+            _this=this;
+        console.log("otherIncome")
+        if(type==1){
+            dataObj.bankEvent=this.data.bankEvent || '';
+            dataObj.bankNum=this.data.bankNum || '';
+            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00";
+            dataObj.userName=this.data.userName || '';
+            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00";
+            dataObj.bankId=this.data.bankValue[this.data.bankValues].bankId;
+            dataObj.receiveType = this.data.receiveTypeValues!=0 ? this.data. receiveTypeValues :'';
+            dataObj.payStatus = this.data.payStatusValueItem != 0 ? this.data.payStatusValueItem-1 :'';
+            dataObj.payFinish = this.data.payFinishValueItem != 0 ? this.data.payFinishValueItem-1 :'';
+            dataObj.isFinish = this.data.isFinishValueItem != 0 ? this.data.isFinishValueItem-1 :'';
+        }
+        console.log('收支',dataObj);
+        $.common('noteBankPlusManager//bank/findBankReceiveListWechat.htm',"POST",$.util.fjson2Form(dataObj),function (res,resData) {
+                console.log("获取成功",res);
+                if(!res.length){
+                    wx.showToast({
+                        title: '查询无结果',
+                        icon: 'none',
+                        duration: 1000
+                    })
+                }else {
+                    for(let i of res){
+                        if(i.payFinish==0){
+                            i.payFinishName='否'
+                        }else {
+                            i.payFinishName='是'
+                        }
+                        if(i.payStatus==0){
+                            i.payStatusName='否'
+                        }else {
+                            i.payStatusName='是'
+                        }
+                        if(i.isFinish==0){
+                            i.isFinishName='否'
+                        }else {
+                            i.isFinishName='是'
+                        }
+                    }
+                }
+
+                _this.setData({
+                    otherIncomeData:res,
+                    otherIncomeTotal:resData.total
+                })
+            },function (err) {
+                wx.showToast({
+                    title: '查询失败',
+                    icon: 'none',
+                    duration: 1000
+                })
+                console.log("获取失败",err)
+            }
+        )
+    },
+    bankRequest(){
+        let personalData=this.data.personalData,
+            _this=this,
+            bankObj={};
+        bankObj.plusId=personalData.plusId;
+        bankObj.plusType=personalData.plusType;
+        $.common('noteBankPlusManager//bank/findBankListWechat.htm',"GET",bankObj,function (res,resData) {
+            console.log('111222',res)
+                _this.setData({
+                    bankValue:res,
+                    bankValueItem:res[_this.data.bankValues].bankName
+                })
+            },function (err) {
+                wx.showToast({
+                    title: '查询失败',
+                    icon: 'none',
+                    duration: 1000
+                })
+                console.log("获取失败",err)
+            }
+        )
+    },
     query(){
         this.incomeData(1)
     },
@@ -155,11 +252,39 @@ Page({
             userName:e.detail.value
         })
     },
+    eventInput(e){
+        this.setData({
+            bankEvent:e.detail.value
+        })
+    },
+    bankNumerInput(e){
+        this.setData({
+            bankNum:e.detail.value
+        })
+    },
     bankSel(){
         console.log("11")
         this.setData({
             dateShow:true,
             bankShow:true
+        })
+    },
+    receiveTypeTap(){
+        this.setData({
+            dateShow:true,
+            receiveTypeShow:true
+        })
+    },
+    receiveTypeChange(e){
+        let val = e.detail.value;
+        this.setData({
+            receiveTypeValuesVal:val
+        })
+    },
+    receiveTypeEns(){
+        let val=this.data.receiveTypeValuesVal || 0;
+        this.setData({
+            receiveTypeValues:val
         })
     },
     startBtn(){
@@ -216,15 +341,75 @@ Page({
         let val=this.data.bankValues,
             bankValue=this.data.bankValue;
         this.setData({
-            bankValueItem:bankValue[val]
+            bankValueItem:bankValue[val].bankName
         })
+    },
+    payStatusTap(){
+        let StateValues=this.data.payStatusValueItem;
+        this.setData({
+            dateShow:true,
+            payStateShow:true,
+            payStateNum:0,
+            StateValues:StateValues
+        })
+    },
+    payFinishTap(){
+        let StateValues=this.data.payFinishValueItem;
+        this.setData({
+            dateShow:true,
+            payStateShow:true,
+            payStateNum:1,
+            StateValues:StateValues
+        })
+    },
+    isFinishTap(){
+        let StateValues=this.data.isFinishValueItem;
+        this.setData({
+            dateShow:true,
+            payStateShow:true,
+            payStateNum:2,
+            StateValues:StateValues
+        })
+    },
+    payStateChange(e){
+        let val=e.detail.value;
+        this.setData({
+            StateValues:val
+        })
+    },
+    payStateEns(){
+        let payStateNum=this.data.payStateNum,
+            StateValues=this.data.StateValues,
+            payStatusValueItem=this.data.payStatusValueItem,
+            payFinishValueItem=this.data.payFinishValueItem,
+            isFinishValueItem=this.data.isFinishValueItem;
+        if(payStateNum==0){
+            this.setData({
+                payStatusValueItem:StateValues
+            })
+        }
+        if(payStateNum==1){
+            this.setData({
+                payFinishValueItem:StateValues
+            })
+        }
+        if(payStateNum==2){
+            this.setData({
+                isFinishValueItem:StateValues
+            })
+        }
+    },
+    paymentQuery(){
+        this.otherIncome(1)
     },
     hideShade(){
         this.setData({
             dateShow:false,
             startDateSel:false,
             endDateSel:false,
-            bankShow:false
+            bankShow:false,
+            payStateShow:false,
+            receiveTypeShow:false
         })
     }
 })

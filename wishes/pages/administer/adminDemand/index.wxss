@@ -27,7 +27,7 @@
     text-align: center;
 }
 .business-main{
-    padding:400rpx 0 100rpx 0;
+    padding:0 0 100rpx 0;
 }
 .admin-bank-main{
     padding: 220rpx 0 0 0;
@@ -39,10 +39,10 @@
     position: relative;
     font-size: 24rpx;
 }
-.business-info-material{
+.adminDe-info-material{
     display: flex;
     flex-direction:row;
-    height:200rpx;
+    height:160rpx;
 }
 .business-id{
     height:100%;
@@ -130,8 +130,6 @@
     padding: 30rpx 0;
     z-index: 98;
     background: #f0f0f0;
-    position: fixed;
-    top:0;
 }
 .date-sel{
     width: 100%;
@@ -179,5 +177,27 @@
 }
 .admin-bank-item-info{
     line-height: 60rpx;
+}
+.margin-bot-10{
+    margin-bottom: 20rpx!important;
+}
+.adminDe-deal{
+    display: flex;
+    flex-wrap:wrap;
+}
+.adminDe-deal view{
+    margin-bottom: 20rpx;
+}
+.info-box{
+    padding: 6rpx 12rpx;
+}
+.y-info-box{
+    background: #ffcc66;
+}
+.b-info-box{
+    background: #339933;
+}
+.width-30 view{
+    width:33%;
 }
 

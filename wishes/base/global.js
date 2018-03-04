@@ -7,6 +7,10 @@ const $ = {
             url:config.API_ROOT+api_cmd,
             method:method,
             data:data,
+            dataType:'json',
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
             success:res=>{
                 console.log(res);
                 if(res.data.status==200){
@@ -23,6 +27,12 @@ const $ = {
 };
 Object.defineProperty($,'util',{
     value:util,
+    writable:false,
+    enumerable:false,
+    configurable:false
+});
+Object.defineProperty($,'config',{
+    value:config,
     writable:false,
     enumerable:false,
     configurable:false

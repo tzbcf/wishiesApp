@@ -53,8 +53,9 @@
     display: flex;
     flex-direction: row;
 }
-.profit-info-figure .profit-deal view,.profit-info-figure .profit-revenue view{
-    width:33%;
+.profit-info-figure .profit-deal{
+    display: flex;
+    flex-wrap:wrap;
 }
 .profit-info-btn{
     display: inline-block;
@@ -74,7 +75,16 @@
 .profit-header-total{
     padding: 10rpx 20rpx;
 }
-
+.profitFen-header-pro{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 20rpx;
+}
+.fen-text-cent{
+    height:100%;
+    text-align: center;
+    padding-top: 50%;
+}
 
 
 

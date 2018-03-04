@@ -40,6 +40,13 @@ const init={
         str = str ? String(str) : "";
         return str.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2').replace(/^(.{3})[^@]*(@.+)$/, '$1****$2');
     },
+    fjson2Form(json) {
+        var str = [];
+        for(var p in json){
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
+        }
+        return str.join("&");
+    }
 };
 
 

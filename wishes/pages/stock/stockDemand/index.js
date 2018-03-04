@@ -63,10 +63,31 @@ Page({
         days: days,
         day: 2,
         value: [9999, 1, 1],
-        timeSorter:false
+        timeSorter:false,
+        navActive:0
     },
     onLoad(){
         console.log(getCurrentPages())
+        let personalData = wx.getStorageSync('loginData');
+        console.log("本地获取的数据",personalData)
+        this.setData({
+            personalData:personalData
+        });
+    },
+    inventoryTap(){
+        this.setData({
+            navActive:0
+        })
+    },
+    temporaryTap(){
+        this.setData({
+            navActive:1
+        })
+    },
+    shortTap(){
+        this.setData({
+            navActive:2
+        })
     },
     bindChange(e) {
         const val = e.detail.value

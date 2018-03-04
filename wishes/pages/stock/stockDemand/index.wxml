@@ -1,7 +1,14 @@
 <view class="stockDd-container">
-    <view class="stockDd-header">
+    <block wx:if="{{personalData.uType<3}}">
+        <view class="stockDd-nav">
+            <view class="stockDd-nav-item {{navActive==0 ? 'nav-item-active' : ''}}" bindtap="inventoryTap">库存</view>
+            <view class="stockDd-nav-item {{navActive==1 ? 'nav-item-active' : ''}}" bindtap="temporaryTap">临时库</view>
+            <view class="stockDd-nav-item {{navActive==2 ? 'nav-item-active' : ''}}" bindtap="shortTap">短票库</view>
+        </view>
+    </block>
+    <view class="stockDd-header {{personalData.uType<3 ? 'padd-top-110':''}}">
         <view class="demand-header-detail">
-            <view class="demand-header-clue">银票标号:</view>
+            <view class="demand-header-clue">银票编号:</view>
             <view class="demand-header-info">
                 <input type="text"></input>
             </view>
@@ -12,7 +19,7 @@
                 <input type="text"></input>
             </view>
         </view>
-        <view  class="demand-header-detail">
+        <view  class="demand-header-detail" wx:if="{{navActive==0}}">
             <view class="demand-header-clue">选择日期:</view>
             <view class="demand-header-ipt">
                 <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
@@ -26,8 +33,8 @@
                 <input type="text"></input>
             </view>
         </view>
-        <view  class="demand-header-detail">
-            <view class="demand-header-clue">扣息:</view>
+        <view  class="demand-header-detail" wx:if="{{navActive==0}}">
+            <view class="demand-header-clue" wx:if="{{personalData.uType<3}}">扣息:</view>
             <view class="demand-header-ipt">
                 <input type="text"></input>
                 <input type="text"></input>
@@ -72,7 +79,7 @@
                             <text class="info">{{item.nExpireTimeIn}}</text>
                         </view>
                     </view>
-                    <view class="stock-info-bank">
+                    <view class="stock-info-bank" wx:if="{{personalData.uType<3}}">
                         <view>
                             <text class="clue">兑票银行:</text>
                             <text class="info">{{item.nEnterBankIn}}</text>
@@ -82,10 +89,35 @@
                             <text class="info">{{item.nBuyDiscount}}</text>
                         </view>
                     </view>
+                    <view wx:if="{{personalData.uType<3 && navActive!=0}}">
+                        <view>
+                            <text class="clue">出库人名称:</text>
+                            <text class="info">{{item.nBuyDiscount}}</text>
+                        </view>
+                    </view>
                 </view>
             </view>
         </block>
     </view>
+    <view class="stockDd-bottom">
+        <view class="stock-header-total">
+            <text class="clue">库存纸制银票合计:</text>
+            <text class="info">{{stockTotal.paperMoneyTotal}}</text>
+        </view>
+        <view class="stock-header-detail">
+            <view class="stock-detail-electer">
+                <view>
+                    <text class="clue">半年电票合计</text>
+                    <text class="info">{{stockTotal.electroHalfYearMoneyTotal}}</text>
+                </view>
+                <view>
+                    <text class="clue">一年电票合计</text>
+                    <text class="info">{{stockTotal.electroYearMoneyTotal}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
 </view>
 <view class="mask">
     <block wx:if="{{timeSorter}}">
