@@ -2,11 +2,11 @@
 const util = require('util.js');
 const config = require('config.js');
 const $ = {
-    common(api_cmd,method,data,success,error){
+    common(api_cmd,data,success,error){
         wx.request({
             url:config.API_ROOT+api_cmd,
-            method:method,
-            data:data,
+            method:'POST',
+            data:util.fjson2Form(data),
             dataType:'json',
             header: {
                 "Content-Type": "application/x-www-form-urlencoded"

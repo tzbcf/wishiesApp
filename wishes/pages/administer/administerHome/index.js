@@ -1,11 +1,6 @@
 Page({
     data:{
-        alone:false,
-        personalData:{
-            userName:"夏正国",
-            uIdNumber:"123456123412131456",
-            uPhone:"1234566548"
-        }
+        personalData:{}
     },
     onLoad(){
         wx.getUserInfo({
@@ -17,7 +12,6 @@ Page({
             }
         });
         let personalData = wx.getStorageSync('loginData');
-        console.log("本地获取的数据",personalData)
         this.setData({
             personalData:personalData
         })

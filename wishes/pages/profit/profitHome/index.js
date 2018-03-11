@@ -9,7 +9,8 @@ Page({
         profitFenData:[],
         profitFenTotal:{},
         page:1,
-        size:3
+        size:6,
+        reachBtn:false
     },
     onLoad(){
         wx.getUserInfo({
@@ -20,10 +21,17 @@ Page({
                 })
             }
         });
-        let personalData = wx.getStorageSync('loginData');
+        let personalData = wx.getStorageSync('loginData'),
+            profitObj={
+                plusId:personalData.plusId,
+                plusType:personalData.plusType,
+                page:this.data.page,
+                size:this.data.size
+            }
         console.log("本地获取的数据",personalData)
         this.setData({
-            personalData:personalData
+            personalData:personalData,
+            profitObj:profitObj
         });
         if(personalData.uType==0){
             this.embellishRequest();
@@ -35,88 +43,122 @@ Page({
     },
     //事件处理函数
     goDemand(){
-        let personalData=this.data.personalData;
-        if(personalData.uType==0){
-            let profitObj={
-                profitData:this.data.profitData,
-                profitTotal:this.data.profitTotal
-            };
-            wx.setStorage({
-                key:"profitObj",
-                data:profitObj,
-                success:res => {
-                    console.log("数据储存成功",res)
-                }
-            })
-        }
-        if(personalData.uType>2){
-            let profitFenObj={
-                profitFenData:this.data.profitFenData,
-                profitFenTotal:this.data.profitFenTotal
-            };
-            wx.setStorage({
-                key:"profitFenObj",
-                data:profitFenObj,
-                success:res => {
-                    console.log("数据储存成功",res)
-                }
-            })
-        }
         wx.navigateTo({
             url: '/pages/profit/profitDemand/index'
         })
     },
     embellishRequest () {
-        let personalData=this.data.personalData,
-            emDataObj={
-                plusId:personalData.plusId,
-                plusType:personalData.plusType,
-                page:this.data.page,
-                size:this.data.size,
-                nTemStatus:1
-            },
-            _this=this;
-        $.common("noteBankPlusManager//note/findNoteProfitListWechat.htm","GET",emDataObj,function (res,resData) {
-                console.log("成功",res)
-                for(let d of res){
-                    if(d.nBuyType==0){
-                        d.nBuyTypeName='纸票'
+        let profitObj=this.data.profitObj,
+            _this=this,
+            profitData=this.data.profitData,
+            profitTotal=this.data.profitTotal,
+            reachBtn=this.data.reachBtn;
+        profitObj.nTemStatus=1;
+        if(!reachBtn){
+            $.common("noteBankPlusManager//note/findNoteProfitListWechat.htm",profitObj,
+                function (res,resData) {
+                    if(res.length){
+                        for(let d of res){
+                            if(d.nBuyType==0){
+                                d.nBuyTypeName='纸票'
+                            }
+                            if(d.nBuyType==1){
+                                d.nBuyTypeName='半年电票'
+                            }
+                            if(d.nBuyType==2){
+                                d.nBuyTypeName='一年电票'
+                            }
+                            profitData.push(d)
+                        }
+                        _this.setData({
+                            profitData:profitData,
+                            profitTotal:resData.total
+                        })
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }else{
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
                     }
-                    if(d.nBuyType==1){
-                        d.nBuyTypeName='半年电票'
-                    }
-                    if(d.nBuyType==2){
-                        d.nBuyTypeName='一年电票'
-                    }
+
+                },function (err) {
+                    console.log("失败",err)
                 }
-                _this.setData({
-                    profitData:res,
-                    profitTotal:resData.total
-                })
-            },function (err) {
-                console.log("失败",err)
-            }
-        )
+            )
+        }
+
     },
     fenRunRequest(){
-        let personalData=this.data.personalData,
-            emDataObj={
-                plusId:personalData.plusId,
-                plusType:personalData.plusType,
-                page:this.data.page,
-                size:this.data.size,
-                userIdM:personalData.userId
-            },
+        let profitObj=this.data.profitObj,
+            personalData=this.data.personalData,
+            reachBtn=this.data.reachBtn,
+            profitFenData=this.data.profitFenData,
+            profitFenTotal=this.data.profitFenTotal,
             _this=this;
-        $.common("noteBankPlusManager//shareBenefit/findShareBenefitDetailWechat.htm","POST",$.util.fjson2Form(emDataObj),function (res,resData) {
-                console.log("成功",resData.total)
-                _this.setData({
-                    profitFenData:res,
-                    profitFenTotal:resData.total
-                })
-            },function (err) {
-                console.log("失败",err)
+            profitObj.userIdM=personalData.userId;
+        if(!reachBtn){
+            $.common("noteBankPlusManager//shareBenefit/findShareBenefitDetailWechat.htm",profitObj,
+                function (res,resData) {
+                    if(res.length){
+                        for(let d of res){
+                            profitFenData.push(d)
+                        }
+                        _this.setData({
+                            profitFenData:profitFenData,
+                            profitFenTotal:resData.total
+                        })
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }else{
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
+                    }
+
+                },function (err) {
+                    console.log("失败",err)
+                }
+            )
+        }
+    },
+    onReachBottom(){
+        let _this = this,
+            profitObj = this.data.profitObj,
+            reachBtn = this.data.reachBtn,
+            personalData = this.data.personalData;
+        console.log(profitObj);
+        if (!reachBtn) {
+            profitObj.page++;
+            this.setData({
+                profitObj: profitObj
+            });
+            if (personalData.uType == 0) {
+                this.embellishRequest();
             }
-        )
+            if (personalData.uType > 2) {
+                this.fenRunRequest();
+            }
+        }
     }
 })

@@ -10,38 +10,36 @@
         <view class="demand-header-detail">
             <view class="demand-header-clue">银票编号:</view>
             <view class="demand-header-info">
-                <input type="text"></input>
+                <input type="text" class="w510" bindinput="paperSerialNum"></input>
             </view>
         </view>
         <view  class="demand-header-detail">
             <view class="demand-header-clue">银票类型:</view>
-            <view class="demand-header-info">
-                <input type="text"></input>
-            </view>
+            <view class="demand-header-info drop-down" bindtap="peperBtnShow">{{paperVal}}</view>
         </view>
         <view  class="demand-header-detail" wx:if="{{navActive==0}}">
             <view class="demand-header-clue">选择日期:</view>
             <view class="demand-header-ipt">
-                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
-                <view class="demand-header-time">{{year}}年{{month}}月{{day}}日</view>
+                <view class="demand-header-time" bindtap="startBtn">{{startYear}}年{{startMonth}}月{{startDay}}日</view>
+                <view class="demand-header-time" bindtap="endBtn">{{endYear}}年{{endMonth}}月{{endDay}}日</view>
             </view>
         </view>
         <view  class="demand-header-detail">
             <view class="demand-header-clue">银票金额:</view>
             <view class="demand-header-ipt">
-                <input type="text"></input>
-                <input type="text"></input>
+                <input type="text" bindinput="MoneyStart"></input>
+                <input type="text" bindinput="MoneyEnd"></input>
             </view>
         </view>
         <view  class="demand-header-detail" wx:if="{{navActive==0}}">
             <view class="demand-header-clue" wx:if="{{personalData.uType<3}}">扣息:</view>
             <view class="demand-header-ipt">
-                <input type="text"></input>
-                <input type="text"></input>
+                <input type="text" bindinput="discountStart"></input>
+                <input type="text" bindinput="discountEnd"></input>
             </view>
         </view>
         <view class="demand-header-btn">
-            <button class="style-btn-bg">查询</button>
+            <button class="style-btn-bg" bindtap="stockQuery">查询</button>
         </view>
     </view>
     <view class="stockDd-main">
@@ -119,18 +117,60 @@
     </view>
 
 </view>
-<view class="mask">
-    <block wx:if="{{timeSorter}}">
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-            <picker-view-column>
-                <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
-            </picker-view-column>
-        </picker-view>
-    </block>
-</view>
+<block wx:if="{{maskShow}}">
+    <view class="shadeMask" bindtap="hideShade">
+        <block wx:if="{{startDateSel}}"  >
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindStartEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{startValue}}" bindchange="bindStartChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+        <block wx:if="{{endDateSel}}">
+            <view class="date-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindEndEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{endValue}}" bindchange="bindEndChange">
+                    <picker-view-column>
+                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+
+        </block>
+        <block wx:if="{{paperTypeShow}}">
+            <view class="user-sort-sel">
+                <view class="birthday-btn">
+                    <view class="birthday-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="birthday-btn-ensure" bindtap="bindUserSortEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{paperValues}}" bindchange="bindUserSortChange">
+                    <picker-view-column>
+                        <view wx:for="{{paperValue}}" wx:key="index" style="line-height: 50px">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+        </block>
+    </view>
+</block>

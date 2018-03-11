@@ -88,6 +88,7 @@
     border-radius: 6rpx;
     padding-left: 20rpx;
     box-sizing: border-box;
+    line-height: 56rpx;
 }
 .id-picture .demand-ipt{
     padding-left: 0;

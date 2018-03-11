@@ -30,7 +30,7 @@
     padding:0 0 100rpx 0;
 }
 .admin-bank-main{
-    padding: 220rpx 0 0 0;
+    padding:0;
 }
 .business-main-info{
     margin-bottom: 20rpx;

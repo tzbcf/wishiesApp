@@ -19,6 +19,8 @@ Page({
     data:{
         businessData:[],
         businessTotal:{},
+        page:1,
+        size:6,
         years: years,
         startYear: date.getFullYear(),
         endYear: date.getFullYear(),
@@ -32,19 +34,85 @@ Page({
         endValue:[date.getFullYear(), date.getMonth(), date.getDate()-1],
         dateShow:false,
         startDateSel:false,
-        endDateSel:false
+        endDateSel:false,
+        reachBtn:false
     },
     onLoad(){
         console.log(getCurrentPages())
-        let busData = wx.getStorageSync('busData'),
-            personalData = wx.getStorageSync('loginData');
-        console.log("bus",busData);
+        let personalData = wx.getStorageSync('loginData'),
+            businessDeObj={
+                page:1,
+                size:this.data.size,
+                plusType:personalData.plusType,
+                plusId:personalData.plusId
+            };
         this.setData({
-            busData:busData,
-            businessData:busData.rows,
-            businessTotal:busData.total,
-            personalData:personalData
-        })
+            personalData:personalData,
+            businessDeObj:businessDeObj
+        });
+        this.businessDeRequest();
+    },
+    onReachBottom(){
+        let _this=this,
+            businessDeObj=this.data.businessDeObj,
+            reachBtn=this.data.reachBtn;
+        console.log(businessDeObj);
+        if(!reachBtn){
+            businessDeObj.page++;
+            this.setData({
+                businessDeObj:businessDeObj
+            });
+            this.businessDeRequest()
+        }
+    },
+    businessDeRequest(){
+        let reachBtn=this.data.reachBtn,
+            businessDeObj=this.data.businessDeObj,
+            businessData=this.data.businessData,
+            businessTotal=this.data.businessTotal,
+            _this=this;
+        if(!reachBtn){
+            $.common('noteBankPlusManager/note/findNoteBusinessListWechat.htm',businessDeObj,
+                function (res,resData) {
+                    console.log("获取成功",res);
+                    if(!res.length){
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
+
+                    }else{
+                        for(let item of res){
+                            businessData.push(item)
+                        }
+                        _this.setData({
+                            businessData:businessData,
+                            businessTotal:resData.total
+                        })
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }
+
+                },function (err) {
+                    wx.showToast({
+                        title: '查询失败',
+                        icon: 'none',
+                        duration: 1000
+                    })
+                    console.log("获取失败",err)
+                }
+            )
+        }
+
     },
     silverTicket(e){
         this.setData({
@@ -108,41 +176,16 @@ Page({
         })
     },
     query(){
-        let startTime=this.data.startYear.toString()+this.data.startMonth.toString()+this.data.startDay.toString(),
-            endTime=this.data.endYear.toString()+this.data.endMonth.toString()+this.data.endDay.toString(),
-            nbNumber=this.data.nbNumber,
-            nbMarketer=this.data.nbMarketer,
-            personalData=this.data.personalData,
-            _this=this;
-        $.common('noteBankPlusManager/note/findNoteBusinessListWechat.htm',"GET",{
-                page:1,
-                size:3,
-                plusType:personalData.plusType,
-                plusId:personalData.plusId,
-                startTime:startTime,
-                endTime:endTime,
-                nbNumber:nbNumber,
-                nbMarketer:nbMarketer
-            },function (res) {
-                console.log("获取成功",res);
-                if(!res.length){
-                    wx.showToast({
-                        title: '查询无结果',
-                        icon: 'none',
-                        duration: 1000
-                    })
-                }
-                _this.setData({
-                    businessData:res
-                })
-            },function (err) {
-                wx.showToast({
-                    title: '查询失败',
-                    icon: 'none',
-                    duration: 1000
-                })
-                console.log("获取失败",err)
-            }
-        )
+        let _this=this,businessDeObj=this.data.businessDeObj;
+        businessDeObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
+        businessDeObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
+        businessDeObj.nbNumber=this.data.nbNumber || '';
+        businessDeObj.nbMarketer=this.data.nbMarketer || '';
+        this.setData({
+            businessDeObj:businessDeObj,
+            businessData:[]
+        })
+        console.log(typeof businessDeObj.nbNumber)
+        this.businessDeRequest()
     }
 })

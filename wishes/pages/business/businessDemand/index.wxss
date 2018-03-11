@@ -27,7 +27,7 @@
     text-align: center;
 }
 .business-main{
-    padding:400rpx 0 140rpx 0;
+    padding:0rpx 0 140rpx 0;
 }
 .business-main-info{
     margin-bottom: 20rpx;
@@ -113,8 +113,6 @@
     padding: 30rpx 0;
     z-index: 98;
     background: #f0f0f0;
-    position: fixed;
-    top:0;
 }
 .date-sel{
     width: 100%;

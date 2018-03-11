@@ -19,6 +19,8 @@ Page({
     data:{
         profitData:[],
         profitTotal:{},
+        profitFenData:[],
+        profitFenTotal:[],
         years: years,
         startYear: date.getFullYear(),
         endYear: date.getFullYear(),
@@ -28,32 +30,33 @@ Page({
         days: days,
         startDay: $.util.formatNumber(date.getDate()),
         endDay: $.util.formatNumber(date.getDate()),
-        startValue: [date.getFullYear(), date.getMonth(), date.getDate()-1],
-        endValue:[date.getFullYear(), date.getMonth(), date.getDate()-1],
+        startValue: [date.getFullYear()-1960, date.getMonth(), date.getDate()-1],
+        endValue:[date.getFullYear()-1960, date.getMonth(), date.getDate()-1],
         page:1,
-        size:3,
+        size:6,
         timeSorter:false,
-        dateShow:false
+        dateShow:false,
+        reachBtn:false
     },
     onLoad(){
-        let personalData = wx.getStorageSync('loginData');
+        let personalData = wx.getStorageSync('loginData'),
+            profitObj={
+                plusId:personalData.plusId,
+                plusType:personalData.plusType,
+                page:this.data.page||1,
+                size:this.data.size||6,
+            };
+        this.setData({
+            personalData:personalData,
+            profitObj:profitObj
+        })
         if(personalData.uType==0){
-            let profitObj=wx.getStorageSync('profitObj');
-            this.setData({
-                profitData:profitObj.profitData,
-                profitTotal:profitObj.profitTotal
-            })
+            this.profitRequest()
         }
         if(personalData.uType>2){
-            let profitFenObj=wx.getStorageSync('profitFenObj');
-            this.setData({
-                profitFenData:profitFenObj.profitFenData,
-                profitFenTotal:profitFenObj.profitFenTotal
-            })
+            this.profitFenRequest()
         }
-        this.setData({
-            personalData:personalData
-        });
+
         console.log(personalData);
         console.log(getCurrentPages())
     },
@@ -128,23 +131,27 @@ Page({
     },
     profitQuery(){
         let personalData=this.data.personalData,
-            profitObj={
-                plusId:personalData.plusId,
-                plusType:personalData.plusType,
-                nTemStatus:1,
-                page:this.data.page||1,
-                size:this.data.size||3,
-                startTime:this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00",
-                endTime:this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00"
-            },
+            profitObj=this.data.profitObj,
             _this=this;
+        this.setData({
+            reachBtn:false
+        })
         if(personalData.uType==0){
             profitObj.nbNumber=_this.data.nbNumber||'';
+            profitObj.nTemStatus=1;
+            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
+            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
             let superName=_this.data.superName;
+            this.setData({
+                profitObj:profitObj,
+                profitData:[]
+            })
+            console.log("323",_this.data.reachBtn);
             if(superName){
                 _this.marketRequest(superName,profitObj);
             }else{
-                _this.profitRequest(profitObj)
+                console.log("222")
+                _this.profitRequest()
             }
 
         }
@@ -152,47 +159,129 @@ Page({
             profitObj.sbdNumber=this.data.nbNumber||'';
             profitObj.sbdCustomer=this.data.sbdCustomer||'';
             profitObj.userIdM=personalData.userId;
-            console.log("21",profitObj)
-            _this.profitFenRequest(profitObj)
+            this.setData({
+                profitObj:profitObj,
+                profitFenData:[]
+            })
+            _this.profitFenRequest()
         }
         console.log(profitObj)
     },
-    profitRequest(obj){
-        let _this=this;
-        $.common("noteBankPlusManager//note/findNoteProfitListWechat.htm","POST",$.util.fjson2Form(obj),function (res,resData) {
-                console.log("成功",res)
-                for(let d of res){
-                    if(d.nBuyType==0){
-                        d.nBuyTypeName='纸票'
+    profitRequest(){
+        let _this=this,
+            reachBtn=this.data.reachBtn,
+            profitObj=this.data.profitObj,
+            profitData=this.data.profitData,
+            profitTotal=this.data.profitTotal;
+            profitObj.nTemStatus=1;
+            console.log("223",reachBtn)
+        if(!reachBtn){
+            console.log("223")
+            $.common("noteBankPlusManager//note/findNoteProfitListWechat.htm",profitObj,
+                function (res,resData) {
+                    if(res.length){
+                        for(let d of res){
+                            if(d.nBuyType==0){
+                                d.nBuyTypeName='纸票'
+                            }
+                            if(d.nBuyType==1){
+                                d.nBuyTypeName='半年电票'
+                            }
+                            if(d.nBuyType==2){
+                                d.nBuyTypeName='一年电票'
+                            }
+                            profitData.push(d)
+                        }
+                        _this.setData({
+                            profitData:profitData,
+                            profitTotal:resData.total
+                        })
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }else{
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
                     }
-                    if(d.nBuyType==1){
-                        d.nBuyTypeName='半年电票'
-                    }
-                    if(d.nBuyType==2){
-                        d.nBuyTypeName='一年电票'
-                    }
+
+                },function (err) {
+                    console.log("失败",err)
                 }
-                _this.setData({
-                    profitData:res,
-                    profitTotal:resData.total
-                })
-            },function (err) {
-                console.log("失败",err)
-            }
-        )
+            )
+        }
+
     },
-    profitFenRequest(obj){
-        let _this=this;
-        $.common("noteBankPlusManager//shareBenefit/findShareBenefitDetailWechat.htm","POST",$.util.fjson2Form(obj),function (res,resData) {
-                console.log("成功",res)
-                _this.setData({
-                    profitFenData:res,
-                    profitFenTotal:resData.total
-                })
-            },function (err) {
-                console.log("失败",err)
+    profitFenRequest(){
+        let profitObj=this.data.profitObj,
+            personalData=this.data.personalData,
+            reachBtn=this.data.reachBtn,
+            profitFenData=this.data.profitFenData,
+            profitFenTotal=this.data.profitFenTotal,
+            _this=this;
+        profitObj.userIdM=personalData.userId;
+        if(!reachBtn){
+            $.common("noteBankPlusManager//shareBenefit/findShareBenefitDetailWechat.htm",profitObj,
+                function (res,resData) {
+                    if(res.length){
+                        for(let d of res){
+                            profitFenData.push(d)
+                        }
+                        _this.setData({
+                            profitFenData:profitFenData,
+                            profitFenTotal:resData.total
+                        })
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }else{
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
+                    }
+
+                },function (err) {
+                    console.log("失败",err)
+                }
+            )
+        }
+    },
+    onReachBottom(){
+        let _this = this,
+            profitObj = this.data.profitObj,
+            reachBtn = this.data.reachBtn,
+            personalData = this.data.personalData;
+        console.log(profitObj);
+        if (!reachBtn) {
+            profitObj.page++;
+            this.setData({
+                profitObj: profitObj
+            });
+            if (personalData.uType == 0) {
+                this.profitRequest();
             }
-        )
+            if (personalData.uType > 2) {
+                this.profitFenRequest();
+            }
+        }
     },
     marketRequest(superName,profitObj){
         let personalData=this.data.personalData,
@@ -202,7 +291,8 @@ Page({
                 type:2
             },
             _this=this;
-        $.common("noteBankPlusManager//user/getUserIntelligentListWechat.htm","POST",$.util.fjson2Form(marketObj),function (res,resData) {
+        $.common("noteBankPlusManager//user/getUserIntelligentListWechat.htm",marketObj,
+            function (res,resData) {
                 console.log("成功",res)
                 for(let data of res){
                     if(data.userName==superName){
@@ -212,7 +302,10 @@ Page({
                         if(data.uType==5){
                             profitObj.superId=data.uSuperiorId
                         }
-                        _this.profitRequest(profitObj)
+                        _this.setData({
+                            profitObj:profitObj
+                        })
+                        _this.profitRequest()
                     }
 
                 }

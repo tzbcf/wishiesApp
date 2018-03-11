@@ -17,6 +17,7 @@ const minifycss = require('gulp-minify-css')
 const runSequence = require('run-sequence')
 const jsonlint = require("gulp-jsonlint")
 
+
 var colors = gutil.colors;
 const handleError = function(err) {
     console.log('\n')
@@ -144,4 +145,4 @@ gulp.task('build', [
 gulp.task('pro', ['clean'], () => {
     runSequence('build');
 })
-gulp.task('default', ['build']);
+

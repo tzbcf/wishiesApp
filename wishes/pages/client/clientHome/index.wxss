@@ -3,6 +3,7 @@
     padding: 0 20rpx;
     background: #fff;
     margin-bottom:30rpx;
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction:row;
@@ -36,4 +37,9 @@
 }
 .client-info-per-data .info{
     margin-right: 20rpx;
+}
+.client-btn-info{
+    font-size: 56rpx;
+    position: absolute;
+    right:50rpx;
 }

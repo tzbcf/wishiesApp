@@ -57,19 +57,19 @@
             <view class="demand-detail">
                 <view class="demand-clue">姓名<text class="font-color-red">*</text>:</view>
                 <view class="demand-ipt">
-                    <input type="text" bindinput="userNameInput"></input>
+                    <input type="text" bindinput="userNameInput" value="{{uAddUserName}}"></input>
                 </view>
             </view>
             <view class="demand-detail">
                 <view class="demand-clue">手机号码<text class="font-color-red">*</text>:</view>
                 <view class="demand-ipt">
-                    <input type="text" bindinput="userPhoneInput"></input>
+                    <input type="text" bindinput="userPhoneInput" value="{{uPone}}"></input>
                 </view>
             </view>
             <view class="demand-detail">
                 <view class="demand-clue">身份证号:</view>
                 <view class="demand-ipt">
-                    <input type="text" bindinput="idCardInput"></input>
+                    <input type="text" bindinput="idCardInput" value="{{uIdNumber}}"></input>
                 </view>
             </view>
             <view class="demand-detail">

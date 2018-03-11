@@ -6,7 +6,7 @@ const years = [];
 const months = [];
 const days = [];
 const $= getApp().globalData.$;
-for (let i = 0; i <= date.getFullYear(); i++) {
+for (let i = 1960; i <= date.getFullYear(); i++) {
     years.push(i)
 }
 
@@ -20,7 +20,10 @@ for (let i = 1 ; i <= 31; i++) {
 Page({
     data:{
         incomeData:[],
+        bankBalanceData:[],
         businessTotal:{},
+        otherIncomeData:[],
+        otherIncomeTotal:{},
         years: years,
         startYear: date.getFullYear(),
         endYear: date.getFullYear(),
@@ -30,8 +33,8 @@ Page({
         days: days,
         startDay: $.util.formatNumber(date.getDate()),
         endDay: $.util.formatNumber(date.getDate()),
-        startValue: [date.getFullYear(), date.getMonth(), date.getDate()-1],
-        endValue:[date.getFullYear(), date.getMonth(), date.getDate()-1],
+        startValue: [date.getFullYear()-1960, date.getMonth(), date.getDate()-1],
+        endValue:[date.getFullYear()-1960, date.getMonth(), date.getDate()-1],
         dateShow:false,
         startDateSel:false,
         endDateSel:false,
@@ -50,21 +53,25 @@ Page({
         receiveTypeShow:false,
         receiveTypeValues:0,
         receiveTypeValue:['全部','应收','应付'],
-        payStateNum:0
+        payStateNum:0,
+        reachBtn:false
     },
     onLoad(options){
         let  queryType=options.queryType || '3',
             _this=this,
-            personalData = wx.getStorageSync('loginData');
+            personalData = wx.getStorageSync('loginData'),
+            dataObj={
+                page:this.data.page,
+                size:this.data.size,
+                plusType:personalData.plusType,
+                plusId:personalData.plusId,
+            };
         console.log(this.data.page);
         console.log("adminDemand",personalData);
         this.setData({
             personalData:personalData,
             queryType:queryType,
-            startValue:[date.getFullYear(), date.getMonth(), date.getDate()-1],
-            endValue:[date.getFullYear(), date.getMonth(), date.getDate()-1],
-            page:1,
-            size:3
+            dataObj:dataObj
         });
         this.bankRequest();
         switch (queryType){
@@ -79,92 +86,133 @@ Page({
         }
     },
     incomeData(type){
-        let personalData=this.data.personalData,
-            dataObj={
-                page:this.data.page,
-                size:this.data.size,
-                plusType:personalData.plusType,
-                plusId:personalData.plusId,
-            },
-            _this=this;
-            console.log("incomeData")
+        let dataObj=this.data.dataObj;
         if(type==1){
-            dataObj.startTime=this.data.startYear.toString()+this.data.startMonth.toString()+this.data.startDay.toString();
-            dataObj.userName=this.data.userName;
-            dataObj.endTime=this.data.endYear.toString()+this.data.endMonth.toString()+this.data.endDay.toString();
-            dataObj.bankId=this.data.bankValueItem;
-            console.log(this.data.userName)
+            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
+            dataObj.userName=this.data.userName || '';
+            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
+            dataObj.bankId=this.data.bankValue[this.data.bankValues].bankId || '';
+            this.setData({
+                incomeData:[],
+                reachBtn:false
+            })
         }
-        $.common('noteBankPlusManager//bank/findBankProfitListWechat.htm',"GET",dataObj,function (res,resData) {
-                console.log("获取成功",res);
-                if(!res.length){
+        console.log(dataObj)
+        this.setData({
+            dataObj:dataObj
+        });
+        this.incomeDataRequest()
+    },
+    incomeDataRequest(){
+        let _this=this,
+            dataObj=this.data.dataObj,
+            incomeData=this.data.incomeData,
+            incomeTotal=this.data.incomeTotal,
+            reachBtn=this.data.reachBtn;
+        if(!reachBtn){
+            $.common('noteBankPlusManager//bank/findBankProfitListWechat.htm',dataObj,
+                function (res,resData) {
+                    console.log("获取成功",res);
+                    if(!res.length){
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
+                    }else{
+                        for(let item of res){
+                            incomeData.push(item)
+                        }
+                        _this.setData({
+                            incomeData:incomeData,
+                            incomeTotal:resData.total
+                        });
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }
+                },function (err) {
                     wx.showToast({
-                        title: '查询无结果',
+                        title: '查询失败',
                         icon: 'none',
                         duration: 1000
                     })
+                    console.log("获取失败",err)
                 }
-                _this.setData({
-                    incomeData:res,
-                    incomeTotal:resData.total
-                })
-            },function (err) {
-                wx.showToast({
-                    title: '查询失败',
-                    icon: 'none',
-                    duration: 1000
-                })
-                console.log("获取失败",err)
-            }
-        )
+            )
+        }
+
     },
     bankBalance(type){
-        console.log("bankBalance")
-        let personalData=this.data.personalData,
-            dataObj={
-                page:this.data.page,
-                size:this.data.size,
-                plusType:personalData.plusType,
-                plusId:personalData.plusId,
-            },
-            _this=this;
+        let dataObj=this.data.dataObj;
         if(type==2){
-            dataObj.bankId=this.data.bankValues;
-            console.log("银行查询")
+           dataObj.bankId=this.data.bankValue[this.data.bankValues].bankId || '';
+            this.setData({
+                bankBalanceData:[],
+                reachBtn:false
+            })
         }
-        $.common('noteBankPlusManager//bank/findBankListWechat.htm',"GET",dataObj,function (res) {
-                console.log("获取成功",res);
-                if(!res.length){
+        this.setData({
+            dataObj:dataObj
+        });
+        this.bankBalanceRequest()
+
+    },
+    bankBalanceRequest(){
+        let _this=this,
+            dataObj=this.data.dataObj,
+            bankBalanceData=this.data.bankBalanceData,
+            reachBtn=this.data.reachBtn;
+        if(!reachBtn){
+            $.common('noteBankPlusManager//bank/findBankListWechat.htm',dataObj,
+                function (res) {
+                    console.log("获取成功",res);
+                    if(!res.length){
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
+                    }else{
+                        for(let item of res){
+                            bankBalanceData.push(item)
+                        }
+                        _this.setData({
+                            bankBalanceData:bankBalanceData
+                        });
+                        if(res.length<6){
+                            wx.showToast({
+                                title: '已全部加载',
+                                icon: 'success',
+                                duration: 1000
+                            })
+                            _this.setData({
+                                reachBtn:true
+                            })
+                        }
+                    }
+                },function (err) {
                     wx.showToast({
-                        title: '查询无结果',
+                        title: '查询失败',
                         icon: 'none',
                         duration: 1000
                     })
+                    console.log("获取失败",err)
                 }
-                _this.setData({
-                    bankBalanceData:res
-                })
-            },function (err) {
-                wx.showToast({
-                    title: '查询失败',
-                    icon: 'none',
-                    duration: 1000
-                })
-                console.log("获取失败",err)
-            }
-        )
+            )
+        }
     },
     otherIncome(type){
-        let personalData=this.data.personalData,
-            dataObj={
-                page:this.data.page,
-                size:this.data.size,
-                plusType:personalData.plusType,
-                plusId:personalData.plusId,
-            },
-            _this=this;
+        let dataObj=this.data.dataObj;
         console.log("otherIncome")
-        if(type==1){
+        if(type==3){
             dataObj.bankEvent=this.data.bankEvent || '';
             dataObj.bankNum=this.data.bankNum || '';
             dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00";
@@ -175,49 +223,76 @@ Page({
             dataObj.payStatus = this.data.payStatusValueItem != 0 ? this.data.payStatusValueItem-1 :'';
             dataObj.payFinish = this.data.payFinishValueItem != 0 ? this.data.payFinishValueItem-1 :'';
             dataObj.isFinish = this.data.isFinishValueItem != 0 ? this.data.isFinishValueItem-1 :'';
+            this.setData({
+                otherIncomeData:[],
+                reachBtn:false
+            })
         }
-        console.log('收支',dataObj);
-        $.common('noteBankPlusManager//bank/findBankReceiveListWechat.htm',"POST",$.util.fjson2Form(dataObj),function (res,resData) {
-                console.log("获取成功",res);
-                if(!res.length){
+        this.setData({
+            dataObj:dataObj
+        });
+       this.otherIncomeRequest()
+    },
+    otherIncomeRequest(){
+        let _this=this,
+            dataObj=this.data.dataObj,
+            otherIncomeData=this.data.otherIncomeData,
+            otherIncomeTotal=this.data.otherIncomeTotal,
+            reachBtn=this.data.reachBtn;
+        if(!reachBtn){
+            $.common('noteBankPlusManager//bank/findBankReceiveListWechat.htm',dataObj,function (res,resData) {
+                    console.log("获取成功",res);
+                    if(!res.length){
+                        wx.showToast({
+                            title: '查询无结果',
+                            icon: 'none',
+                            duration: 1000
+                        })
+                    }else {
+                        for(let i of res){
+                            if(i.payFinish==0){
+                                i.payFinishName='否'
+                            }else {
+                                i.payFinishName='是'
+                            }
+                            if(i.payStatus==0){
+                                i.payStatusName='否'
+                            }else {
+                                i.payStatusName='是'
+                            }
+                            if(i.isFinish==0){
+                                i.isFinishName='否'
+                            }else {
+                                i.isFinishName='是'
+                            }
+                            otherIncomeData.push(i)
+                        }
+                    }
+
+                    _this.setData({
+                        otherIncomeData:otherIncomeData,
+                        otherIncomeTotal:resData.total
+                    })
+                    if(res.length<6){
+                        wx.showToast({
+                            title: '已全部加载',
+                            icon: 'success',
+                            duration: 1000
+                        })
+                        _this.setData({
+                            reachBtn:true
+                        })
+                    }
+                },function (err) {
                     wx.showToast({
-                        title: '查询无结果',
+                        title: '查询失败',
                         icon: 'none',
                         duration: 1000
                     })
-                }else {
-                    for(let i of res){
-                        if(i.payFinish==0){
-                            i.payFinishName='否'
-                        }else {
-                            i.payFinishName='是'
-                        }
-                        if(i.payStatus==0){
-                            i.payStatusName='否'
-                        }else {
-                            i.payStatusName='是'
-                        }
-                        if(i.isFinish==0){
-                            i.isFinishName='否'
-                        }else {
-                            i.isFinishName='是'
-                        }
-                    }
+                    console.log("获取失败",err)
                 }
-
-                _this.setData({
-                    otherIncomeData:res,
-                    otherIncomeTotal:resData.total
-                })
-            },function (err) {
-                wx.showToast({
-                    title: '查询失败',
-                    icon: 'none',
-                    duration: 1000
-                })
-                console.log("获取失败",err)
-            }
-        )
+            )
+        }
     },
     bankRequest(){
         let personalData=this.data.personalData,
@@ -225,11 +300,11 @@ Page({
             bankObj={};
         bankObj.plusId=personalData.plusId;
         bankObj.plusType=personalData.plusType;
-        $.common('noteBankPlusManager//bank/findBankListWechat.htm',"GET",bankObj,function (res,resData) {
+        $.common('noteBankPlusManager//bank/findBankListWechat.htm',bankObj,function (res,resData) {
             console.log('111222',res)
                 _this.setData({
                     bankValue:res,
-                    bankValueItem:res[_this.data.bankValues].bankName
+                    bankValueItem:res[_this.data.bankValues].bankName,
                 })
             },function (err) {
                 wx.showToast({
@@ -400,7 +475,7 @@ Page({
         }
     },
     paymentQuery(){
-        this.otherIncome(1)
+        this.otherIncome(3)
     },
     hideShade(){
         this.setData({
@@ -411,5 +486,27 @@ Page({
             payStateShow:false,
             receiveTypeShow:false
         })
+    },
+    onReachBottom(){
+        let _this=this,
+            dataObj=this.data.dataObj,
+            reachBtn=this.data.reachBtn,
+            queryType=this.data.queryType;
+        console.log(dataObj);
+        if(!reachBtn){
+            dataObj.page++;
+            this.setData({
+                dataObj:dataObj
+            });
+            if(queryType==1){
+                this.incomeDataRequest()
+            }
+            if(queryType==2){
+                this.bankBalanceRequest()
+            }
+            if(queryType==3){
+                this.otherIncomeRequest()
+            }
+        }
     }
 })

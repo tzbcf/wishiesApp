@@ -1,6 +1,6 @@
 <view class="client-container">
     <block wx:for="{{clientData}}" wx:key="index">
-        <view class="client-info">
+        <view class="client-info" bindtap="modifyUser" id="{{index}}">
             <view class="client-info-surname">
                 <text>{{item.userNameFirstChar}}</text>
             </view>
@@ -24,8 +24,9 @@
                     <text class="info">{{item.uBirthday}}</text>
                 </view>
             </view>
+            <view class="client-btn-info">></view>
         </view>
     </block>
 </view>
 <view class="query" bindtap="goDemand">查询</view>
-<view class="mask"></view>
+
