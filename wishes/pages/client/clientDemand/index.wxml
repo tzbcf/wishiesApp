@@ -24,7 +24,7 @@
         </view>
         <view class="clientDd-main">
             <block wx:for="{{clientData}}" wx:key="index">
-                <view class="client-info">
+                <view class="client-info" bindtap="modifyUser" id="{{index}}">
                     <view class="client-info-surname">
                         <text>{{item.userNameFirstChar}}</text>
                     </view>
@@ -48,6 +48,7 @@
                             <text class="info">{{item.uBirthday}}</text>
                         </view>
                     </view>
+                    <view class="client-btn-info">></view>
                 </view>
             </block>
         </view>
@@ -55,53 +56,53 @@
     <block wx:else>
         <view class="client-demand">
             <view class="demand-detail">
-                <view class="demand-clue">姓名<text class="font-color-red">*</text>:</view>
+                <view class="demand-clue">姓名<text class="font-color-red">*</text></view>
                 <view class="demand-ipt">
                     <input type="text" bindinput="userNameInput" value="{{uAddUserName}}"></input>
                 </view>
             </view>
             <view class="demand-detail">
-                <view class="demand-clue">手机号码<text class="font-color-red">*</text>:</view>
+                <view class="demand-clue">手机号码<text class="font-color-red">*</text></view>
                 <view class="demand-ipt">
                     <input type="text" bindinput="userPhoneInput" value="{{uPone}}"></input>
                 </view>
             </view>
             <view class="demand-detail">
-                <view class="demand-clue">身份证号:</view>
+                <view class="demand-clue">身份证号</view>
                 <view class="demand-ipt">
                     <input type="text" bindinput="idCardInput" value="{{uIdNumber}}"></input>
                 </view>
             </view>
             <view class="demand-detail">
-                <view class="demand-clue">出身日期:</view>
+                <view class="demand-clue">出生日期</view>
                 <view class="demand-ipt" bindtap="birthdayInput">{{year}}年{{month}}月{{day}}日</view>
             </view>
             <view class="demand-detail">
-                <view class="demand-clue">开户行:</view>
+                <view class="demand-clue">开户行</view>
                 <view class="demand-ipt">
                     <input type="text" bindinput="openBankInput"></input>
                 </view>
             </view>
             <view class="demand-detail">
-                <view class="demand-clue">银行卡号:</view>
+                <view class="demand-clue">银行卡号</view>
                 <view class="demand-ipt">
                     <input type="text" bindinput="bankInput"></input>
                 </view>
             </view>
             <block wx:if="{{personalData.uType<=2}}">
                 <view class="demand-detail">
-                    <view class="demand-clue">用户类别:</view>
+                    <view class="demand-clue">用户类别</view>
                     <view class="demand-ipt drop-down" bindtap="userSortBtn">{{userSortVal}}</view>
                 </view>
             </block>
             <block wx:if="{{personalData.uType<=2}}">
                 <view class="demand-detail">
-                    <view class="demand-clue">营销员关联:</view>
+                    <view class="demand-clue">营销员关联</view>
                     <view class="demand-ipt  drop-down" bindtap="uSuperiorBtn">{{uSuperiorVal.userName}}</view>
                 </view>
             </block>
             <view class="demand-detail id-picture">
-                <view class="demand-clue">身份证图片:</view>
+                <view class="demand-clue">身份证图片</view>
                 <view class="demand-ipt">
                     <block wx:if="{{!identityId}}">
                         <button bindtap="addIdentityId">选择图片</button>

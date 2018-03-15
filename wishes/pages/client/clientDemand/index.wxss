@@ -147,3 +147,8 @@
     top:21rpx;
     right:15rpx;
 }
+.client-btn-info{
+    font-size: 56rpx;
+    position: absolute;
+    right:50rpx;
+}

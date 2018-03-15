@@ -4,20 +4,16 @@
     line-height: 40rpx;
     padding: 20rpx 0;
 }
-.business-header-deal{
-    display: flex;
-    flex-direction:row;
-}
 .business-header-deal view{
-    width:50%;
+   width:100%;
     box-sizing: border-box;
 }
 .business-header-deal view:nth-child(1){
-    text-align: right;
+    text-align: center;
     padding-right: 10rpx;
 }
 .business-header-deal view:nth-child(2){
-    text-align: left;
+    text-align: center;
     padding-left: 10rpx;
 }
 .business-header-total{

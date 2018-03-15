@@ -43,6 +43,7 @@ Page({
     },
     onLoad(options){
         console.log(getCurrentPages())
+
         let clientData = wx.getStorageSync('clientData'),
             personalData = wx.getStorageSync('loginData'),
             clientDeObj={
@@ -51,7 +52,8 @@ Page({
                 plusType:personalData.plusType,
                 plusId:personalData.plusId
             };
-        if(options){
+        if(options.demand){
+            console.log(options)
             let demand=options.demand ? false :true,
                 specificInfo=JSON.parse(options.specificInfo),
                 uAddUserName=specificInfo.userName,
@@ -373,5 +375,20 @@ Page({
             userSort:false,
             uSuperior:false
         })
+    },
+    modifyUser(e){
+        let index=e.currentTarget.id,
+            specificInfo=this.data.clientData[index],
+            uAddUserName=specificInfo.userName,
+            uPhone=specificInfo.uPhone,
+            uIdNumber=specificInfo.uIdNumber;
+        this.setData({
+            demand:false,
+            specificInfo:specificInfo,
+            uAddUserName:uAddUserName,
+            uPhone:uPhone,
+            uIdNumber:uIdNumber
+        })
+        console.log("index",specificInfo)
     }
 });
