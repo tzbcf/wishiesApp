@@ -88,9 +88,9 @@ Page({
     incomeData(type){
         let dataObj=this.data.dataObj;
         if(type==1){
-            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
+            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
             dataObj.userName=this.data.userName || '';
-            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
+            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
             dataObj.bankId=this.data.bankValue[this.data.bankValues].bankId || '';
             this.setData({
                 incomeData:[],
@@ -215,9 +215,9 @@ Page({
         if(type==3){
             dataObj.bankEvent=this.data.bankEvent || '';
             dataObj.bankNum=this.data.bankNum || '';
-            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00";
+            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
             dataObj.userName=this.data.userName || '';
-            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00";
+            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
             dataObj.bankId=this.data.bankValue[this.data.bankValues].bankId;
             dataObj.receiveType = this.data.receiveTypeValues!=0 ? this.data. receiveTypeValues :'';
             dataObj.payStatus = this.data.payStatusValueItem != 0 ? this.data.payStatusValueItem-1 :'';

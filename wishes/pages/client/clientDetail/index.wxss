@@ -1,0 +1,154 @@
+.client-info{
+    height:200rpx;
+    padding: 0 20rpx;
+    background: #fff;
+    margin-bottom:20rpx;
+    display: flex;
+    align-items: center;
+    flex-direction:row;
+}
+.client-info .client-info-surname,.client-info .client-info-per-data{
+    height:200rpx;
+}
+.client-info-surname{
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.client-info-surname text{
+    display: inline-block;
+    width:50rpx;
+    height:50rpx;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 50rpx;
+    border-radius: 50%;
+    border:1rpx solid #d8d8d8;
+}
+.client-info-per-data{
+    padding: 10rpx 0;
+    box-sizing: border-box;
+    font-size: 24rpx;
+    line-height: 46rpx;
+}
+.client-info-per-data .clue{
+    margin-right: 10rpx;
+}
+.client-info-per-data .info{
+    margin-right: 20rpx;
+}
+.clientDd-demand{
+    /*background: #fff;*/
+    margin-bottom: 30rpx;
+    padding: 30rpx 40rpx 20rpx;
+}
+.clientDd-name,.clientDd-tel{
+    display: flex;
+    margin-bottom: 30rpx;
+}
+.clientDd-name input,.clientDd-tel input{
+    width:500rpx;
+    /*border: 1rpx solid #d2d2d2;*/
+    background: #fff;
+    border-radius: 4rpx;
+}
+.clientDd-demand .clientDa-clue{
+    width:160rpx;
+    line-height: 56rpx;
+}
+.clientDd-demand .clientDa-clue text{
+    display: inline-block;
+    width:60rpx;
+}
+.clientDd-btn{
+    display: flex;
+    justify-content:space-between;
+}
+.clientDd-btn view{
+    width:45%;
+}
+.clientDd-btn button{
+    border-radius: 8rpx;
+    box-shadow:0 4rpx 4rpx #686868;
+}
+.client-demand{
+    padding: 20rpx 40rpx;
+}
+.demand-detail{
+    margin:30rpx;
+    display: flex;
+}
+.demand-clue{
+    width:160rpx;
+    line-height: 56rpx;
+}
+.demand-ipt{
+    width:480rpx;
+    background: #fff;
+    border-radius: 6rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    line-height: 56rpx;
+}
+.id-picture .demand-ipt{
+    padding-left: 0;
+}
+.font-color-red{
+    color:red;
+}
+.demand-ipt button{
+    height:56rpx;
+    line-height: 56rpx;
+    font-size: 28rpx;
+    background: #fff;
+}
+.demand-ipt image{
+    width:460rpx;
+    height:200rpx;
+    max-width: 100%;
+}
+.birthdaySelect,.user-sort-sel{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    background: #fff;
+}
+.birthdaySelect view,.user-sort-sel view{
+    text-align: center;
+}
+.birthday-btn{
+    display: flex;
+    justify-content:space-between;
+    padding: 0 50rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+}
+.birthday-btn view{
+    padding: 20rpx 20rpx;
+}
+.birthday-btn-cancel{
+    color: #888;
+}
+.birthday-btn-ensure{
+    color: #1AAD19;
+}
+.demand-detail .drop-down{
+    position: relative;
+    line-height: 56rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+}
+.demand-detail .drop-down:after{
+    content: "";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    position: absolute;
+    width: 0;
+    top:21rpx;
+    right:15rpx;
+}
+.client-btn-info{
+    font-size: 56rpx;
+    position: absolute;
+    right:50rpx;
+}

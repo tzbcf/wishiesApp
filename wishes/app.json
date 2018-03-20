@@ -1,10 +1,12 @@
 {
   "pages":[
+
     "pages/login/index",
     "pages/business/businessHome/index",
     "pages/business/businessDemand/index",
     "pages/client/clientHome/index",
     "pages/client/clientDemand/index",
+    "pages/client/clientDetail/index",
     "pages/administer/administerHome/index",
     "pages/administer/adminDemand/index",
     "pages/stock/stockHome/index",

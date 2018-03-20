@@ -18,7 +18,10 @@ Page({
                 size:this.data.size,
                 plusType:personalData.plusType,
                 plusId:personalData.plusId
-            }
+            };
+        if(personalData.uType>2){
+            businessObj.userIdM=personalData.userId || '';
+        }
         console.log("本地获取的数据",personalData);
 
         this.setData({

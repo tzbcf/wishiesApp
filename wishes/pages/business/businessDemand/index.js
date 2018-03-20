@@ -46,6 +46,9 @@ Page({
                 plusType:personalData.plusType,
                 plusId:personalData.plusId
             };
+        if(personalData.uType>2){
+            businessDeObj.userIdM=personalData.userId || '';
+        }
         this.setData({
             personalData:personalData,
             businessDeObj:businessDeObj
@@ -81,7 +84,9 @@ Page({
                             icon: 'none',
                             duration: 1000
                         })
-
+                        _this.setData({
+                            businessTotal:resData.total
+                        })
                     }else{
                         for(let item of res){
                             businessData.push(item)
@@ -102,12 +107,12 @@ Page({
                         }
                     }
 
-                },function (err) {
+                },function (err,resData){
                     wx.showToast({
                         title: '查询失败',
                         icon: 'none',
                         duration: 1000
-                    })
+                    });
                     console.log("获取失败",err)
                 }
             )
@@ -177,8 +182,8 @@ Page({
     },
     query(){
         let _this=this,businessDeObj=this.data.businessDeObj;
-        businessDeObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
-        businessDeObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
+        businessDeObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
+        businessDeObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
         businessDeObj.nbNumber=this.data.nbNumber || '';
         businessDeObj.nbMarketer=this.data.nbMarketer || '';
         this.setData({

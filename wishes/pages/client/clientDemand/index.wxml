@@ -1,5 +1,5 @@
 <view class="clientDd-container">
-    <block wx:if="{{demand}}">
+
         <view class="clientDd-demand">
             <view class="clientDd-name">
                 <view class="clientDa-clue">姓<text></text>名:</view>
@@ -48,122 +48,8 @@
                             <text class="info">{{item.uBirthday}}</text>
                         </view>
                     </view>
-                    <view class="client-btn-info">></view>
+                    <view class="client-btn-info" wx:if="{{personalData.uType<2}}">></view>
                 </view>
             </block>
         </view>
-    </block>
-    <block wx:else>
-        <view class="client-demand">
-            <view class="demand-detail">
-                <view class="demand-clue">姓名<text class="font-color-red">*</text></view>
-                <view class="demand-ipt">
-                    <input type="text" bindinput="userNameInput" value="{{uAddUserName}}"></input>
-                </view>
-            </view>
-            <view class="demand-detail">
-                <view class="demand-clue">手机号码<text class="font-color-red">*</text></view>
-                <view class="demand-ipt">
-                    <input type="text" bindinput="userPhoneInput" value="{{uPone}}"></input>
-                </view>
-            </view>
-            <view class="demand-detail">
-                <view class="demand-clue">身份证号</view>
-                <view class="demand-ipt">
-                    <input type="text" bindinput="idCardInput" value="{{uIdNumber}}"></input>
-                </view>
-            </view>
-            <view class="demand-detail">
-                <view class="demand-clue">出生日期</view>
-                <view class="demand-ipt" bindtap="birthdayInput">{{year}}年{{month}}月{{day}}日</view>
-            </view>
-            <view class="demand-detail">
-                <view class="demand-clue">开户行</view>
-                <view class="demand-ipt">
-                    <input type="text" bindinput="openBankInput"></input>
-                </view>
-            </view>
-            <view class="demand-detail">
-                <view class="demand-clue">银行卡号</view>
-                <view class="demand-ipt">
-                    <input type="text" bindinput="bankInput"></input>
-                </view>
-            </view>
-            <block wx:if="{{personalData.uType<=2}}">
-                <view class="demand-detail">
-                    <view class="demand-clue">用户类别</view>
-                    <view class="demand-ipt drop-down" bindtap="userSortBtn">{{userSortVal}}</view>
-                </view>
-            </block>
-            <block wx:if="{{personalData.uType<=2}}">
-                <view class="demand-detail">
-                    <view class="demand-clue">营销员关联</view>
-                    <view class="demand-ipt  drop-down" bindtap="uSuperiorBtn">{{uSuperiorVal.userName}}</view>
-                </view>
-            </block>
-            <view class="demand-detail id-picture">
-                <view class="demand-clue">身份证图片</view>
-                <view class="demand-ipt">
-                    <block wx:if="{{!identityId}}">
-                        <button bindtap="addIdentityId">选择图片</button>
-                    </block>
-                    <block wx:else>
-                        <image src="{{identityId}}"></image>
-                    </block>
-                </view>
-            </view>
-            <view class="demand-btn">
-                <button class="style-btn-bg" bindtap="addAffirm">确认</button>
-            </view>
-        </view>
-    </block>
 </view>
-<block wx:if="{{maskShow}}">
-    <view class="shadeMask" bindtap="hideShade">
-        <block wx:if="{{birthdayShow}}">
-            <view class="birthdaySelect">
-                <view class="birthday-btn">
-                    <view class="birthday-btn-cancel" bindtap="hideShade">取消</view>
-                    <view class="birthday-btn-ensure" bindtap="bindBirthdayEns">确定</view>
-                </view>
-                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{value}}" bindchange="bindBirthdayChange">
-                    <picker-view-column>
-                        <view wx:for="{{years}}" wx:key="index" style="line-height: 50px">{{item}}年</view>
-                    </picker-view-column>
-                    <picker-view-column>
-                        <view wx:for="{{months}}" wx:key="index" style="line-height: 50px">{{item}}月</view>
-                    </picker-view-column>
-                    <picker-view-column>
-                        <view wx:for="{{days}}" wx:key="index" style="line-height: 50px">{{item}}日</view>
-                    </picker-view-column>
-                </picker-view>
-            </view>
-        </block>
-        <block wx:if="{{userSort}}">
-            <view class="user-sort-sel">
-                <view class="birthday-btn">
-                    <view class="birthday-btn-cancel" bindtap="hideShade">取消</view>
-                    <view class="birthday-btn-ensure" bindtap="bindUserSortEns">确定</view>
-                </view>
-                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{userSortValues}}" bindchange="bindUserSortChange">
-                    <picker-view-column>
-                        <view wx:for="{{userSortValue}}" wx:key="index" style="line-height: 50px">{{item}}</view>
-                    </picker-view-column>
-                </picker-view>
-            </view>
-        </block>
-        <block wx:if="{{uSuperior}}">
-            <view class="user-sort-sel">
-                <view class="birthday-btn">
-                    <view class="birthday-btn-cancel" bindtap="hideShade">取消</view>
-                    <view class="birthday-btn-ensure" bindtap="bindSuperiorEns">确定</view>
-                </view>
-                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{uSuperiorValues}}" bindchange="bindSuperiorChange">
-                    <picker-view-column>
-                        <view wx:for="{{uSuperiorValue}}" wx:key="index" style="line-height: 50px">{{item.userName}}</view>
-                    </picker-view-column>
-                </picker-view>
-            </view>
-        </block>
-    </view>
-</block>

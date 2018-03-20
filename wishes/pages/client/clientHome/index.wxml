@@ -24,7 +24,7 @@
                     <text class="info">{{item.uBirthday}}</text>
                 </view>
             </view>
-            <view class="client-btn-info">></view>
+            <view class="client-btn-info" wx:if="{{personalData.uType<2}}">></view>
         </view>
     </block>
 </view>

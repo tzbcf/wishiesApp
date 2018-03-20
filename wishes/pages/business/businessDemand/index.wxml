@@ -28,7 +28,7 @@
             <view class="business-main-info">
                 <view class="business-info-material">
                     <view class="business-id">
-                        <text>{{item.noteBusinessId}}</text>
+                        <text>{{index+1}}</text>
                     </view>
                     <view class="business-bill-material">
                         <view class="business-bill-material-item">
@@ -42,7 +42,7 @@
                         <view class="business-bill-material-time">
                             <text class="clue">客户名称:</text>
                             <text class="info">{{item.nbMarketer}}</text>
-                            <text class="clue">交易日期:</text>
+                            <text class="clue">交易时间:</text>
                             <text class="info">{{item.nbDate}}</text>
                         </view>
                     </view>

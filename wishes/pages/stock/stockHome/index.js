@@ -18,7 +18,7 @@ Page({
                 size:this.data.size,
                 plusId:personalData.plusId,
                 plusType:personalData.plusType,
-                nTemStatus:0,
+                nTemStatus:''
             }
         console.log("本地获取的数据",personalData)
         this.setData({

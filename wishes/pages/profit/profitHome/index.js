@@ -37,6 +37,9 @@ Page({
             this.embellishRequest();
         }
         if(personalData.uType > 2){
+            wx.setNavigationBarTitle({
+                title: '分润',
+            })
             this.fenRunRequest();
         }
         console.log(getCurrentPages())

@@ -27,6 +27,9 @@ Page({
             plusType:personalData.plusType,
             plusId:personalData.plusId
         };
+    if(personalData.uType>2){
+        clientObj.userIdM=personalData.userId || '';
+    }
         this.setData({
             clientObj:clientObj
         });
@@ -63,14 +66,6 @@ Page({
   },
   //事件处理函数
   goDemand(){
-    let clientData=this.data.clientData;
-    wx.setStorage({
-      key:"clientData",
-      data:clientData,
-      success:res => {
-          console.log("数据储存成功",res)
-      }
-    })
     wx.navigateTo({
         url: '/pages/client/clientDemand/index'
     })
@@ -90,9 +85,19 @@ Page({
     },
     modifyUser(e){
         let index=e.currentTarget.id,
-            specificInfo=JSON.stringify(this.data.clientData[index]);
-        wx.navigateTo({
-            url: '/pages/client/clientDemand/index?demand=false&specificInfo='+specificInfo
-        });
+            specificInfo=this.data.clientData[index],
+            personalData=this.data.personalData;
+        if(personalData.uType<2){
+            wx.setStorage({
+                key:"specificInfo",
+                data:specificInfo,
+                success:res => {
+                    console.log("数据储存成功",res)
+                }
+            })
+            wx.navigateTo({
+                url: '/pages/client/clientDetail/index?demand=false'
+            });
+        }
     }
 })

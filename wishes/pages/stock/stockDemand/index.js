@@ -76,10 +76,14 @@ Page({
         dataObj.startTime='';
         dataObj.endTime='';
         dataObj.nTemStatus=0;
+        dataObj.page=1;
         this.setData({
             navActive:0,
             dataObj:dataObj,
-            reachBtn:false
+            stockData:[],
+            reachBtn:false,
+            paperValues:0,
+            paperVal:'纸票'
         })
         this.stockRequest();
     },
@@ -94,10 +98,14 @@ Page({
         dataObj.startTime='';
         dataObj.endTime='';
         dataObj.nTemStatus=1;
+        dataObj.page=1;
         this.setData({
             navActive:1,
             dataObj:dataObj,
-            reachBtn:false
+            stockData:[],
+            reachBtn:false,
+            paperValues:0,
+            paperVal:'纸票'
         })
         this.stockRequest();
     },
@@ -112,10 +120,14 @@ Page({
         dataObj.startTime='';
         dataObj.endTime='';
         dataObj.nTemStatus=2;
+        dataObj.page=1;
         this.setData({
             navActive:2,
             dataObj:dataObj,
-            reachBtn:false
+            stockData:[],
+            reachBtn:false,
+            paperValues:0,
+            paperVal:'纸票'
         })
         this.stockRequest();
     },
@@ -230,12 +242,13 @@ Page({
         if(navActive==0){
             dataObj.nBuyDiscountStart=_this.data.nBuyDiscountStart || '';
             dataObj.nBuyDiscountEnd=_this.data.nBuyDiscountEnd || '';
-            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
-            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
+            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
+            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
         }
         this.setData({
             dataObj:dataObj,
-            stockData:[]
+            stockData:[],
+            reachBtn:false
         });
         console.log('as',this.data.nNumber);
         this.stockRequest();
@@ -245,10 +258,12 @@ Page({
             reachBtn=this.data.reachBtn,
             stockData=this.data.stockData,
             stockTotal=this.data.stockTotal;
+        console.log('2222222222',stockData)
         if(!reachBtn){
             $.common('noteBankPlusManager//note/findNoteListWechat.htm',dataObj,function (res,resData) {
                     console.log("获取成功",res);
                     console.log("获取成功",resData);
+                    console.log("获取成功",_this.data.stockData);
                     if(res.length){
                         for(let item of res){
                             stockData.push(item)
@@ -257,6 +272,7 @@ Page({
                             stockData:stockData,
                             stockTotal:resData.total
                         });
+                        console.log('222222',_this.data.stockData);
                         if(res.length<6){
                             wx.showToast({
                                 title: '已全部加载',
@@ -272,6 +288,10 @@ Page({
                             title: '查询无结果',
                             icon: 'none',
                             duration: 1000
+                        })
+                        _this.setData({
+                            stockData:stockData,
+                            stockTotal:resData.total
                         })
                     }
                 },function (err) {

@@ -15,11 +15,8 @@
     padding: 10rpx 0;
     border-bottom: 1rpx solid #d8d8d8;
 }
-.stock-detail-electer,.stock-detail-finance,.stock-detail-business{
-    display: flex;
-}
+
 .stock-detail-electer view,.stock-detail-finance view,.stock-detail-business view{
-    width:50%;
     text-align: center;
     line-height: 44rpx;
 }

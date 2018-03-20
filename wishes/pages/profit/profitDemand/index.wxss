@@ -11,6 +11,15 @@
     width:520rpx;
     background: #fff;
 }
+.profitDd-main{
+    padding-bottom: 130rpx;
+}
+.demand-header-info .demand-ipt{
+    width:520rpx;
+    background: #fff;
+    height:56rpx;
+    line-height: 56rpx;
+}
 .demand-header-time{
     background: #fff;
 }
@@ -153,4 +162,35 @@
     padding: 10rpx;
     text-align: center;
     line-height: 40rpx;
+    display: flex;
+    justify-content: center;
+}
+.profit-bttom-total view{
+    width:50%;
+    text-align: center;
+}
+ .drop-down{
+    position: relative;
+    line-height: 56rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+}
+ .drop-down:after{
+    content: "";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    position: absolute;
+    width: 0;
+    top:21rpx;
+    right:15rpx;
+}
+.user-sort-sel{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    background: #fff;
+}
+.user-sort-sel view{
+    text-align: center;
 }

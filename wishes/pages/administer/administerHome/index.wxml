@@ -6,6 +6,10 @@
             </view>
             <view class="ad-info">
                 <view>{{personalData.userName}}</view>
+                <view wx:if="{{personalData.uMember}}">
+                    <text class="clue">编号:</text>
+                    <text class="info">{{personalData.uMember}}</text>
+                </view>
                 <view>
                     <text class="clue">手机号码:</text>
                     <text class="info">{{personalData.uPhone}}</text>

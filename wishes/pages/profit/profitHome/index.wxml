@@ -8,7 +8,7 @@
                 </view>
                 <view>
                     <text class="clue">分成合计:</text>
-                    <text class="info">{{profitTotal.sun.subtotalYingSum}}</text>
+                    <text class="info">{{profitTotal.sum.subtotalYingSum}}</text>
                 </view>
             </view>
             <view class="profit-header-total">
@@ -21,64 +21,20 @@
                     <text class="info">{{profitTotal.sum.subtotalActualSum}}</text>
                 </view>
             </view>
-            <view class="profit-header-bill">
-                <view class="profit-bill-electro">
-                    <view>
-                        <text class="clue">半年电票利润:</text>
-                        <text class="info">{{profitTotal.electroHalfYearMoneyTotal}}</text>
-                    </view>
-                    <view>
-                        <text class="clue">一年电票利润:</text>
-                        <text class="info">{{profitTotal.electroYearMoneyTotal}}</text>
-                    </view>
-                </view>
-            </view>
         </view>
     </block>
     <block wx:if="{{personalData.plusType==2 && personalData.uType==0}}">
         <view class="profit-header">
-            <view class="profit-header-pro">
-                <view>
+            <!--<view class="profit-header-pro">-->
+                <view style="padding-left: 20rpx">
                     <text class="clue">利润合计:</text>
                     <text class="info">{{profitTotal.sum.subtotalProfitSum}}</text>
                 </view>
-                <view>
+                <view style="padding-left: 20rpx">
                     <text class="clue">实际利润:</text>
-                    <text class="info">{{profitTotal.sun.subtotalActualSum}}</text>
+                    <text class="info">{{profitTotal.sum.subtotalActualSum}}</text>
                 </view>
-            </view>
-            <view class="profit-header-bill">
-                <view class="profit-bill-electro">
-                    <view>
-                        <text class="clue">半年电票利润:</text>
-                        <text class="info">{{profitTotal.electroHalfYearMoneyTotal}}</text>
-                    </view>
-                    <view>
-                        <text class="clue">一年电票利润:</text>
-                        <text class="info">{{profitTotal.electroYearMoneyTotal}}</text>
-                    </view>
-                </view>
-                <view class="profiy-bill-finance">
-                    <view>
-                        <text class="clue">半年财票利润:</text>
-                        <text class="info">{{profitTotal.financeHalfYearMoneyTotal}}</text>
-                    </view>
-                    <view>
-                        <text class="clue">一年财票利润:</text>
-                        <text class="info">{{profitTotal.financeYearMoneyTotal}}</text>
-                    </view>
-                </view>
-                <view class="profiy-bill-business">
-                    <view>
-                        <text class="clue">半年商票利润:</text>
-                        <text class="info">{{profitTotal.businessHalfYearMoneyTotal}}</text>
-                    </view>
-                    <view>
-                        <text class="clue">一年商票利润:</text>
-                        <text class="info">{{profitTotal.businessYearMoneyTotal}}</text>
-                    </view>
-                </view>
-            </view>
+            <!--</view>-->
         </view>
     </block>
     <block wx:if="{{personalData.uType ==1 || personalData.uType ==2}}">
@@ -111,7 +67,7 @@
             <view class="profit-main-info">
                 <view class="profit-info-material">
                     <view class="profit-id">
-                        <text>{{item.noteBusinessId}}</text>
+                        <text>{{index+1}}</text>
                     </view>
                     <view class="profit-bill-material">
                         <view class="profit-bill-material-item">
@@ -130,11 +86,11 @@
                     <view class="profit-deal">
                         <view>
                             <text class="clue">买入客户:</text>
-                            <text class="info">{{item.nbCustomer}}</text>
+                            <text class="info">{{item.nbCustomerBuy}}</text>
                         </view>
                         <view>
                             <text class="clue">卖出客户:</text>
-                            <text class="info">{{item.nbCustomerBuy}}</text>
+                            <text class="info">{{item.nbCustomer}}</text>
                         </view>
                         <view>
                             <text class="clue">票面金额:</text>
@@ -150,7 +106,7 @@
                         </view>
                         <view>
                             <text class="clue">利润小计:</text>
-                            <text class="info">{{item.subtotalYingProfit}}</text>
+                            <text class="info">{{item.subtotalProfit}}</text>
                         </view>
                     </view>
                 </view>
@@ -163,7 +119,7 @@
             <view class="profit-main-info">
                 <view class="profit-info-material">
                     <view class="profit-id">
-                        <text>{{item.shareBenefitDetailId}}</text>
+                        <text>{{index+1}}</text>
                     </view>
                     <view class="profit-bill-material">
                         <view class="profit-bill-material-item">
@@ -216,4 +172,3 @@
     <view class="query" bindtap="goDemand">查询</view>
 </block>
 
-<view class="mask"></view>

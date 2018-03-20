@@ -47,7 +47,7 @@
             <view class="stock-main-info">
                 <view class="stock-info-top">
                     <view class="stock-top-id">
-                        <text>{{item.noteId}}</text>
+                        <text>{{index+1}}</text>
                     </view>
                     <view class="stock-top-detail">
                         <view>
@@ -67,29 +67,19 @@
                     </view>
                 </view>
                 <view class="stock-info-bottom">
-                    <view class="stock-info-time">
-                        <view>
-                            <text class="clue">出票日期:</text>
-                            <text class="info">{{item.nOpenTime}}</text>
-                        </view>
-                        <view>
-                            <text class="clue">到期日期:</text>
-                            <text class="info">{{item.nExpireTimeIn}}</text>
-                        </view>
-                    </view>
-                    <view class="stock-info-bank" wx:if="{{personalData.uType<3}}">
-                        <view>
-                            <text class="clue">兑票银行:</text>
-                            <text class="info">{{item.nEnterBankIn}}</text>
-                        </view>
-                        <view>
-                            <text class="clue">银行扣息:</text>
-                            <text class="info">{{item.nBuyDiscount}}</text>
-                        </view>
-                    </view>
                     <view wx:if="{{personalData.uType<3 && navActive!=0}}">
                         <view>
                             <text class="clue">出库人名称:</text>
+                            <text class="info">{{item.nBuyDiscount}}</text>
+                        </view>
+                    </view>
+                    <view class="stock-info-bank">
+                        <view>
+                            <text class="clue">兑付银行:</text>
+                            <text class="info">{{item.nEnterBankIn}}</text>
+                        </view>
+                        <view wx:if="{{personalData.uType<3}}">
+                            <text class="clue">银行扣息:</text>
                             <text class="info">{{item.nBuyDiscount}}</text>
                         </view>
                     </view>

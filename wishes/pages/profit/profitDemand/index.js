@@ -34,6 +34,8 @@ Page({
         endValue:[date.getFullYear()-1960, date.getMonth(), date.getDate()-1],
         page:1,
         size:6,
+        uSuperiorValues:0,
+        uSuperiorValue:[],
         timeSorter:false,
         dateShow:false,
         reachBtn:false
@@ -54,6 +56,9 @@ Page({
             this.profitRequest()
         }
         if(personalData.uType>2){
+            wx.setNavigationBarTitle({
+                title: '分润查询',
+            })
             this.profitFenRequest()
         }
 
@@ -122,12 +127,51 @@ Page({
             endDateSel:false
         })
     },
+    uSuperiorBtn(){
+        this.acquireSuperior();
+        this.setData({
+            dateShow:true,
+            uSuperior:true
+        })
+    },
+    bindSuperiorChange(e){
+        let val = e.detail.value;
+        this.setData({
+            uSuperiorValues:val
+        })
+    },
+    bindSuperiorEns(){
+        let val=this.data.uSuperiorValues,
+            value=this.data.uSuperiorValue[val];
+        this.setData({
+            uSuperiorName:value.userName
+        })
+    },
     hideShade(){
         this.setData({
             dateShow:false,
             startDateSel:false,
-            endDateSel:false
+            endDateSel:false,
+            uSuperior:false
         })
+    },
+    acquireSuperior(){
+        let personalData=this.data.personalData,
+            _this=this,
+            userAssObj={
+                plusId:personalData.plusId,
+                plusType:personalData.plusType,
+                type:2
+            };
+        $.common('noteBankPlusManager//user/getUserIntelligentListWechat.htm',userAssObj,
+            function (res) {
+                _this.setData({
+                    uSuperiorValue:res
+                })
+            },function (err) {
+                console.log("获取失败",err)
+            }
+        )
     },
     profitQuery(){
         let personalData=this.data.personalData,
@@ -139,26 +183,32 @@ Page({
         if(personalData.uType==0){
             profitObj.nbNumber=_this.data.nbNumber||'';
             profitObj.nTemStatus=1;
-            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString()+" "+"00:00:00" || '';
-            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString()+" "+"00:00:00" || '';
-            let superName=_this.data.superName;
+            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
+            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
+            let superName=_this.data.uSuperiorName;
+            if(this.data.uSuperiorValue.length){
+                profitObj.userIdM=this.data.uSuperiorValue[this.data.uSuperiorValues].userId
+            }else{
+                profitObj.userIdM='';
+            }
+
             this.setData({
                 profitObj:profitObj,
                 profitData:[]
             })
             console.log("323",_this.data.reachBtn);
-            if(superName){
-                _this.marketRequest(superName,profitObj);
-            }else{
-                console.log("222")
-                _this.profitRequest()
-            }
+
+
+            _this.profitRequest()
+
 
         }
         if(personalData.uType>2){
             profitObj.sbdNumber=this.data.nbNumber||'';
             profitObj.sbdCustomer=this.data.sbdCustomer||'';
             profitObj.userIdM=personalData.userId;
+            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
+            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
             this.setData({
                 profitObj:profitObj,
                 profitFenData:[]
@@ -212,6 +262,9 @@ Page({
                             icon: 'none',
                             duration: 1000
                         })
+                        _this.setData({
+                            profitTotal:resData.total
+                        })
                     }
 
                 },function (err) {
@@ -255,6 +308,9 @@ Page({
                             title: '查询无结果',
                             icon: 'none',
                             duration: 1000
+                        })
+                        _this.setData({
+                            profitFenTotal:resData.total
                         })
                     }
 

@@ -39,6 +39,11 @@
     position: relative;
     font-size: 24rpx;
 }
+.business-info-material{
+    display: flex;
+    flex-direction:row;
+    height:160rpx;
+}
 .adminDe-info-material{
     display: flex;
     flex-direction:row;

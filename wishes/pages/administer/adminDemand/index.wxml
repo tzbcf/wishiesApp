@@ -27,7 +27,7 @@
                 <view class="business-main-info">
                     <view class="business-info-material">
                         <view class="business-id">
-                            <text>{{item.bankProfitId}}</text>
+                            <text>{{index+1}}</text>
                         </view>
                         <view class="business-bill-material">
                             <view class="business-bill-material-item">
@@ -185,7 +185,7 @@
                 <view class="business-main-info">
                     <view class="adminDe-info-material">
                         <view class="business-id">
-                            <text>{{item.bankReceiveId}}</text>
+                            <text>{{index+1}}</text>
                         </view>
                         <view class="business-bill-material">
                             <view class="business-bill-material-item">

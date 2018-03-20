@@ -31,6 +31,9 @@
     padding-top: 30rpx;
     margin-bottom: 30rpx;
 }
+.stockDd-main{
+    padding-bottom: 200rpx;
+}
 .padd-top-110{
     padding-top: 110rpx!important;
 }
@@ -51,11 +54,8 @@
     padding: 10rpx 0;
     border-bottom: 1rpx solid #d8d8d8;
 }
-.stock-detail-electer,.stock-detail-finance,.stock-detail-business{
-    display: flex;
-}
+
 .stock-detail-electer view,.stock-detail-finance view,.stock-detail-business view{
-    width:50%;
     text-align: center;
     line-height: 44rpx;
 }

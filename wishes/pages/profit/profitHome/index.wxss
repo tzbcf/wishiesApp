@@ -66,7 +66,6 @@
     top:16rpx;
 }
 .profit-header-pro,.profit-header-total{
-    border-bottom: 1rpx solid #d8d8d8;
     padding: 0 20rpx;
 }
 .profit-header-bill{

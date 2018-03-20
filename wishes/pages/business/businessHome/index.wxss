@@ -7,17 +7,12 @@
 .business-header-deal view{
    width:100%;
     box-sizing: border-box;
-}
-.business-header-deal view:nth-child(1){
-    text-align: center;
-    padding-right: 10rpx;
-}
-.business-header-deal view:nth-child(2){
-    text-align: center;
-    padding-left: 10rpx;
+    text-align: left;
+    padding-left: 20rpx;
 }
 .business-header-total{
-    text-align: center;
+    text-align: left;
+    padding-left: 20rpx;
 }
 .business-main-info{
     margin-bottom: 20rpx;

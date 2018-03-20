@@ -6,10 +6,10 @@
                 <input type="text" bindinput="silverInput"></input>
             </view>
         </view>
-        <view  class="demand-header-detail" wx:if="{{personalData.uType==0}}">
+        <view  class="demand-header-detail" wx:if="{{personalData.uType==0 && uSuperiorValue.length}}">
             <view class="demand-header-clue">营销人员:</view>
             <view class="demand-header-info">
-                <input type="text" bindinput="superInput"></input>
+                <view class="demand-ipt  drop-down" bindtap="uSuperiorBtn">{{uSuperiorName}}</view>
             </view>
         </view>
         <view  class="demand-header-detail" wx:if="{{personalData.uType>2}}">
@@ -34,7 +34,7 @@
             <view class="profit-main-info">
                 <view class="profit-info-material">
                     <view class="profit-id">
-                        <text>{{item.noteBusinessId}}</text>
+                        <text>{{index+1}}</text>
                     </view>
                     <view class="profit-bill-material">
                         <view class="profit-bill-material-item">
@@ -53,11 +53,11 @@
                     <view class="profit-deal">
                         <view>
                             <text class="clue">买入客户:</text>
-                            <text class="info">{{item.nbCustomer}}</text>
+                            <text class="info">{{item.nbCustomerBuy}}</text>
                         </view>
                         <view>
                             <text class="clue">卖出客户:</text>
-                            <text class="info">{{item.nbCustomerBuy}}</text>
+                            <text class="info">{{item.nbCustomer}}</text>
                         </view>
                         <view>
                             <text class="clue">票面金额:</text>
@@ -73,7 +73,7 @@
                         </view>
                         <view>
                             <text class="clue">利润小计:</text>
-                            <text class="info">{{item.subtotalYingProfit}}</text>
+                            <text class="info">{{item.subtotalProfit}}</text>
                         </view>
                     </view>
                 </view>
@@ -83,17 +83,23 @@
     </view>
     <view class="profit-bttom" wx:if="{{personalData.uType==0}}">
         <view class="profit-bttom-total">
-            <text>纸制银票利润合计:</text>
-            <text>{{profitTotal.paperMoneyTotal}}元</text>
+            <view>
+                <text>利润合计:</text>
+                <text>{{profitTotal.sum.subtotalProfitSum}}元</text>
+            </view>
+            <view>
+                <text>分成合计:</text>
+                <text>{{profitTotal.sum.subtotalYingSum}}元</text>
+            </view>
         </view>
         <view class="profit-bttom-total">
             <view>
-                <text>半年电票利润合计:</text>
-                <text>{{profitTotal.electroHalfYearMoneyTotal}}元</text>
+                <text>分润合计:</text>
+                <text>{{profitTotal.sum.subtotalShareum}}元</text>
             </view>
             <view>
-                <text>一年电票利润合计:</text>
-                <text>{{profitTotal.electroYearMoneyTotal}}元</text>
+                <text>实际利润:</text>
+                <text>{{profitTotal.sum.subtotalActualSum}}元</text>
             </view>
         </view>
     </view>
@@ -114,7 +120,7 @@
             <view class="profit-main-info">
                 <view class="profit-info-material">
                     <view class="profit-id">
-                        <text>{{item.shareBenefitDetailId}}</text>
+                        <text>{{index+1}}</text>
                     </view>
                     <view class="profit-bill-material">
                         <view class="profit-bill-material-item">
@@ -203,7 +209,19 @@
                     </picker-view-column>
                 </picker-view>
             </view>
-
+        </block>
+        <block wx:if="{{uSuperior}}">
+            <view class="user-sort-sel">
+                <view class="businessDay-btn">
+                    <view class="businessDay-btn-cancel" bindtap="hideShade">取消</view>
+                    <view class="businessDay-btn-ensure" bindtap="bindSuperiorEns">确定</view>
+                </view>
+                <picker-view indicator-style="height: 50px;" style="width: 100%; height: 160px;" value="{{uSuperiorValues}}" bindchange="bindSuperiorChange">
+                    <picker-view-column>
+                        <view wx:for="{{uSuperiorValue}}" wx:key="index" style="line-height: 50px">{{item.userName}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
         </block>
     </view>
 </block>
