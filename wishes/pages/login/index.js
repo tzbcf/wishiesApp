@@ -5,7 +5,7 @@ Page({
     },
     onLoad: function () {
         let _this=this,userInfo;
-        _this.getUser(userInfo);
+        _this.getUser(userInfo);//获取头像
         console.log(getCurrentPages())
     },
     getUser(userInfo){
@@ -19,12 +19,12 @@ Page({
         })
     },
     userInput(e){
-        this.setData({
+        this.setData({//获取账号
             account:e.detail.value
         })
     },
     passInput(e){
-        this.setData({
+        this.setData({//获取密码
             password:e.detail.value
         })
     },
@@ -36,7 +36,7 @@ Page({
             account:this.data.account,
             password:this.data.password
         };
-        $.common("noteBankPlusManager/user/loginManagerWechat.htm",loginObj,
+        $.common("noteBankPlusManager/user/loginManagerWechat.htm",loginObj,//登录
             function (res) {
                 console.log("成功",res);
                 if(res.uType==4){

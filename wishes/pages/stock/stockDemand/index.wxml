@@ -1,16 +1,20 @@
 <view class="stockDd-container">
-    <block wx:if="{{personalData.uType<3}}">
+
         <view class="stockDd-nav">
-            <view class="stockDd-nav-item {{navActive==0 ? 'nav-item-active' : ''}}" bindtap="inventoryTap">库存</view>
-            <view class="stockDd-nav-item {{navActive==1 ? 'nav-item-active' : ''}}" bindtap="temporaryTap">临时库</view>
-            <view class="stockDd-nav-item {{navActive==2 ? 'nav-item-active' : ''}}" bindtap="shortTap">短票库</view>
+            <view class="stockDd-nav-item {{navActive==0 ? 'nav-item-active' : ''}} {{personalData.uType>2 ? 'width-100' : ''}}" bindtap="inventoryTap">库存</view>
+            <block wx:if="{{personalData.uType<3}}">
+                <view class="stockDd-nav-item {{navActive==1 ? 'nav-item-active' : ''}}" bindtap="temporaryTap">临时库</view>
+            </block>
+            <block wx:if="{{personalData.uType<3}}">
+                <view class="stockDd-nav-item {{navActive==2 ? 'nav-item-active' : ''}}" bindtap="shortTap">短票库</view>
+            </block>
         </view>
-    </block>
+
     <view class="stockDd-header {{personalData.uType<3 ? 'padd-top-110':''}}">
         <view class="demand-header-detail">
             <view class="demand-header-clue">银票编号:</view>
             <view class="demand-header-info">
-                <input type="text" class="w510" bindinput="paperSerialNum"></input>
+                <input type="text" class="w510" bindinput="paperSerialNum" value="{{nNumber}}"></input>
             </view>
         </view>
         <view  class="demand-header-detail">
@@ -27,15 +31,15 @@
         <view  class="demand-header-detail">
             <view class="demand-header-clue">银票金额:</view>
             <view class="demand-header-ipt">
-                <input type="text" bindinput="MoneyStart"></input>
-                <input type="text" bindinput="MoneyEnd"></input>
+                <input type="text" bindinput="MoneyStart" value="{{nMoneyStart}}"></input>
+                <input type="text" bindinput="MoneyEnd" value="{{nMoneyEnd}}"></input>
             </view>
         </view>
-        <view  class="demand-header-detail" wx:if="{{navActive==0}}">
-            <view class="demand-header-clue" wx:if="{{personalData.uType<3}}">扣息:</view>
+        <view  class="demand-header-detail" wx:if="{{navActive==0 && personalData.uType<3}}">
+            <view class="demand-header-clue">扣息:</view>
             <view class="demand-header-ipt">
-                <input type="text" bindinput="discountStart"></input>
-                <input type="text" bindinput="discountEnd"></input>
+                <input type="text" bindinput="discountStart" value="{{nBuyDiscountStart}}"></input>
+                <input type="text" bindinput="discountEnd" value="{{nBuyDiscountEnd}}"></input>
             </view>
         </view>
         <view class="demand-header-btn">
@@ -67,13 +71,11 @@
                     </view>
                 </view>
                 <view class="stock-info-bottom">
-                    <view wx:if="{{personalData.uType<3 && navActive!=0}}">
-                        <view>
-                            <text class="clue">出库人名称:</text>
-                            <text class="info">{{item.nBuyDiscount}}</text>
-                        </view>
-                    </view>
                     <view class="stock-info-bank">
+                        <view>
+                            <text class="clue">到期日:</text>
+                            <text class="info">{{item.nExpireTimeIn}}</text>
+                        </view>
                         <view>
                             <text class="clue">兑付银行:</text>
                             <text class="info">{{item.nEnterBankIn}}</text>
@@ -81,6 +83,10 @@
                         <view wx:if="{{personalData.uType<3}}">
                             <text class="clue">银行扣息:</text>
                             <text class="info">{{item.nBuyDiscount}}</text>
+                        </view>
+                        <view wx:if="{{personalData.uType<3 && navActive!=0}}">
+                            <text class="clue">出库人名称:</text>
+                            <text class="info">{{item.nTemName}}</text>
                         </view>
                     </view>
                 </view>

@@ -6,7 +6,7 @@
                 <input type="text" bindinput="silverInput"></input>
             </view>
         </view>
-        <view  class="demand-header-detail" wx:if="{{personalData.uType==0 && uSuperiorValue.length}}">
+        <view  class="demand-header-detail" wx:if="{{personalData.uType==0}}">
             <view class="demand-header-clue">营销人员:</view>
             <view class="demand-header-info">
                 <view class="demand-ipt  drop-down" bindtap="uSuperiorBtn">{{uSuperiorName}}</view>

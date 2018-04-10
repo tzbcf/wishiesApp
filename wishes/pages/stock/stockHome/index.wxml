@@ -44,19 +44,19 @@
                 <view class="stock-info-bottom">
                     <view class="stock-info-time">
                         <view>
-                            <text class="clue">到期日期:</text>
+                            <text class="clue">到期日:</text>
                             <text class="info">{{item.nExpireTimeIn}}</text>
+                        </view>
+                        <view>
+                            <text class="clue" >银行扣息:</text>
+                            <text class="info">{{item.nBuyDiscount}}</text>
                         </view>
                     </view>
                 </view>
-                <view class="stock-info-bank">
+                <view class="stock-info-bank"  wx:if="{{personalData.uType<3}}">
                     <view>
                         <text class="clue">兑付银行:</text>
                         <text class="info">{{item.nEnterBankIn}}</text>
-                    </view>
-                    <view>
-                        <text class="clue" wx:if="{{personalData.uType<3}}">银行扣息:</text>
-                        <text class="info">{{item.nBuyDiscount}}</text>
                     </view>
                 </view>
             </view>

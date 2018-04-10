@@ -40,11 +40,25 @@ Page({
     onLoad(){
         console.log(getCurrentPages())
         let personalData = wx.getStorageSync('loginData'),
-            businessDeObj={
+            buseinessMonth,
+            buseinsessDay;
+        if(date.getMonth()+1 > 9){
+            buseinessMonth=date.getMonth()+1
+        }else{
+            buseinessMonth="0"+(date.getMonth()+1)
+        }
+        if(date.getDate() > 9){
+            buseinsessDay=date.getDate()
+        }else{
+            buseinsessDay="0"+date.getDate()
+        }
+        let businessDeObj={
                 page:1,
                 size:this.data.size,
                 plusType:personalData.plusType,
-                plusId:personalData.plusId
+                plusId:personalData.plusId,
+                startTime:date.getFullYear().toString()+"-"+buseinessMonth.toString()+"-"+buseinsessDay.toString(),
+                endTime:date.getFullYear().toString()+"-"+buseinessMonth.toString()+"-"+buseinsessDay.toString()
             };
         if(personalData.uType>2){
             businessDeObj.userIdM=personalData.userId || '';
@@ -188,7 +202,8 @@ Page({
         businessDeObj.nbMarketer=this.data.nbMarketer || '';
         this.setData({
             businessDeObj:businessDeObj,
-            businessData:[]
+            businessData:[],
+            reachBtn:false
         })
         console.log(typeof businessDeObj.nbNumber)
         this.businessDeRequest()

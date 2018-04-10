@@ -27,7 +27,10 @@ Page({
                 plusType:personalData.plusType,
                 page:this.data.page,
                 size:this.data.size
-            }
+            };
+        let date=new Date();
+        profitObj.startTime=date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString();
+        profitObj.endTime=date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString();
         console.log("本地获取的数据",personalData)
         this.setData({
             personalData:personalData,
@@ -93,6 +96,9 @@ Page({
                             icon: 'none',
                             duration: 1000
                         })
+                        _this.setData({
+                            profitTotal:resData.total
+                        })
                     }
 
                 },function (err) {
@@ -136,6 +142,9 @@ Page({
                             title: '查询无结果',
                             icon: 'none',
                             duration: 1000
+                        })
+                        _this.setData({
+                            profitFenTotal:resData.total
                         })
                     }
 

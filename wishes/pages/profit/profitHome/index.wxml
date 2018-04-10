@@ -43,19 +43,21 @@
     <block wx:if="{{personalData.uType > 2}}">
         <view class="profit-header">
             <view class="profitFen-header-pro">
-                <view>
+                <view style="width:50%">
                     <text class="clue">一级分润合计:</text>
                     <text class="info">{{profitFenTotal.sbdMarketerPercentSum}}</text>
                 </view>
-                <view>
+                <view style="width:50%">
                     <text class="clue">二级分润合计:</text>
                     <text class="info">{{profitFenTotal.sbdTwoPercentSum}}</text>
                 </view>
-                <view>
+            </view>
+            <view class="profitFen-header-pro">
+                <view style="width:50%">
                     <text class="clue">分润合计:</text>
                     <text class="info">{{profitFenTotal.sbdPercentTotalSum}}</text>
                 </view>
-                <view>
+                <view style="width:50%">
                     <text class="clue">分成合计:</text>
                     <text class="info">{{profitFenTotal.nbYingTotalSum}}</text>
                 </view>

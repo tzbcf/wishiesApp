@@ -8,7 +8,11 @@
 .profit-header-pro,.profit-header-total,.profit-bill-electro,.profiy-bill-finance,.profiy-bill-business{
     display: flex;
 }
-.profit-header-pro view,.profit-header-total view,.profit-bill-electro view,.profiy-bill-finance view,.profiy-bill-business view{
+.profit-header-pro view,
+.profit-header-total view,
+.profit-bill-electro view,
+.profiy-bill-finance view,
+.profiy-bill-business view{
     width: 50%;
 }
 .profit-header .clue,.profit-header .info{

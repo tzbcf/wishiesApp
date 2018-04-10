@@ -44,7 +44,7 @@ Page({
         uSuperiorValues:0,
         reachBtn:false
     },
-    onLoad(options){
+    onLoad(options){//客户详情与添加
         console.log(getCurrentPages())
         let personalData = wx.getStorageSync('loginData');
         if(options.demand){
@@ -234,7 +234,7 @@ Page({
         });
     },
     addIdentityId(){
-        let _this=this;
+        let _this=this;//身份证图片上传
         wx.chooseImage({
             count: 1, // 默认9
             sizeType: ['compressed'], // 压缩图
@@ -272,7 +272,7 @@ Page({
     addAffirm(){
         this.addUserRequest()
     },
-    addUserRequest(){
+    addUserRequest(){//添加
         let _this=this,
             UserObj={},
             personalData=this.data.personalData;

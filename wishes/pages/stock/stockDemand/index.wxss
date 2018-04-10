@@ -28,7 +28,7 @@
     padding: 0 40rpx 0 30rpx;
 }
 .stockDd-header{
-    padding-top: 30rpx;
+    padding-top: 100rpx;
     margin-bottom: 30rpx;
 }
 .stockDd-main{
@@ -94,6 +94,7 @@
     display: flex;
     padding: 0 20rpx;
     flex-direction: row;
+    flex-wrap:wrap;
 }
 .stock-info-time view,.stock-info-bank view{
     width:50%;
@@ -190,4 +191,7 @@
 }
 .birthday-btn-ensure{
     color: #1AAD19;
+}
+.width-100{
+    width:100%;
 }

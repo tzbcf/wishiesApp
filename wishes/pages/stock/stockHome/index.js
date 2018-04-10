@@ -17,9 +17,13 @@ Page({
                 page:this.data.page,
                 size:this.data.size,
                 plusId:personalData.plusId,
-                plusType:personalData.plusType,
-                nTemStatus:''
-            }
+                plusType:personalData.plusType
+            };
+        if(personalData.uType<3) {
+            stockObj.nTemStatus = '';
+        }else{
+            stockObj.nTemStatus = 0;
+        }
         console.log("本地获取的数据",personalData)
         this.setData({
             personalData:personalData,

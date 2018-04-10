@@ -47,6 +47,8 @@ Page({
                 plusType:personalData.plusType,
                 page:this.data.page||1,
                 size:this.data.size||6,
+                startTime:date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString(),
+                endTime:date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString()
             };
         this.setData({
             personalData:personalData,
@@ -129,10 +131,6 @@ Page({
     },
     uSuperiorBtn(){
         this.acquireSuperior();
-        this.setData({
-            dateShow:true,
-            uSuperior:true
-        })
     },
     bindSuperiorChange(e){
         let val = e.detail.value;
@@ -165,9 +163,13 @@ Page({
             };
         $.common('noteBankPlusManager//user/getUserIntelligentListWechat.htm',userAssObj,
             function (res) {
-                _this.setData({
-                    uSuperiorValue:res
-                })
+                if(res.length){
+                    _this.setData({
+                        dateShow:true,
+                        uSuperior:true,
+                        uSuperiorValue:res
+                    })
+                }
             },function (err) {
                 console.log("获取失败",err)
             }
@@ -183,8 +185,8 @@ Page({
         if(personalData.uType==0){
             profitObj.nbNumber=_this.data.nbNumber||'';
             profitObj.nTemStatus=1;
-            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
-            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
+            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString();
+            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString();
             let superName=_this.data.uSuperiorName;
             if(this.data.uSuperiorValue.length){
                 profitObj.userIdM=this.data.uSuperiorValue[this.data.uSuperiorValues].userId
@@ -207,8 +209,8 @@ Page({
             profitObj.sbdNumber=this.data.nbNumber||'';
             profitObj.sbdCustomer=this.data.sbdCustomer||'';
             profitObj.userIdM=personalData.userId;
-            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
-            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
+            profitObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString();
+            profitObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || date.getFullYear().toString()+"-"+("0"+(date.getMonth()+1)).toString()+"-"+date.getDate().toString();
             this.setData({
                 profitObj:profitObj,
                 profitFenData:[]

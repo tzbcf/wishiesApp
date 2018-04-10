@@ -17,8 +17,25 @@ Page({
                 page:1,
                 size:this.data.size,
                 plusType:personalData.plusType,
-                plusId:personalData.plusId
+                plusId:personalData.plusId,
+                nbNumber:'',
+                nbMarketer:''
             };
+        let date=new Date(),
+            buseinessMonth,
+            buseinsessDay;
+        if(date.getMonth()+1 > 9){
+            buseinessMonth=date.getMonth()+1
+        }else{
+            buseinessMonth="0"+(date.getMonth()+1)
+        }
+        if(date.getDate() > 9){
+            buseinsessDay=date.getDate()
+        }else{
+            buseinsessDay="0"+date.getDate()
+        }
+        businessObj.startTime=date.getFullYear().toString()+"-"+buseinessMonth.toString()+"-"+buseinsessDay.toString();
+        businessObj.endTime=date.getFullYear().toString()+"-"+buseinessMonth.toString()+"-"+buseinsessDay.toString();
         if(personalData.uType>2){
             businessObj.userIdM=personalData.userId || '';
         }

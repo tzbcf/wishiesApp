@@ -9,7 +9,7 @@ Page({
         reachBtn:false,
         addClient:false
     },
-    onLoad(options){
+    onLoad(options){//客户查询
         console.log(getCurrentPages())
 
         let personalData = wx.getStorageSync('loginData'),

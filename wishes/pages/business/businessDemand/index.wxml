@@ -85,16 +85,16 @@
         <view class="business-header-deal">
             <view>
                 <text>买入合计:</text>
-                <text>{{businessTotal.saleMoneyTotal}}元</text>
+                <text>{{businessTotal.buyMoneyTotal}}元</text>
             </view>
             <view>
                 <text>卖出合计:</text>
-                <text>{{businessTotal.exchangeMoneyTotal}}元</text>
+                <text>{{businessTotal.saleMoneyTotal}}元</text>
             </view>
         </view>
         <view class="business-header-total">
             <text>对换合计:</text>
-            <text>{{businessTotal.buyMoneyTotal}}元</text>
+            <text>{{businessTotal.exchangeMoneyTotal}}元</text>
         </view>
     </view>
 </view>

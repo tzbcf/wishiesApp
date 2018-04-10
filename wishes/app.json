@@ -2,8 +2,8 @@
   "pages":[
 
     "pages/login/index",
-    "pages/business/businessHome/index",
     "pages/business/businessDemand/index",
+    "pages/business/businessHome/index",
     "pages/client/clientHome/index",
     "pages/client/clientDemand/index",
     "pages/client/clientDetail/index",
@@ -11,8 +11,8 @@
     "pages/administer/adminDemand/index",
     "pages/stock/stockHome/index",
     "pages/stock/stockDemand/index",
-    "pages/profit/profitDemand/index",
-    "pages/profit/profitHome/index"
+    "pages/profit/profitHome/index",
+    "pages/profit/profitDemand/index"
   ],
   "tabBar":{
     "color":"#666666",

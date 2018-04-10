@@ -9,7 +9,7 @@ Page({
       reachBtn:false
   },
   onLoad(){
-    let personalData = wx.getStorageSync('loginData');
+    let personalData = wx.getStorageSync('loginData');//获取登录人员用户信息
     console.log("本地获取的数据",personalData)
     this.setData({
       personalData:personalData
@@ -19,7 +19,7 @@ Page({
 
     this.getClientData()
   },
-  getClientData(){
+  getClientData(){//设置获取客户信息接口的参数
     let personalData=this.data.personalData,
         clientObj={
             page:this.data.page,
@@ -35,7 +35,7 @@ Page({
         });
       this.clientRequset()
   },
-  clientRequset(){
+  clientRequset(){//获取客户信息
       let _this=this,
           clientObj=this.data.clientObj,
           reachBtn=this.data.reachBtn,
@@ -65,12 +65,12 @@ Page({
       )
   },
   //事件处理函数
-  goDemand(){
+  goDemand(){//跳转到查询
     wx.navigateTo({
         url: '/pages/client/clientDemand/index'
     })
   },
-    onReachBottom(){
+    onReachBottom(){//加载更多信息
       console.log('111')
         let _this=this,
             clientObj=this.data.clientObj,
@@ -83,7 +83,7 @@ Page({
             this.clientRequset()
         }
     },
-    modifyUser(e){
+    modifyUser(e){//进入客户信息详情
         let index=e.currentTarget.id,
             specificInfo=this.data.clientData[index],
             personalData=this.data.personalData;

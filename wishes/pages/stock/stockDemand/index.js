@@ -4,7 +4,7 @@ const $= getApp().globalData.$,
     months = [],
     days = [];
 
-for (let i = 1960; i <= date.getFullYear(); i++) {
+for (let i = 1960; i <= date.getFullYear()+1; i++) {
     years.push(i)
 }
 
@@ -21,24 +21,24 @@ Page({
         stockData:[],
         stockTotal:{},
         years: years,
-        startYear: date.getFullYear(),
-        endYear: date.getFullYear(),
+        startYear: date.getFullYear()-1,
+        endYear: date.getFullYear()+1,
         months: months,
         startMonth: $.util.formatNumber(date.getMonth()+1),
         endMonth: $.util.formatNumber(date.getMonth()+1),
         days: days,
         startDay: $.util.formatNumber(date.getDate()),
         endDay: $.util.formatNumber(date.getDate()),
-        startValue: [date.getFullYear(), date.getMonth(), date.getDate()-1],
-        endValue:[date.getFullYear(), date.getMonth(), date.getDate()-1],
+        startValue: [date.getFullYear()-1960-1, date.getMonth(), date.getDate()-1],
+        endValue:[date.getFullYear()-1960+1, date.getMonth(), date.getDate()-1],
         startDateSel:false,
         endDateSel:false,
         maskShow:false,
         paperTypeShow:false,
         navActive:0,
-        paperValue:['纸票','半年电票','一年电票','半年财务电票','一年财务电票','半年商业电票','一年商业电票','电票','财票','商票'],
+        paperValue:['','纸票','半年电票','一年电票','半年财务电票','一年财务电票','半年商业电票','一年商业电票','电票','财票','商票'],
         paperValues:0,
-        paperVal:'纸票',
+        paperVal:'',
         page:1,
         size:6,
         dataObj:{},
@@ -83,11 +83,17 @@ Page({
             stockData:[],
             reachBtn:false,
             paperValues:0,
-            paperVal:'纸票'
+            paperVal:'',
+            nMoneyStart:"",
+            nMoneyEnd:"",
+            nBuyDiscountStart:"",
+            nBuyDiscountEnd:""
         })
+        console.log("aaa",this.data.nNumber)
         this.stockRequest();
     },
     temporaryTap(){
+        console.log("aaa",this.data.nNumber)
         let dataObj=this.data.dataObj;
         dataObj.nNumber='';
         dataObj.nType='';
@@ -105,11 +111,16 @@ Page({
             stockData:[],
             reachBtn:false,
             paperValues:0,
-            paperVal:'纸票'
+            paperVal:'',
+            nMoneyStart:"",
+            nMoneyEnd:"",
+            nBuyDiscountStart:"",
+            nBuyDiscountEnd:""
         })
         this.stockRequest();
     },
     shortTap(){
+        console.log("aaa",this.data.nNumber)
         let dataObj=this.data.dataObj;
         dataObj.nNumber='';
         dataObj.nType='';
@@ -127,7 +138,11 @@ Page({
             stockData:[],
             reachBtn:false,
             paperValues:0,
-            paperVal:'纸票'
+            paperVal:'',
+            nMoneyStart:"",
+            nMoneyEnd:"",
+            nBuyDiscountStart:"",
+            nBuyDiscountEnd:""
         })
         this.stockRequest();
     },
@@ -236,14 +251,19 @@ Page({
             _this=this,
             navActive=this.data.navActive;
         dataObj.nNumber=this.data.nNumber || '';
-        dataObj.nType=this.data.paperValues || '';
+        console.log('this.data.paperVal',this.data.paperVal)
+        if(this.data.paperVal){
+            console.log("1213",this.data.paperValues);
+            dataObj.nType=this.data.paperValues-1;
+        }else{
+            dataObj.nType='';
+        }
+        console.log(dataObj.nType);
         dataObj.nMoneyStart=this.data.nMoneyStart || '';
         dataObj.nMoneyEnd=this.data.nMoneyEnd || '';
         if(navActive==0){
             dataObj.nBuyDiscountStart=_this.data.nBuyDiscountStart || '';
             dataObj.nBuyDiscountEnd=_this.data.nBuyDiscountEnd || '';
-            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
-            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
         }
         this.setData({
             dataObj:dataObj,
@@ -257,8 +277,13 @@ Page({
         let dataObj=this.data.dataObj,_this=this,
             reachBtn=this.data.reachBtn,
             stockData=this.data.stockData,
-            stockTotal=this.data.stockTotal;
-        console.log('2222222222',stockData)
+            stockTotal=this.data.stockTotal,
+            navActive=this.data.navActive;
+        console.log('2222222222',stockData);
+        if(navActive==0){
+            dataObj.startTime=this.data.startYear.toString()+"-"+this.data.startMonth.toString()+"-"+this.data.startDay.toString() || '';
+            dataObj.endTime=this.data.endYear.toString()+"-"+this.data.endMonth.toString()+"-"+this.data.endDay.toString() || '';
+        }
         if(!reachBtn){
             $.common('noteBankPlusManager//note/findNoteListWechat.htm',dataObj,function (res,resData) {
                     console.log("获取成功",res);
